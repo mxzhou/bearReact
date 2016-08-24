@@ -6,13 +6,18 @@
     "add-module-exports",
     "transform-decorators-legacy",
     "transform-react-display-name",
-    "transform-es3-property-literals"
+    "transform-es3-property-literals",
+    "transform-es3-member-expression-literals",
+    "transform-es5-property-mutators"
   ],
 
   "env": {
     "development": {
       "plugins": [
         "typecheck",
+        "transform-es3-property-literals",
+        "transform-es3-member-expression-literals",
+        "transform-es5-property-mutators",
         ["react-transform", {
             "transforms": [{
                 "transform": "react-transform-catch-errors",

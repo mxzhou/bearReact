@@ -1,5 +1,7 @@
 require('babel-polyfill');
-
+require('es5-shim');
+require('es5-shim/es5-sham');
+require('console-polyfill');
 // Webpack config for development
 var fs = require('fs');
 var path = require('path');
@@ -7,7 +9,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var assetsPath = path.resolve(__dirname, '../static/dist');
 var host = (process.env.HOST || 'localhost');
-var port = (+process.env.PORT + 1) || 3001;
+var port = (+process.env.PORT) || 3000;
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
@@ -90,6 +92,12 @@ module.exports = {
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" },
       { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' }
+    ],
+    postLoaders: [
+      {
+        test: /\.jsx?$/,
+        loaders: ['es3ify-loader']
+      }
     ]
   },
   progress: true,
