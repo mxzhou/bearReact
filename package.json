@@ -24,47 +24,13 @@
   ],
   "main": "bin/server.js",
   "scripts": {
-    "start": "concurrent --kill-others \"npm run start-prod\" \"npm run start-prod-api\"",
-    "start-prod": "better-npm-run start-prod",
-    "start-prod-api": "better-npm-run start-prod-api",
     "build": "better-npm-run build",
     "postinstall": "npm run build",
-    "lint": "eslint -c .eslintrc src api",
-    "start-dev": "better-npm-run start-dev",
     "start-dev-api": "better-npm-run start-dev-api",
     "watch-client": "better-npm-run watch-client",
-    "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev-api\"",
-    "test": "karma start",
-    "test-node": "./node_modules/mocha/bin/mocha $(find api -name '*-test.js') --compilers js:babel-core/register",
-    "test-node-watch": "./node_modules/mocha/bin/mocha $(find api -name '*-test.js') --compilers js:babel-core/register --watch"
+    "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev-api\""
   },
   "betterScripts": {
-    "start-prod": {
-      "command": "node ./bin/server.js",
-      "env": {
-        "NODE_PATH": "./src",
-        "NODE_ENV": "production",
-        "PORT": 8080,
-        "APIPORT": 3030
-      }
-    },
-    "start-prod-api": {
-      "command": "node ./bin/api.js",
-      "env": {
-        "NODE_PATH": "./api",
-        "NODE_ENV": "production",
-        "APIPORT": 3030
-      }
-    },
-    "start-dev": {
-      "command": "node ./bin/server.js",
-      "env": {
-        "NODE_PATH": "./src",
-        "NODE_ENV": "development",
-        "PORT": 3000,
-        "APIPORT": 3030
-      }
-    },
     "start-dev-api": {
       "command": "node ./bin/api.js",
       "env": {
@@ -94,6 +60,7 @@
     "babel-loader": "^6.2.1",
     "babel-plugin-add-module-exports": "^0.1.2",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-es3-property-literals": "^6.8.0",
     "babel-plugin-transform-react-display-name": "^6.3.13",
     "babel-plugin-transform-runtime": "^6.3.13",
     "babel-polyfill": "^6.3.14",

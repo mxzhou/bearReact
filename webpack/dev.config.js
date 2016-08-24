@@ -61,9 +61,6 @@ reactTransform[1].transforms.push({
   imports: ['react'],
   locals: ['module']
 });
-console.log('-------------')
-console.log('-------------')
-console.log(__dirname)
 module.exports = {
   devtool: 'inline-source-map',
   //context: path.resolve(__dirname, '..'),

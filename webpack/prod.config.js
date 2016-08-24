@@ -4,6 +4,7 @@ require('babel-polyfill');
 var path = require('path');
 var webpack = require('webpack');
 var CleanPlugin = require('clean-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var strip = require('strip-loader');
 
@@ -28,7 +29,7 @@ module.exports = {
     path: assetsPath,
     filename: '[name]-[chunkhash].js',
     chunkFilename: '[name]-[chunkhash].js',
-    publicPath: '/dist/'
+    publicPath: './'
   },
   module: {
     loaders: [
@@ -70,7 +71,18 @@ module.exports = {
 
     // ignore dev config
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
-
+    new HtmlWebpackPlugin({
+      favicon:path.join(__dirname,'./../static/favicon.ico'),
+      title: "胖熊一元买",
+      filename: 'index.html',
+      template: path.join(__dirname,'./../static/index.html'),
+      inject: true,
+      hash:false,    //为静态资源生成hash值
+      minify:{    //压缩HTML文件
+        removeComments:false,    //移除HTML中的注释
+        collapseWhitespace:true    //删除空白符与换行符
+      }
+    }),
     // optimizations
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -79,7 +91,5 @@ module.exports = {
         warnings: false
       }
     }),
-
-    webpackIsomorphicToolsPlugin
   ]
 };
