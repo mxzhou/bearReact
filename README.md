@@ -2,8 +2,8 @@ bearReact
 
 node-module
 
-1.ansi-html /inde.js
-
+1.ansi-html /index.js
+E:\bearKtv\node_modules\webpack-hot-middleware\node_modules\ansi-html\index.js
 require('es5-shim')
 
 // 修改前
@@ -38,6 +38,7 @@ if('get' in Attributes || 'set' in Attributes){
   }
 
 3.webpack-hot-middleware  /client-overlay.js
+E:\bearKtv\node_modules\webpack-hot-middleware\client-overlay.js
 // 修改前
 
 for (var key in styles) {
