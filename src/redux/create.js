@@ -3,7 +3,6 @@ import createMiddleware from './middleware/clientMiddleware';
 import { routerMiddleware } from 'react-router-redux';
 
 export default function createStore(client) {
-  console.log(client)
   // Sync dispatched route actions to the history
   const reduxRouterMiddleware = routerMiddleware();
 
