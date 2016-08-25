@@ -5,7 +5,6 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
-import Helmet from 'react-helmet';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { InfoBar } from 'components';
@@ -63,7 +62,6 @@ export default class App extends Component {
 
     return (
       <div className={styles.app}>
-        <Helmet {...config.app.head}/>
         <Navbar fixedTop>
           <Navbar.Header>
             <Navbar.Brand>

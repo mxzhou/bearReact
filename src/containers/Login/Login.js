@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import Helmet from 'react-helmet';
 import * as authActions from 'redux/modules/auth';
 
 @connect(
@@ -25,7 +24,6 @@ export default class Login extends Component {
     const styles = require('./Login.scss');
     return (
       <div className={styles.loginPage + ' container'}>
-        <Helmet title="Login"/>
         <h1>Login</h1>
         {!user &&
         <div>

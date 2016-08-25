@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import Helmet from 'react-helmet';
 import {connect} from 'react-redux';
 import * as widgetActions from 'redux/modules/widgets';
 import {isLoaded, load as loadWidgets} from 'redux/modules/widgets';
@@ -53,7 +52,6 @@ export default class Widgets extends Component {
             <i className={refreshClassName}/> {' '} Reload Widgets
           </button>
         </h1>
-        <Helmet title="Widgets"/>
         <p>
           If you hit refresh on your browser, the data loading will take place on the server before the page is returned.
           If you navigated here from another page, the data was fetched from the client after the route transition.
