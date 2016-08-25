@@ -1,0 +1,33 @@
+.navBar {
+  width: 100%;
+  margin-top: 20px;
+  li{
+    height: 50px;
+    line-height: 50px;
+    margin-left: 4px;
+    .tap{
+      vertical-align: middle;
+      margin-right: 15px;
+      position: relative;
+      top: -2px;
+    }
+  }
+  .nav.active{
+    padding-left: 13px;
+    margin-left: 0;
+    color: #033668;
+    background: #F9FAFB;
+    font-weight: bold;
+    border: 0;
+    border-radius: 4px 0 0 4px;
+    box-shadow: none;
+  }
+  .nav{
+    padding-left: 13px;
+    border-radius: 4px 0 0 4px;
+    display: block;
+    color: #0066AC;
+    border-bottom: solid 1px #CDCDCD;
+    box-shadow: inset 0px -1px 0px 0px #FFF, inset 0px -1px 0px 0px #CDCDCD;
+  }
+}

@@ -10,11 +10,12 @@ import InfoBar from './InfoBar/InfoBar';
 import MiniInfoBar from './MiniInfoBar/MiniInfoBar';
 import SurveyForm from './SurveyForm/SurveyForm';
 import WidgetForm from './WidgetForm/WidgetForm';
+import NavBar from './NavBar/NavBar';
 export {
   CounterButton,
   GithubButton,
   InfoBar,
   MiniInfoBar,
   SurveyForm,
-  WidgetForm
+  NavBar
 }

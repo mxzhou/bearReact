@@ -8,6 +8,8 @@ require('console-polyfill');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createStore from './redux/create';
+import { ReduxAsyncConnect } from 'redux-async-connect';
+import { syncHistoryWithStore } from 'react-router-redux';
 import ApiClient from './helpers/ApiClient';
 import {Provider} from 'react-redux';
 import { Router, hashHistory } from 'react-router';
