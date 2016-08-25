@@ -1,14 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
-import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
+import { getNav } from 'redux/modules/navlist';
 import  {NavBar } from 'components';
-import { push } from 'react-router-redux';
 import config from '../../config';
 
 @connect(
-  state => ({user: state.auth.user,info:state.info.data}),
-  {logout,loadInfo})
+  state => ({nav: state.navlist.list}),
+  {getNav})
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
@@ -30,13 +28,9 @@ export default class App extends Component {
   };
 
   render() {
-    const {user} = this.props;
+    // 左侧菜单 nav
+    const {nav} = this.props;
     const styles = require('./App.scss');
-    const list = [
-      {name:'幸运夺宝',link:''},
-      {name:'最新揭晓',link:'announce'},
-      {name:'个人中心',link:'mine'}
-    ];
     return (
       <div className={styles.app}>
         <div className={styles.appTitle}>
@@ -44,7 +38,7 @@ export default class App extends Component {
         </div>
         <div className={styles.appContent+' f-cb'}>
           <div className={styles.appNav}>
-            <NavBar list={list}/>
+            <NavBar list={nav}/>
           </div>
           <div className={styles.appSection}>
             <div className={styles.content}>
@@ -56,6 +50,7 @@ export default class App extends Component {
     );
   }
   componentDidMount(){
-    this.props.loadInfo()
+    // 获取菜单
+    this.props.getNav()
   }
 }
