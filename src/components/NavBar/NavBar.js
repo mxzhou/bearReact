@@ -16,14 +16,14 @@ export default class NavBar extends Component {
         {
           list && list.map((item,index) =>
             (index == 0 ?
-              <li>
-                <IndexLink key={index} to={'/'} className={styles.nav} activeClassName={styles.active}>
+              <li key={'nav-bar'+index}>
+                <IndexLink to={'/'} className={styles.nav} activeClassName={styles.active}>
                   <img src={tap1} className={styles.tap}/>{item.name}
                 </IndexLink>
               </li>
               :
-              <li>
-                <Link key={index} to={'/'+item.link} className={styles.nav} activeClassName={styles.active}>
+              <li key={'nav-bar'+index}>
+                <Link to={'/'+item.link} className={styles.nav} activeClassName={styles.active}>
                   <img src={index == 1 ? tap2 : tap3} className={styles.tap}/>{item.name}
                 </Link>
               </li>)

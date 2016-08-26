@@ -7,7 +7,7 @@ import { load } from 'redux/modules/home';
 export default class Home extends Component {
 
   static propTypes = {
-    result: PropTypes.object.isRequired,
+    result: PropTypes.object,
   };
   render() {
     const {result} = this.props;
@@ -19,7 +19,7 @@ export default class Home extends Component {
           <ul className={styles.list+' f-cb'} id="slidee">
             {
               result && result.data && result.data.goodsList.map((item,index) =>
-                <li key={index} className={styles.item + (index%2 != 0 ? (' '+styles.even):'')}></li>
+                <li key={'home-list'+index} className={styles.item + (index%2 != 0 ? (' '+styles.even):'')}></li>
               )
             }
           </ul>
