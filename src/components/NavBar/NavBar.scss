@@ -13,8 +13,6 @@
     }
   }
   .nav.active{
-    padding-left: 13px;
-    margin-left: 0;
     color: #033668;
     background: #F9FAFB;
     font-weight: bold;
@@ -24,9 +22,10 @@
   }
   .nav{
     padding-left: 13px;
-    border-radius: 4px 0 0 4px;
+    height: 52px;
     display: block;
     color: #0066AC;
+    border-radius: 3px 0 0 3px;
     border-bottom: solid 1px #CDCDCD;
     box-shadow: inset 0px -1px 0px 0px #FFF, inset 0px -1px 0px 0px #CDCDCD;
   }
