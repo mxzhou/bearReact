@@ -1,28 +1,19 @@
 import React, { Component,PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { load } from 'redux/modules/home';
-@connect(
-  state => ({result: state.home.data}),
-  {load})
-export default class Home extends Component {
 
+export default class Sly extends Component {
   static propTypes = {
     result: PropTypes.object.isRequired,
-  };
+    height: PropTypes.string.isRequired
+  }
   render() {
-    const {result} = this.props;
-    const styles = require('./Home.scss');
+    const {height} = this.props; // eslint-disable-line no-shadow
+    console.log(height)
 
+    const styles = require('./Sly.scss');
     return (
-      <div  className={styles.home}>
-        <div className={styles.frame} id="frame">
-          <ul className={styles.list+' f-cb'} id="slidee">
-            {
-              result && result.data && result.data.goodsList.map((item,index) =>
-                <li key={index} className={styles.item + (index%2 != 0 ? (' '+styles.even):'')}></li>
-              )
-            }
-          </ul>
+      <div>
+        <div className={styles.frame} id="frame" Style={{height:height}}>
+
         </div>
         <div className="scrollbar">
           <div className="handle">
@@ -33,15 +24,17 @@ export default class Home extends Component {
     );
   }
   componentDidUpdate() {
+
     require('../../utils/plugin')
     require('../../utils/jquery.sly')
+
     var $frame  = $('#frame'),
-      $slidee = $('#slidee'),
       $wrap = $frame.parent(),
       result = this.props.result;
+
+    console.log(result)
     if(result && result.data && result.data.goodsList.length>0){
       $frame.sly({
-        slidee:$slidee,
         itemNav: 'basic',
         smart: 2,
         activateOn: 'click',
@@ -50,20 +43,16 @@ export default class Home extends Component {
         releaseSwing: 1,
         startAt: 0,
         scrollBar: $wrap.find('.scrollbar'),
-        scrollBy: 2,
+        scrollBy: 1,
         activatePageOn: 'click',
         speed: 300,
         elasticBounds: 1,
         easing: 'easeOutExpo',
         dragHandle: 1,
         dynamicHandle: 1,
-        clickBar: 1,
+        clickBar: 1
       });
     }
-
-  }
-  componentDidMount(){
-    this.props.load();
 
   }
 }

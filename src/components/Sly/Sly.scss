@@ -1,28 +1,5 @@
-.home{
-  padding: 10px 0 0 10px;
-  position: relative;
-  .frame{
-    height: 430px;
-  }
-  .list{
-    width: 100%;
-    .item{
-      //float: left;
-      background: #EBEBEB;
-      border: 1px solid #E7E8E9;
-      box-shadow: inset 0px 0px 0px 2px rgba(255,255,255,0.25);
-      border-radius: 8px;
-      width: 351px;
-      height: 140px;
-      margin: 0 3px 3px 0;
-    }
-    .item.odd{
-
-    }
-    .item.even{
-      margin-right: 0;
-    }
-  }
+.frame{
+  height: 430px;
 }
 :global{
   /* Scrollbar */

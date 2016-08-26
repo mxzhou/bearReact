@@ -110,6 +110,11 @@ module.exports = {
     // hot reload
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      "window.jQuery": "jquery"
+    }),
     new HtmlWebpackPlugin({
       favicon:path.join(__dirname,'./../static/favicon.ico'),
       title: "胖熊一元买",

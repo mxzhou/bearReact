@@ -14,6 +14,7 @@ import ApiClient from './helpers/ApiClient';
 import {Provider} from 'react-redux';
 import { Router, hashHistory } from 'react-router';
 import getRoutes from './routes';
+import jquery from 'jquery'
 
 const client = new ApiClient();
 const dest = document.getElementById('content');
