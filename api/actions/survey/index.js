@@ -1,1 +1,2 @@
-export isValid from './isValid';
+import isValid from './isValid';
+export {isValid};

@@ -1,2 +1,3 @@
-export update from './update';
-export load from './load';
+import update from './update';
+import load from './load';
+export {update,load};
