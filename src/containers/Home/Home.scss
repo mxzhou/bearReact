@@ -27,10 +27,10 @@
 :global{
   /* Scrollbar */
   .scrollbar {
-    top: 0;
+    top: 10px;
     position: absolute;
-    right: 2px;
-    height: 100%;
+    right: 5px;
+    height: 430px;
     width: 8px;
     background: #ebebeb;
     line-height: 0;
@@ -50,6 +50,6 @@
     top: 0;
     left: -10px;
     width: 22px;
-    height: 100%;
+    height: 430px;
   }
 }
