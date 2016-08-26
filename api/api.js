@@ -7,6 +7,7 @@ import {mapUrl} from 'utils/url.js';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
+import home from './routes/home'
 
 const pretty = new PrettyError();
 const app = express();
@@ -24,32 +25,32 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 
-
-app.use((req, res) => {
-  const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
-
-  const {action, params} = mapUrl(actions, splittedUrlPath);
-
-  if (action) {
-    action(req, params)
-      .then((result) => {
-        if (result instanceof Function) {
-          result(res);
-        } else {
-          res.json(result);
-        }
-      }, (reason) => {
-        if (reason && reason.redirect) {
-          res.redirect(reason.redirect);
-        } else {
-          console.error('API ERROR:', pretty.render(reason));
-          res.status(reason.status || 500).json(reason);
-        }
-      });
-  } else {
-    res.status(404).end('NOT FOUND');
-  }
-});
+app.use('/', home);
+//app.use((req, res) => {
+//  const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
+//
+//  const {action, params} = mapUrl(actions, splittedUrlPath);
+//
+//  if (action) {
+//    action(req, params)
+//      .then((result) => {
+//        if (result instanceof Function) {
+//          result(res);
+//        } else {
+//          res.json(result);
+//        }
+//      }, (reason) => {
+//        if (reason && reason.redirect) {
+//          res.redirect(reason.redirect);
+//        } else {
+//          console.error('API ERROR:', pretty.render(reason));
+//          res.status(reason.status || 500).json(reason);
+//        }
+//      });
+//  } else {
+//    res.status(404).end('NOT FOUND');
+//  }
+//});
 
 
 const bufferSize = 100;

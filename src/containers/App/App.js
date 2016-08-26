@@ -10,8 +10,7 @@ import config from '../../config';
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
-    user: PropTypes.object,
-    logout: PropTypes.func.isRequired,
+    nav: PropTypes.array.isRequired,
   };
 
   static contextTypes = {
@@ -21,11 +20,6 @@ export default class App extends Component {
   componentWillReceiveProps(nextProps) {
 
   }
-
-  handleLogout = (event) => {
-    event.preventDefault();
-    this.props.logout();
-  };
 
   render() {
     // 左侧菜单 nav

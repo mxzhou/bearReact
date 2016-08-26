@@ -6,7 +6,7 @@ import Helmet from 'react-helmet';
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
  * Used in server-side code only to wrap the string output of the
- * rendered route component.
+ * rendered routes component.
  *
  * The only thing this component doesn't (and can't) include is the
  * HTML doctype declaration, which is added to the rendered output

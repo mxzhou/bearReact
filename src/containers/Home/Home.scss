@@ -1,60 +1,25 @@
-@import "../../theme/variables.scss";
+.home{
+  padding: 10px 0 0 10px;
+  height: 430px;
+  overflow: hidden;
 
-.home {
-  dd {
-    margin-bottom: 15px;
-  }
-}
-.masthead {
-  background: #2d2d2d;
-  padding: 40px 20px;
-  color: white;
-  text-align: center;
-  .logo {
-    $size: 200px;
-    margin: auto;
-    height: $size;
-    width: $size;
-    border-radius: $size / 2;
-    border: 1px solid $cyan;
-    box-shadow: inset 0 0 10px $cyan;
-    vertical-align: middle;
-    p {
-      line-height: $size;
-      margin: 0px;
+  .list{
+    width: 100%;
+    .item{
+      float: left;
+      background: #EBEBEB;
+      border: 1px solid #E7E8E9;
+      box-shadow: inset 0px 0px 0px 2px rgba(255,255,255,0.25);
+      border-radius: 8px;
+      width: 351px;
+      height: 140px;
+      margin: 0 3px 3px 0;
     }
-    img {
-      width: 75%;
-      margin: auto;
-    }
-  }
-  h1 {
-    color: $cyan;
-    font-size: 4em;
-  }
-  h2 {
-    color: #ddd;
-    font-size: 2em;
-    margin: 20px;
-  }
-  a {
-    color: #ddd;
-  }
-  p {
-    margin: 10px;
-  }
-  .humility {
-    color: $humility;
-    a {
-      color: $humility;
-    }
-  }
-  .github {
-    font-size: 1.5em;
-  }
-}
+    .item.odd{
 
-.counterContainer {
-  text-align: center;
-  margin: 20px;
+    }
+    .item.even{
+      margin-right: 0;
+    }
+  }
 }
