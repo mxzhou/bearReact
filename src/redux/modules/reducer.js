@@ -10,6 +10,8 @@ import info from './info';
 import widgets from './widgets';
 import navlist from './navlist';
 import home from './home';
+import loading from './loading';
+
 
 export default combineReducers({
   routing: routerReducer,
@@ -24,5 +26,6 @@ export default combineReducers({
   info,
   widgets,
   navlist,
-  home
+  home,
+  loading
 });

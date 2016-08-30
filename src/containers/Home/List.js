@@ -2,10 +2,12 @@ import React, { Component,PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { connect } from 'react-redux';
 import { load } from 'redux/modules/home';
+import { loading,unloading } from '../../redux/modules/loading';
+
 import { Link } from 'react-router';
 @connect(
   state => ({result: state.home.data}),
-  {load})
+  {load,loading,unloading})
 export default class List extends Component {
 
   static propTypes = {
@@ -67,11 +69,12 @@ export default class List extends Component {
 
   componentDidMount(){
     console.log('componentDidMount')
-
+    this.props.loading()
     this.props.load();
 
   }
   componentWillUpdate(){
+    this.props.unloading()
     console.log('componentWillUpdate')
 
   }
@@ -88,7 +91,7 @@ export default class List extends Component {
       if(result && result.data && result.data.goodsList.length>0){
         $frame.sly({
           slidee:$slidee,
-          parataxis:2,
+          average:2,
           itemNav: 'basic',
           smart: 2,
           mouseDragging: 1,

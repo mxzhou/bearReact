@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getNav } from 'redux/modules/navlist';
-import  {NavBar } from 'components';
+import  {NavBar,Loading } from 'components';
 import config from '../../config';
 
 @connect(
-  state => ({nav: state.navlist.list}),
+  state => ({nav: state.navlist.list,show: state.loading.show}),
   {getNav})
 export default class App extends Component {
   static propTypes = {
@@ -35,7 +35,8 @@ export default class App extends Component {
             <NavBar list={nav}/>
           </div>
           <div className={styles.appSection}>
-              {this.props.children}
+            <Loading></Loading>
+            {this.props.children}
           </div>
         </div>
       </div>
