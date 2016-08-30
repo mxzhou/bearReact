@@ -4,6 +4,25 @@
  *
  * Licensed under the MIT license.
  * http://opensource.org/licenses/MIT
+ *
+ *
+ *
+ *
+ * 2016*08-30 update
+ * author mengxz 554892498
+ * 1. add parataxis 每行的子元素
+ * 2. if(o.parataxis > 1){
+       slideeSize = slideeSize/ o.parataxis
+       $slidee[0].style[o.horizontal ? 'width' : 'height'] = (borderBox ? slideeSize: slideeSize - paddingStart - paddingEnd) + 'px';
+     }else{
+       $slidee[0].style[o.horizontal ? 'width' : 'height'] = (borderBox ? slideeSize: slideeSize - paddingStart - paddingEnd) + 'px';
+     }
+ *3. line
+ * if(o.parataxis > 1) {
+    pos.end = slideeSize - frameSize;
+   }else{
+    pos.end = forceCenteredNav ? lastItem.center : frameSize < slideeSize ? lastItem.end : pos.start;
+   }
  */
 
 ;(function ($, w, undefined) {
@@ -278,7 +297,6 @@
             pos.end = slideeSize - frameSize;
           }else{
             pos.end = forceCenteredNav ? lastItem.center : frameSize < slideeSize ? lastItem.end : pos.start;
-
           }
         } else {
           pos.start = pos.end = 0;
