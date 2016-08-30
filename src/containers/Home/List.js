@@ -91,7 +91,7 @@ export default class List extends Component {
       if(result && result.data && result.data.goodsList.length>0){
         $frame.sly({
           slidee:$slidee,
-          average:2,
+          parataxis:2,
           itemNav: 'basic',
           smart: 2,
           mouseDragging: 1,
