@@ -1,28 +1,31 @@
 import React, {Component, PropTypes} from 'react';
-import { IndexLink,Link } from 'react-router';
-export default class NavBar extends Component {
+import { connect } from 'react-redux';
+import { loading,unloading } from '../../redux/modules/loading';
+
+@connect(
+  state => ({show: state.loading.show}),
+  {loading,unloading})
+export default class Loading extends Component {
   static propTypes = {
-    list: PropTypes.array.isRequired,
+    text: PropTypes.string,
+    show: PropTypes.boolean
+  }
+  handlerFunc(){
+    this.props.unloading()
   }
   render() {
-    const {list} = this.props; // eslint-disable-line no-shadow
-    const tap1 = require('../../../static/assets/ic_tap1.png');
-    const tap2 = require('../../../static/assets/ic_tap2.png');
-    const tap3 = require('../../../static/assets/ic_tap3.png');
-
-    const styles = require('./NavBar.scss');
+    const {text,show} = this.props; // eslint-disable-line no-shadow
+    const text2 = text || '';
+    const styles = require('./Toast.scss');
     return (
-      <ul className={styles.navBar}>
-        {
-          list && list.map((item,index) =>
-            <li key={'nav-bar'+index}>
-              <Link to={'/'+item.link} className={styles.nav} activeClassName={styles.active}>
-                <img src={index == 1 ? tap2 : tap3} className={styles.tap}/>{item.name}
-              </Link>
-            </li>
-          )
-        }
-      </ul>
+      <div style={{'display':show ? 'block':'none'}} onClick={this.handlerFunc.bind(this)}>
+        <div className={styles.mask}></div>
+        <div className={styles.content}>
+          <div className={styles.toast}>
+            <p className={styles.p}>{text2}</p>
+          </div>
+        </div>
+      </div>
     );
   }
 }
