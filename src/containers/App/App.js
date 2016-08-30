@@ -35,9 +35,7 @@ export default class App extends Component {
             <NavBar list={nav}/>
           </div>
           <div className={styles.appSection}>
-            <div className={styles.content}>
               {this.props.children}
-            </div>
           </div>
         </div>
       </div>

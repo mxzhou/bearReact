@@ -1,0 +1,99 @@
+.home{
+  padding: 10px 0 0 10px;
+  position: relative;
+  .frame{
+    height: 430px;
+    overflow: hidden;
+  }
+  .list{
+    width: 100%;
+    .item{
+      float: left;
+      background: #EBEBEB;
+      border: 1px solid #E7E8E9;
+      box-shadow: inset 0px 0px 0px 2px rgba(255, 255, 255, 0.25);
+      border-radius: 8px;
+      width: 330px;
+      height: 120px;
+      margin: 0 3px 3px 0;
+      padding: 10px;
+      .left{
+        float: left;
+        width: 118px;
+        height: 118px;
+        border: 1px solid #0299CD;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #fff;
+        .coverImg{
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+      }
+      .right{
+        float: left;
+        width: 200px;
+        margin-left: 10px;
+        .name{
+          font-size: 14px;
+          color: #0066AC;
+          line-height: 20px;
+          margin-bottom: 10px;
+        }
+        .bar{
+          position: relative;
+          background:#D5DDE3;
+          background-image: linear-gradient(0deg, #D5DDE3 0%, #A8BDCD 99%);
+          box-shadow: 0px 1px 0px 0px rgba(255,255,255,0.33);
+          border-radius: 12px;
+          width: 200px;
+          height: 8px;
+          .active{
+            position: absolute;
+            left: 0;
+            top:0;
+            height: 8px;
+            background: #2FC1DF;
+            background-image: linear-gradient(0deg, #018DD0 0%, #2FC1DF 100%);
+            box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.33);
+            border-radius: 14px;
+          }
+        }
+        .p{
+          margin-top: 5px;
+          font-size: 12px;
+          color: #666666;
+          line-height: 17px;
+          .blue{
+            color: #06c;
+          }
+        }
+        .btn{
+          transform: scale(1);
+          margin-top: 15px;
+          background: #038FFF;
+          background-image: linear-gradient(-180deg, #0DB4FF 0%, #038FFF 100%);
+          border: 1px solid #B1BECA;
+          box-shadow: inset 0px -2px 6px 0px rgba(255,255,255,0.60);
+          border-radius: 4px;
+          width: 80px;
+          line-height: 24px;
+          text-align: center;
+          color: #fff;
+          font-size: 12px;
+        }
+        .btn:hover{
+          border: 0;
+          transform: scale(1.1);
+        }
+      }
+    }
+    .item.odd{
+
+    }
+    .item.even{
+      margin-right: 0;
+    }
+  }
+}

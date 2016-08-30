@@ -2,10 +2,14 @@ import React from 'react';
 import {IndexRoute, Route} from 'react-router';
 import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
 import {
-    App,
-    Home,
-    NotFound,
-  } from 'containers';
+  App,
+  Home,
+  List,
+  Detail,
+  Announce,
+  Mine,
+  NotFound
+} from 'containers';
 
 export default (store) => {
   const requireLogin = (nextState, replace, cb) => {
@@ -30,8 +34,27 @@ export default (store) => {
    */
   return (
     <Route path="/" component={App}>
-      { /* Home (main) route */ }
-      <IndexRoute component={Home}/>
+      { /* Home (main) route
+       <IndexRoute component={Home}>
+       <IndexRoute component={List}/>
+       <Route path="detail/:id" component={Detail}/>
+       </IndexRoute>
+       */ }
+      <Route path="home" component={Home}>
+        <IndexRoute component={List}/>
+        <Route path="detail/:id" component={Detail} />
+      </Route>
+      <Route path="announce" component={Announce}></Route>
+      <Route path="mine" component={Mine}></Route>
+      {
+        /*
+        <Route path="home" component={Home}>
+         <Route path="list" component={List}/>
+         <Route path="detail/:id" component={Detail} />
+         </Route>
+         */
+      }
+
 
       {/* Routes requiring login */ }
       {/*
