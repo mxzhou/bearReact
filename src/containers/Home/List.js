@@ -81,12 +81,11 @@ export default class List extends Component {
   componentDidUpdate() {
     require('../../utils/plugin')
     require('../../utils/jquery.sly')
-    var _that = this
-    setTimeout(function(){
+    setTimeout(() =>{
       var $frame  = $('#frame'),
         $slidee = $('#slidee'),
         $wrap = $frame.parent(),
-        result = _that.props.result;
+        result = this.props.result;
 
       if(result && result.data && result.data.goodsList.length>0){
         $frame.sly({
