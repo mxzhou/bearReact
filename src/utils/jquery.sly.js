@@ -260,7 +260,13 @@
         });
 
         // Resize SLIDEE to fit all items
-        $slidee[0].style[o.horizontal ? 'width' : 'height'] = (borderBox ? slideeSize: slideeSize - paddingStart - paddingEnd) + 'px';
+        if(o.parataxis > 1){
+          slideeSize = slideeSize/ o.parataxis
+          $slidee[0].style[o.horizontal ? 'width' : 'height'] = (borderBox ? slideeSize: slideeSize - paddingStart - paddingEnd) + 'px';
+
+        }else{
+          $slidee[0].style[o.horizontal ? 'width' : 'height'] = (borderBox ? slideeSize: slideeSize - paddingStart - paddingEnd) + 'px';
+        }
 
         // Adjust internal SLIDEE size for last margin
         slideeSize -= ignoredMargin;
@@ -268,7 +274,12 @@
         // Set limits
         if (items.length) {
           pos.start =  items[0][forceCenteredNav ? 'center' : 'start'];
-          pos.end = forceCenteredNav ? lastItem.center : frameSize < slideeSize ? lastItem.end : pos.start;
+          if(o.parataxis > 1) {
+            pos.end = slideeSize - frameSize;
+          }else{
+            pos.end = forceCenteredNav ? lastItem.center : frameSize < slideeSize ? lastItem.end : pos.start;
+
+          }
         } else {
           pos.start = pos.end = 0;
         }
@@ -2139,6 +2150,7 @@
 
   // Default options
   Sly.defaults = {
+    parataxis:1, // each row child
     slidee:     null,  // Selector, DOM element, or jQuery object with DOM element representing SLIDEE.
     horizontal: false, // Switch to horizontal mode.
 
