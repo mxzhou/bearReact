@@ -8,6 +8,8 @@
     .tap{
       vertical-align: middle;
       margin-right: 15px;
+      width: 24px;
+      height: 24px;
       position: relative;
       top: -2px;
     }
@@ -28,5 +30,28 @@
     border-radius: 3px 0 0 3px;
     border-bottom: solid 1px #CDCDCD;
     box-shadow: inset 0px -1px 0px 0px #FFF, inset 0px -1px 0px 0px #CDCDCD;
+  }
+  .tap0{
+    background: url(../../../static/assets/ic_tap1.png) no-repeat;
+  }
+  .tap1{
+    background: url(../../../static/assets/ic_tap2.png) no-repeat;
+
+  }
+  .tap2{
+    background: url(../../../static/assets/ic_tap3.png) no-repeat;
+
+  }
+  .nav.active .tap0{
+    background: url(../../../static/assets/ic_tap1_a.png) no-repeat;
+
+  }
+  .nav.active .tap1{
+    background: url(../../../static/assets/ic_tap2_a.png) no-repeat;
+
+  }
+  .nav.active .tap2{
+    background: url(../../../static/assets/ic_tap3_a.png) no-repeat;
+
   }
 }
