@@ -10,12 +10,14 @@ export default class Loading extends Component {
     text: PropTypes.string,
     show: PropTypes.boolean
   }
+  static defaultProps ={
+    text: '加载中。。。'
+  }
   handlerFunc(){
     this.props.unloading()
   }
   render() {
     const {text,show} = this.props; // eslint-disable-line no-shadow
-    const text2 = text || '加载中。。。';
     const loading = require('../../../static/assets/loading.gif');
 
     const styles = require('./Loading.scss');
@@ -25,7 +27,7 @@ export default class Loading extends Component {
         <div className={styles.content}>
           <div className={styles.loading}>
             <img src={loading} className={styles.img}/>
-            <p className={styles.p}>{text2}</p>
+            <p className={styles.p}>{text}</p>
           </div>
         </div>
       </div>
