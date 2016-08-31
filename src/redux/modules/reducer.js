@@ -12,6 +12,7 @@ import navlist from './navlist';
 import home from './home';
 import loading from './loading';
 import toast from './toast';
+import announce from './announce';
 
 
 export default combineReducers({
@@ -29,5 +30,6 @@ export default combineReducers({
   navlist,
   home,
   loading,
-  toast
+  toast,
+  announce
 });

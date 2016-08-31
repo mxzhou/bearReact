@@ -5,6 +5,23 @@ import 'babel-polyfill';
 require('es5-shim');
 require('es5-shim/es5-sham');
 require('console-polyfill');
+(function(window) {
+  "use strict";
+  var lastTime = 0;
+  window.requestAnimationFrame = window.requestAnimationFrame ||
+    window.webkitrequestAnimationFrame ||
+    function(callback) {
+      var currTime = Date.now(),
+        timeToCall = Math.max(0, 16 - (currTime - lastTime)),
+        id = setTimeout(function() {
+          callback(currTime + timeToCall);
+        }, timeToCall);
+
+      lastTime = currTime + timeToCall;
+
+      return id;
+    };
+})(window);
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createStore from './redux/create';

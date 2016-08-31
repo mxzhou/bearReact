@@ -8,6 +8,7 @@ import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
 import home from './routes/home'
+import open from './routes/open'
 
 const pretty = new PrettyError();
 const app = express();
@@ -26,6 +27,8 @@ app.use(session({
 app.use(bodyParser.json());
 
 app.use('/', home);
+app.use('/', open);
+
 //app.use((req, res) => {
 //  const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
 //

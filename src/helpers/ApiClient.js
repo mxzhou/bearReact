@@ -1,6 +1,6 @@
 import superagent from 'superagent';
 import config from '../config';
-
+import {loading} from '../redux/modules/loading'
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 
 function formatUrl(path) {
@@ -16,23 +16,34 @@ function formatUrl(path) {
 export default class ApiClient {
   constructor(req) {
     methods.forEach((method) =>
-      this[method] = (path, { params, data } = {}) => new Promise((resolve, reject) => {
-        const request = superagent[method](formatUrl(path));
+      this[method] = (path, { params, data } = {}) =>
+      {
+        return new Promise((resolve, reject) => {
 
-        if (params) {
-          request.query(params);
-        }
+          const request = superagent[method](formatUrl(path));
 
-        if (__SERVER__ && req.get('cookie')) {
-          request.set('cookie', req.get('cookie'));
-        }
+          if (params) {
+            request.query(params);
+          }
 
-        if (data) {
-          request.send(data);
-        }
+          if (__SERVER__ && req.get('cookie')) {
+            request.set('cookie', req.get('cookie'));
+          }
 
-        request.end((err, { body } = {}) => err ? reject(body || err) : resolve(body));
-      }));
+          if (data) {
+            request.send(data);
+          }
+
+          request.end((err, { body } = {}) => {
+            if(err){
+              reject(body || err)
+            }else{
+              console.log(body)
+              resolve(body)
+            }
+          });
+        })
+      });
   }
   /*
    * There's a V8 bug where, when using Babel, exporting classes with only

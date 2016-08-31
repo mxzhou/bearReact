@@ -23,27 +23,29 @@ export default class List extends Component {
     console.log('listRender');
 
     return (
+      <div className={styles.home}>
         <div className={styles.section}>
-          <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionLeaveTimeout={300} transitionAppearTimeout={300} transitionEnterTimeout={300}>
-            <div className={styles.content}>
-              <div className={styles.homeList}>
-                <div className={styles.frame} id="frame">
-                  <ul className={styles.list+' f-cb'} id="slidee">
-                    {
-                      result && result.data && result.data.goodsList.map((item,index) =>
-                        <Single key={'home-list'+index} item={item} index={index}></Single>
-                      )
-                    }
-                  </ul>
-                </div>
-                <div className="scrollbar">
-                  <div className="handle">
-                    <div className="mousearea"></div>
+            <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionLeaveTimeout={300} transitionAppearTimeout={300} transitionEnterTimeout={300}>
+              <div className={styles.content}>
+                <div className={styles.homeList}>
+                  <div className={styles.frame} id="frame">
+                    <ul className={styles.list+' f-cb'} id="slidee">
+                      {
+                        result && result.data && result.data.goodsList.map((item,index) =>
+                          <Single key={'home-list'+index} item={item} index={index}></Single>
+                        )
+                      }
+                    </ul>
+                  </div>
+                  <div className="scrollbar">
+                    <div className="handle">
+                      <div className="mousearea"></div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </ReactCSSTransitionGroup>
+            </ReactCSSTransitionGroup>
+          </div>
         </div>
     );
   }
