@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getNav } from 'redux/modules/navlist';
-import  {NavBar,Loading } from 'components';
+import  {NavBar,Loading,Toast } from '../../components/index';
 import config from '../../config';
 
 @connect(
@@ -36,6 +36,7 @@ export default class App extends Component {
           </div>
           <div className={styles.appSection}>
             <Loading></Loading>
+            <Toast></Toast>
             {this.props.children}
           </div>
         </div>

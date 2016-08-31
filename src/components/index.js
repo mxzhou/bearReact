@@ -6,8 +6,10 @@
  */
 import NavBar from './NavBar/NavBar';
 import Loading from './Loading/Loading';
+import Toast from './Toast/Toast';
 
 export {
   NavBar,
-  Loading
+  Loading,
+  Toast
 }

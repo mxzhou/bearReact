@@ -11,6 +11,7 @@ import widgets from './widgets';
 import navlist from './navlist';
 import home from './home';
 import loading from './loading';
+import toast from './toast';
 
 
 export default combineReducers({
@@ -27,5 +28,6 @@ export default combineReducers({
   widgets,
   navlist,
   home,
-  loading
+  loading,
+  toast
 });
