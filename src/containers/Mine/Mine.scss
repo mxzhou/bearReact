@@ -6,6 +6,47 @@
     float: left;
     width: 220px;
     height: 100%;
+    .avatar{
+      margin: 30px auto 10px;
+      width: 120px;
+      height: 120px;
+      border-radius: 100%;
+      border: 1px solid #0299CD;
+    }
+    .name{
+      font-size: 18px;
+      color: #033668;
+      line-height: 25px;
+      text-align: center;
+    }
+    .desc{
+      text-align: center;
+      font-size: 14px;
+      color: #333333;
+      line-height:20px;
+      margin-top: 10px;
+    }
+    .navList{
+      line-height: 50px;
+      width: 160px;
+      margin: 20px auto 0;
+      .li1{
+        border-top: solid 1px #ebebeb;
+        border-bottom: solid 1px #ebebeb;
+      }
+      .li2{
+        border-bottom: solid 1px #ebebeb;
+      }
+      .linkClass{
+        display: block;
+      }
+      .iconList{
+        width: 24px;
+        height: 24px;
+        vertical-align: middle;
+        margin: 0 20px;
+      }
+    }
   }
   .right{
     float: right;
@@ -13,16 +54,50 @@
     width: 511px;
     height: 100%;
     .linkList{
-      padding: 50px 40px 0;
-      .li{
+      padding: 50px 32px 0;
+    }
+    .li{
+      float: left;
+      width: 132px;
+      margin-right: 25px;
+      margin-bottom: 30px;
+    }
+    .li.noMargin{
+      margin-right: 0;
+    }
+    .icon{
+      width: 132px;
+      height: 132px;
+      background-size: cover;
+    }
 
-      }
+    .join{
+      background:url(../../../static/assets/ic_joinlist.png) no-repeat;
+    }
+    .lucky{
+      background:url(../../../static/assets/ic_luckylist.png) no-repeat;
+
+    }
+    .address{
+      background:url(../../../static/assets/ic_addresslist.png) no-repeat;
+    }
+    .payRecord{
+      background:url(../../../static/assets/ic_paylist.png) no-repeat;
+
+    }
+    .intro{
+      background:url(../../../static/assets/ic_introduction.png) no-repeat;
+
     }
     .linkClass{
       display: block;
+      transform: scale(1);
+    }
+    .linkClass:hover{
+      transform: scale(1.1);
     }
     .linkText{
-      line-height: 20px;
+      line-height: 40px;
       text-align: center;
       font-size: 14px;
       color: #333333;

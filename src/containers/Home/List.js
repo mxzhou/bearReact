@@ -53,7 +53,7 @@ export default class List extends Component {
   componentDidMount(){
     console.log('componentDidMount')
     this.props.loading()
-    this.props.loadToast('11225444')
+    //this.props.loadToast('11225444')
 
     this.props.load();
 

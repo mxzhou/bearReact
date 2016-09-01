@@ -10,7 +10,16 @@ import {
   Mine,
   NotFound
 } from 'containers';
-
+import {
+  Nav,
+  Join,
+  Lucky,
+  Address,
+  PayRecord,
+  Intro,
+  Recharge,
+  Msg
+} from './containers/Mine';
 export default (store) => {
   const requireLogin = (nextState, replace, cb) => {
     function checkAuth() {
@@ -45,7 +54,16 @@ export default (store) => {
         <Route path="detail/:id" component={Detail} />
       </Route>
       <Route path="announce" component={Announce}></Route>
-      <Route path="mine" component={Mine}></Route>
+      <Route path="mine" component={Mine}>
+        <IndexRoute component={Nav}/>
+        <Route path="join" component={Join} />
+        <Route path="lucky" component={Lucky} />
+        <Route path="address" component={Address} />
+        <Route path="payRecord" component={PayRecord} />
+        <Route path="intro" component={Intro} />
+        <Route path="recharge" component={Recharge} />
+        <Route path="msg" component={Msg} />
+      </Route>
       {
         /*
         <Route path="home" component={Home}>
