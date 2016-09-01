@@ -172,7 +172,7 @@ router.post('/goods/win', function (req, res, next) {
     "servertime" : 1470893330734,
     "data" : {
       "kgUid" : 1209145396,
-      "nickname" : "大莆田"+Math.random(1000),
+      "nickname" : "大莆田",
       "status" : 5,
       "ip" : "221.204.218.112",
       "address" : "山西省太原市",

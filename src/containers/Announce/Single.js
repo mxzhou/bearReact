@@ -31,7 +31,8 @@ export default class Single extends Component {
     const {item,servertime} = this.props;
     var times = item.startTime+60*1000-servertime;
 
-    var timeTemp,                           // 临时时间
+    var timeTemp,                         // 临时时间
+      remain_msec = 0,                    // mm
       remain_ssec = 0,                    // mm
       remain_sec = 0,                     // 秒
       remain_minute = 0,                  // 分钟
@@ -39,12 +40,17 @@ export default class Single extends Component {
       timetag = Date.now(),               // 上一帧的时间
       hour = 0,                           // 最终显示小时
       min = 0,                            // 最终显示分钟
-      sec = 0;                            // 最终显示秒
-
+      sec = 0,                            // 最终显示秒
+      ssec = 0,
+      msec = 0;
     var count =()=>{
-      timeTemp = parseInt(times / 10);
-      remain_ssec = timeTemp % 100;
-      timeTemp = parseInt(timeTemp / 100);
+      timeTemp = parseInt(times/10);
+      remain_ssec = timeTemp % 10;
+
+      timeTemp = parseInt(timeTemp / 10);
+      remain_msec = timeTemp % 10;
+
+      timeTemp = parseInt(timeTemp / 10);
       // 秒数
       remain_sec = timeTemp % 60;
       timeTemp = parseInt(timeTemp / 60);
@@ -60,7 +66,7 @@ export default class Single extends Component {
 
     var begin = ()=>{
       var minus = Date.now() - timetag;
-      if ((minus) >= 100) {
+      if ((minus) >= 10) {
         times = times - minus;
         count()
         //   当时间结束后倒计时停止
@@ -104,9 +110,11 @@ export default class Single extends Component {
       } else {
         sec = remain_sec;
       }
+      ssec = remain_ssec
+      msec = remain_msec
 
 
-      this.setState({time: min + ':' + sec + ':' + remain_ssec});
+      this.setState({time: min + ':' + sec + ':' + msec+ssec});
       window.requestAnimationFrame(begin);
     }
     window.requestAnimationFrame(begin);
