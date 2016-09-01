@@ -7,8 +7,7 @@ import { loadToast,removeToast } from '../../redux/modules/toast';
   {loadToast,removeToast})
 export default class Toast extends Component {
   static propTypes = {
-    text: PropTypes.string,
-    show: PropTypes.boolean
+    text: PropTypes.string
   }
   handlerFunc(){
     this.props.removeToast()
@@ -16,8 +15,10 @@ export default class Toast extends Component {
   render() {
     const {text,show} = this.props; // eslint-disable-line no-shadow
     const styles = require('./Toast.scss');
+    const display = show ? 'block':'none';
+
     return (
-      <div style={{'display':show ? 'block':'none'}} onClick={this.handlerFunc.bind(this)}>
+      <div style={{'display':display}} onClick={this.handlerFunc.bind(this)}>
         <div className={styles.mask}></div>
         <div className={styles.content}>
           <div className={styles.toast}>

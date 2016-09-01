@@ -38,7 +38,7 @@ export default class ApiClient {
             if(err){
               reject(body || err)
             }else{
-              console.log(body)
+              //console.log(body)
               resolve(body)
             }
           });

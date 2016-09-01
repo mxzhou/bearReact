@@ -7,8 +7,7 @@ import { loading,unloading } from '../../redux/modules/loading';
   {loading,unloading})
 export default class Loading extends Component {
   static propTypes = {
-    text: PropTypes.string,
-    show: PropTypes.boolean
+    text: PropTypes.string
   }
   static defaultProps ={
     text: '加载中。。。'
@@ -19,10 +18,10 @@ export default class Loading extends Component {
   render() {
     const {text,show} = this.props; // eslint-disable-line no-shadow
     const loading = require('../../../static/assets/loading.gif');
-
+    const display = show ? 'block':'none';
     const styles = require('./Loading.scss');
     return (
-      <div style={{'display':show ? 'block':'none'}} onClick={this.handlerFunc.bind(this)}>
+      <div style={{'display':display}} onClick={this.handlerFunc.bind(this)}>
         <div className={styles.mask}></div>
         <div className={styles.content}>
           <div className={styles.loading}>

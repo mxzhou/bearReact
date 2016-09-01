@@ -1,12 +1,17 @@
 import React, { Component,PropTypes } from 'react';
-import { Link } from 'react-router';
+import ApiClient from '../../helpers/ApiClient'
+
 export default class Single extends Component {
   static propTypes = {
     item: PropTypes.object,
+    result: PropTypes.object,
   };
   // porps 的默认值
   static defaultProps = {
     time: 0,
+    result:{},
+    imgShow:true,
+
   }
   // 构造器
   constructor(props, context) {
@@ -14,16 +19,17 @@ export default class Single extends Component {
 
     // 在这里设置初始出台
     this.state = {
-      time: props.time
+      time: props.time,
+      result:props.result,
+      imgShow:props.imgShow
     }
   }
   static propTypes = {
     item: PropTypes.object,
   };
-
   countDownFunc(){
     const {item,servertime} = this.props;
-    var times = item.startTime+3*60*1000-servertime;
+    var times = item.startTime+60*1000-servertime;
 
     var timeTemp,                           // 临时时间
       remain_ssec = 0,                    // mm
@@ -61,6 +67,16 @@ export default class Single extends Component {
         if ((remain_minute <= 0) && (remain_sec <= 0) && (remain_hour <= 0)) {
           remain_minute = remain_sec = remain_hour = 0;
           this.setState({time: '正在开奖'});
+          const client = new ApiClient();
+          const _this = this;
+          // 异步获取数据 promise
+          client.post('/goods/win').then(function(data) {
+            _this.setState({imgShow:!_this.state.imgShow});
+            _this.setState({result:data});
+            // success
+          }, function(value) {
+            // failure
+          });
           //
           //_this.$http.post('/api/goods/win',{aaa:1}).then((response) => {
           //  _this.$set('items', response.data);
@@ -111,7 +127,7 @@ export default class Single extends Component {
   }
   render() {
     const {item,index,servertime} = this.props;
-    const time = this.state.time;
+    const {time,result,imgShow} = this.state;
     const styles = require('./Announce.scss');
     const label = require('../../../static/assets/img_lable.png')
     return (
@@ -133,22 +149,40 @@ export default class Single extends Component {
           {/*未揭晓*/}
           {item.status==3 &&
             <div>
-              <img src={label} className={styles.label} alt=""/>
-              <p className={styles.p}>
-                总需：{item.needNumber}<br/>
-                期号：{item.id}<br/>
-              </p>
-              <div className='f-cb'>
-                <div className={styles.btn + ' f-fr'}><p className={styles.time}>{time}</p></div>
-              </div>
+              {imgShow ?
+                <div>
+                  <img src={label} className={styles.label} alt=""/>
+                  <p className={styles.p}>
+                    总需：{item.needNumber}<br/>
+                    期号：{item.id}<br/>
+                  </p>
+                  <div className='f-cb'>
+                    <div className={styles.btn + ' f-fr'}><p className={styles.time}>{time}</p></div>
+                  </div>
+                </div> :
+                <div>
+                  {
+                    result.data &&　<p className={styles.p}>
+                      <span className={styles.blue}>{result.data.nickname}</span> 获得该奖品<br/>
+                      幸运号码：{result.data.id}<br/>
+                      本期参与：{result.data.winnerJoinNumber}<br/>
+                      揭晓时间：{this.formatDate(result.servertime,result.data.openTime)}<br/>
+                    </p>
+                  }
+                </div>
+              }
+
             </div>
           }
         </div>
       </li>
     );
   }
-
   componentDidMount(){
+    const {item} = this.props;
+    if(item.status == 5){
+      return;
+    }
     this.countDownFunc()
   }
 }
