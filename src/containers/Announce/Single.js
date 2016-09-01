@@ -27,97 +27,73 @@ export default class Single extends Component {
   static propTypes = {
     item: PropTypes.object,
   };
-  countDownFunc(){
-    const {item,servertime} = this.props;
-    var times = item.startTime+60*1000-servertime;
+  count(){
+    this.timeTemp = parseInt(this.times/10);
+    this.remain_ssec = this.timeTemp % 10;
 
-    var timeTemp,                         // 临时时间
-      remain_msec = 0,                    // mm
-      remain_ssec = 0,                    // mm
-      remain_sec = 0,                     // 秒
-      remain_minute = 0,                  // 分钟
-      remain_hour = 0,                    // 小时
-      timetag = Date.now(),               // 上一帧的时间
-      hour = 0,                           // 最终显示小时
+    this.timeTemp = parseInt(this.timeTemp / 10);
+    this.remain_msec = this.timeTemp % 10;
+
+    this.timeTemp = parseInt(this.timeTemp / 10);
+    // 秒数
+    this.remain_sec = this.timeTemp % 60;
+    this.timeTemp = parseInt(this.timeTemp / 60);
+    // 分数
+    this.remain_minute = this.timeTemp % 60;
+    this.timeTemp = parseInt(this.timeTemp / 60);
+    // 小时数
+    this.remain_hour = this.timeTemp % 24;
+    this.timeTemp = parseInt(this.timeTemp / 24);
+  }
+  begin(){
+    var hour = 0,                           // 最终显示小时
       min = 0,                            // 最终显示分钟
       sec = 0,                            // 最终显示秒
       ssec = 0,
       msec = 0;
-    var count =()=>{
-      timeTemp = parseInt(times/10);
-      remain_ssec = timeTemp % 10;
-
-      timeTemp = parseInt(timeTemp / 10);
-      remain_msec = timeTemp % 10;
-
-      timeTemp = parseInt(timeTemp / 10);
-      // 秒数
-      remain_sec = timeTemp % 60;
-      timeTemp = parseInt(timeTemp / 60);
-      // 分数
-      remain_minute = timeTemp % 60;
-      timeTemp = parseInt(timeTemp / 60);
-      // 小时数
-      remain_hour = timeTemp % 24;
-      timeTemp = parseInt(timeTemp / 24);
+    var minus = Date.now() - this.timetag;
+    if ((minus) >= 10) {
+      this.times = this.times - minus;
+      this.count()
+      //   当时间结束后倒计时停止
+      if ((this.remain_minute <= 0) && (this.remain_sec <= 0) && (this.remain_hour <= 0)) {
+        this.remain_minute = this.remain_sec = this.remain_hour = 0;
+        this.setState({time: '正在开奖'});
+        const client = new ApiClient();
+        const _this = this;
+        // 异步获取数据 promise
+        client.post('/goods/win').then(function(data) {
+          _this.setState({imgShow:!_this.state.imgShow});
+          _this.setState({result:data});
+          // success
+        }, function(value) {
+          // failure
+        });
+        return;
+      }
+      this.timetag = Date.now();
     }
-
-    count();
-
-    var begin = ()=>{
-      var minus = Date.now() - timetag;
-      if ((minus) >= 10) {
-        times = times - minus;
-        count()
-        //   当时间结束后倒计时停止
-        if ((remain_minute <= 0) && (remain_sec <= 0) && (remain_hour <= 0)) {
-          remain_minute = remain_sec = remain_hour = 0;
-          this.setState({time: '正在开奖'});
-          const client = new ApiClient();
-          const _this = this;
-          // 异步获取数据 promise
-          client.post('/goods/win').then(function(data) {
-            _this.setState({imgShow:!_this.state.imgShow});
-            _this.setState({result:data});
-            // success
-          }, function(value) {
-            // failure
-          });
-          //
-          //_this.$http.post('/api/goods/win',{aaa:1}).then((response) => {
-          //  _this.$set('items', response.data);
-          //  _this.$set('show', false);
-          //}, (response) => {
-          //  // error callback
-          //});
-          return;
-        }
-        timetag = Date.now();
-      }
-      // 以下部分做为时间显示时补零
-      if (remain_hour < 10) {
-        hour = '0' + remain_hour;
-      } else {
-        hour = remain_hour;
-      }
-      if (remain_minute < 10) {
-        min = '0' + remain_minute;
-      } else {
-        min = remain_minute;
-      }
-      if (remain_sec < 10) {
-        sec = '0' + remain_sec;
-      } else {
-        sec = remain_sec;
-      }
-      ssec = remain_ssec
-      msec = remain_msec
-
-
-      this.setState({time: min + ':' + sec + ':' + msec+ssec});
-      window.requestAnimationFrame(begin);
-    }
-    window.requestAnimationFrame(begin);
+    // 以下部分做为时间显示时补零
+    hour = this.remain_hour < 10 ? '0' + this.remain_hour : this.remain_hour;
+    min = this.remain_minute < 10 ? '0' + this.remain_minute : this.remain_minute;
+    sec = this.remain_sec < 10 ? '0' + this.remain_sec : this.remain_sec;
+    ssec = this.remain_ssec;
+    msec = this.remain_msec;
+    this.setState({time: min + ':' + sec + ':' + msec+ssec});
+    this.reqAni = window.requestAnimationFrame(this.begin.bind(this));
+  }
+  countDownFunc(){
+    const {item,servertime} = this.props;
+    this.times = item.startTime+3*60*1000-servertime;
+    this.timeTemp,                         // 临时时间
+    this.remain_msec = 0,                    // mm
+    this.remain_ssec = 0,                    // mm
+    this.remain_sec = 0,                     // 秒
+    this.remain_minute = 0,                  // 分钟
+    this.remain_hour = 0,                    // 小时
+    this.timetag = Date.now();               // 上一帧的时间
+    this.count();
+    this.reqAni = window.requestAnimationFrame(this.begin.bind(this));
   }
   formatDate(servertime,openTime){
     function intNumber(n){
@@ -192,5 +168,9 @@ export default class Single extends Component {
       return;
     }
     this.countDownFunc()
+  }
+  componentWillUnmount(){
+    // 解除倒计时
+    window.cancelAnimationFrame(this.reqAni);
   }
 }

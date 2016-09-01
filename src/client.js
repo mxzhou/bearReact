@@ -5,11 +5,15 @@ import 'babel-polyfill';
 require('es5-shim');
 require('es5-shim/es5-sham');
 require('console-polyfill');
+// requestAnimation 兼容
 (function(window) {
   "use strict";
   var lastTime = 0;
   window.requestAnimationFrame = window.requestAnimationFrame ||
-    window.webkitrequestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame||
+    window.oRequestAnimationFrame||
+    window.msRequestAnimationFrame||
     function(callback) {
       var currTime = Date.now(),
         timeToCall = Math.max(0, 16 - (currTime - lastTime)),
@@ -21,6 +25,14 @@ require('console-polyfill');
 
       return id;
     };
+  window.cancelAnimationFrame = window.cancelAnimationFrame
+    || window.cancelRequestAnimationFrame
+    || window.webkitCancelAnimationFrame
+    || window.webkitCancelRequestAnimationFrame
+    || window.mozCancelRequestAnimationFrame
+    || window.oCancelRequestAnimationFrame
+    || window.msCancelRequestAnimationFrame
+    || clearTimeout;
 })(window);
 import React from 'react';
 import ReactDOM from 'react-dom';

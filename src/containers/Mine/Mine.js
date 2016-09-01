@@ -16,6 +16,7 @@ export default class Mine extends Component {
       <div className={styles.mine + ' f-cb'}>
         <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionLeaveTimeout={300} transitionAppearTimeout={300} transitionEnterTimeout={300}>
           <div className={styles.left}>
+            <div></div>
             <Left></Left>
           </div>
           <div className={styles.right}>

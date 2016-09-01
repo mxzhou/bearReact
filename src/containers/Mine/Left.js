@@ -25,6 +25,7 @@ export default class Mine extends Component {
           <li className={styles.li2}>
             <Link to="/mine/msg" className={styles.linkClass}>
               <img src={msg} className={styles.iconList + ' f-ib'}/>消息
+              <em className={styles.em + ' f-ib'}>5</em>
             </Link>
           </li>
         </ul>
