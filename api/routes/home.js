@@ -220,7 +220,7 @@ router.post('/goods/list',function(req, res, next){
     next();
 })
 //商品详情
-router.get('/goods/detail',function(req, res, next){
+router.post('/goods/detail',function(req, res, next){
   var json = {
       "status" : 1,
       "errorCode" : 0,

@@ -13,6 +13,7 @@ import home from './home';
 import loading from './loading';
 import toast from './toast';
 import announce from './announce';
+import detail from './detail';
 
 
 export default combineReducers({
@@ -31,5 +32,6 @@ export default combineReducers({
   home,
   loading,
   toast,
-  announce
+  announce,
+  detail
 });

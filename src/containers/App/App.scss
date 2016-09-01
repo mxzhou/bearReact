@@ -84,7 +84,8 @@ body {
 a, a:hover {
   color: #333;
 }
-
+* {
+  font-family: "Helvetica Neue",Helvetica,"Microsoft YaHei",Arial,sans-serif; }
 :global {
   /* function */
   .f-cb:after, .f-cbli li:after {
