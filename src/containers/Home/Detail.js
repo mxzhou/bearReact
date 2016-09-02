@@ -42,7 +42,7 @@ export default class Detail extends Component {
                 }
               </ul>
             </div>
-            <div className={homeStyles.right}>
+            <div className={homeStyles.right} id="frame">
 
               <div className={styles.title}>
                 <h3>{result.data.goodsName}</h3>
@@ -54,28 +54,56 @@ export default class Detail extends Component {
                 <p className={styles.number}><span className="f-fr">剩余: <em>{result.data.surplusNumber}</em></span><span className="f-fl">总需: {result.data.needNumber}</span></p>
               </div> 
               {/* 奖品状态 */}
-              { result.data.status == 0 &&
-                <div className={styles.codes}>
-
+              { result.data.status == 3 &&
+                <div className={styles.countdown}>
+                  <p>期号：{result.data.id}</p>
+                  <h3>揭晓倒计时 00:08:13</h3>
+                </div>
+              }
+              { result.data.status == 3 &&
+                <div className={styles.winner}>
+                  <div className={styles.userPic}>
+                     <img src={result.data.coverImgUrl}/>
+                  </div>
+                  <h4>获奖者：<span className={styles.winnerName}>是第三方的</span></h4>
+                  <p style={{color:'#AAA'}}>（中国广东 IP：12423424234）</p>
+                  <p>用户ID: 2434234</p>
+                  <p>本期参与: <span className={styles.red}>234432</span> 人次</p>
+                  <p>本期期号: 2434234</p>
+                  <p>揭晓时间: 2434234</p>
+                  <div className={styles.luckyNum}>
+                      <a className="f-fr">计算详情&gt;</a>
+                      幸运号码：10004435
+                  </div> 
+                </div>
+              }
+              { result.data.status == -1 &&
+                <div className={styles.goodsDisabeld}>
+                  商品已下架
                 </div>
               }
               {/* 是否参与 */}
-              { resultUser &&
+              { result.data.status == 0 && resultUser && resultUser.data.joinFlag &&
                 <div className={styles.codes}>
                   <p><span className={styles.title}>你参与了：</span><i>{resultUser.data.joinNumber}</i>人次</p>
                   <p><span className={styles.title}>夺宝号码：</span>
                     {
                       resultUser.data.joinCodeList.map((item,index) => 
-                        <em key={'detail'+index} className={index>10?'hide':'show'} style={{display:index>10?'none':'inline-block'}}>{item}</em>
+                        <em key={'detail'+index} className={index>=11?'hideCodeItem':'showCodeItem'} style={{display:index>=11?'none':'inline-block'}}>{item}</em>
                       )
                     }
                   </p>
                   {
-                    resultUser.data.joinCodeList.length > 10 &&
+                    resultUser.data.joinCodeList.length > 12 &&
                     <a className={styles.showMore} data-len={resultUser.data.joinCodeList.length} onClick={this.showAllCodes.bind(this)}>查看全部</a>
                   }
                 </div>
               }
+            </div>
+            <div className="scrollbar1">
+              <div className="handle">
+                <div className="mousearea"></div>
+              </div>
             </div>
             <a className={styles.btnBack} id="btnBack"><img src={iconBack}/></a>
           </div>
@@ -87,13 +115,13 @@ export default class Detail extends Component {
   showAllCodes (e) {
     let $this = $(e.target)
     if($this.text()=='查看全部'){
-      $('em.hide').css('display','')
+      $('em.hideCodeItem').css('display','')
       $this.text('收起')
       if($this.attr('data-len')%6==0){
         $this.css({'position':'relative','margin-left':'94%','bottom':0,'right':0})
       }
     }else{
-      $('em.hide').css('display','none')
+      $('em.hideCodeItem').css('display','none')
       $this.text('查看全部').css({'position':'absolute','margin-left':'0%','bottom':11,'right':10})
     }
   }
@@ -108,7 +136,34 @@ export default class Detail extends Component {
   }
   componentDidUpdate () {
     this.swiperInit()
-  }
+    if($('em.hideCodeItem').length==1){
+      $('em.hideCodeItem').css('display','')
+    }
+    require('../../utils/plugin')
+    require('../../utils/jquery.sly')
+    /*setTimeout(() =>{
+      var $frame  = $('#frame'),
+        $slidee = $('#slidee'),
+        $wrap = $frame.parent(),
+        result = this.props.result;
+      $frame.sly({
+        slidee:$slidee,
+        parataxis:2,
+        itemNav: 'basic',
+        smart: 2,
+        mouseDragging: 1,
+        touchDragging: 1,
+        releaseSwing: 1,
+        startAt: 0,
+        scrollBar: $wrap.find('.scrollbar'),
+        scrollBy: 2,
+        speed: 300,
+        elasticBounds: 1,
+        easing: 'easeOutExpo',
+        dragHandle: 1
+      });
+    },200)*/
+  } 
   componentWillUnmount () {
     clearInterval(this.timer)
   }

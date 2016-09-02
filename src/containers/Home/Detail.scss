@@ -99,10 +99,11 @@
 .codes {
 	position: relative;
 	margin: 10px;
-	margin-top: 20px;
+	margin-top: 10px;
 	background: #EBEBEB;
 	padding: 10px;
 	border-radius: 3px;
+	clear: both;
 	p {
 		position: relative;
 		width: 100%;
@@ -139,4 +140,94 @@
 		right: 10px;
 		bottom: 11px;
 	}
+}
+.countdown {
+	position: relative;
+	clear: both;
+	width: 431px;
+	height: 60px;
+	margin: auto;
+	text-align: center;
+	background: url(../../../static/assets/bg_itemcounting.png) no-repeat;
+	p {
+		font-size: 14px;
+		color: #FFF;
+		line-height: 30px;
+		margin: 0;
+	}
+	h3 {
+		font-size: 18px;
+		color: #FFF;
+		line-height: 20px;
+		margin: 0;
+		font-weight: normal;
+	}
+}
+.winner {
+	position: relative;
+	width: 430px;
+	height: 172px;
+	margin: auto;
+	margin-top: 20px;
+	background: url(../../../static/assets/bg_bingoinfobg.png) no-repeat;
+	.userPic {
+		position: absolute;
+		width: 72px;
+		height: 50px;
+		text-align: center;
+		left: 20px;
+		top: 20px;
+		img {
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+		}
+		&:after {
+			width: 72px;
+			height: 21px;
+			left: 0;
+			bottom: 0;
+			position: absolute;
+			content: " ";
+			background: url(../../../static/assets/img_bingolable.png) center center no-repeat;
+			background-size: 100% auto;
+		}
+	}
+	h4 {
+		padding-top: 15px;
+	}
+	h4,p {
+		padding-left: 100px;
+		color: #333;
+		font-weight: normal;
+		line-height: 18px;
+		font-size: 12px;			
+	}
+	.winnerName {
+		color: #5393E0;
+	}
+	.red {
+		color: #ef4835;
+	}
+	.luckyNum {
+		color: #FFF;
+		padding: 0 10px;
+		font-size: 14px;
+		line-height: 36px;
+		a {
+			color: #FFF;
+			font-size: 12px;
+		}
+	}
+}
+.goodsDisabeld {
+	position: relative;
+	margin: 10px;
+	margin-top: 20px;
+	background: #EBEBEB;
+	height: 40px;
+	line-height: 40px;
+	color: #999;
+	text-align: center;
+	border-radius: 3px;
 }
