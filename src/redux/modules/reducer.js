@@ -13,6 +13,10 @@ import home from './home';
 import loading from './loading';
 import toast from './toast';
 import announce from './announce';
+import payRecord from './mine/payRecord';
+import lucky from './mine/lucky';
+import join from './mine/join';
+import mask from './mine/mask';
 
 
 export default combineReducers({
@@ -31,5 +35,9 @@ export default combineReducers({
   home,
   loading,
   toast,
-  announce
+  announce,
+  payRecord,
+  lucky,
+  join,
+  mask
 });
