@@ -220,7 +220,7 @@ router.post('/goods/list',function(req, res, next){
     next();
 })
 //商品详情
-router.get('/goods/detail',function(req, res, next){
+router.post('/goods/detail',function(req, res, next){
   var json = {
       "status" : 1,
       "errorCode" : 0,
@@ -506,16 +506,16 @@ router.get('/cart/detail',function(req, res, next){
     next();
 })
 //参与者本人
-router.get('/goods/user',function(req, res, next){
+router.post('/goods/user',function(req, res, next){
   var json = {
   "status" : 1,
   "errorCode" : 0,
   "errorMessage" : null,
   "servertime" : 1470652350990,
   "data" : {
-    "joinNumber" : 0,
-    "joinFlag" : false,
-    "joinCodeList" : null
+    "joinNumber" : 32,
+    "joinFlag" : true,
+    "joinCodeList" : [1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006,1000006]
   }
 }
     res.json(json);
