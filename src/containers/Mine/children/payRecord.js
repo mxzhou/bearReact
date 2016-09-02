@@ -58,7 +58,7 @@ export default class PayRecord extends Component {
             <ul id="slidee" className="f-cb">
               {result && result.data && result.data.payLogList.map((item,index) =>
                 <li key={index} className={styles.paragraph +' '+styles.rechargeRecord+ ' f-cb'}>
-                  <div className="f-fl">
+                  <div className={styles.reLeft}>
                     <p className={styles.type}>{payType[item.payType]}</p>
                     <p className={styles.desc}>
                       {this.formData(item.createTime)}
@@ -66,7 +66,7 @@ export default class PayRecord extends Component {
                       {payStatus[item.payStatus]}
                     </p>
                   </div>
-                  <div className="f-fr">
+                  <div className={styles.reRight}>
                     <p className={styles.money}>{item.money}元</p>
                   </div>
                 </li>
