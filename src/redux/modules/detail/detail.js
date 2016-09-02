@@ -39,18 +39,18 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 export function isLoaded(globalState) {
-  return globalState.DETAIL;
+  return globalState.detail;
 }
 
-export function load() {
+export function loadDetail() {
   return {
     types: [LOAD_DETAIL, LOAD_DETAIL_SUCCESS, LOAD_DETAIL_FAIL],
-    promise: (client) => client.post('/goods/detail') // params not used, just shown as demonstration
+    promise: (client) => client.post('/goods/detail')
   };
 }
 export function win() {
   return {
     types: [LOAD_DETAIL, LOAD_DETAIL_SUCCESS, LOAD_DETAIL_FAIL],
-    promise: (client) => client.post('/goods/win') // params not used, just shown as demonstration
+    promise: (client) => client.post('/goods/win')
   };
 }
