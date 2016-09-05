@@ -240,6 +240,39 @@
       height:418px;
       overflow:hidden
     }
+    .logic{
+      font-size: 14px;
+      color: #999999;
+      margin-bottom: 5px;
+      .name{
+        color: #333333;
+      }
+    }
+
+    .system{
+      .systemTitle{
+        line-height: 22px;
+        font-size: 16px;
+        color: #333333;
+        margin-bottom: 5px;
+        .time{
+          float: right;
+          font-size: 14px;
+          color: #999999;
+        }
+
+      }
+      .desc{
+        font-size: 14px;
+        color: #999999;
+        line-height: 20px;
+      }
+    }
+    .logicDesc{
+      font-size: 14px;
+      color: #999999;
+      line-height: 20px;
+    }
     .luckyList{
       .luckyLeft{
         float: left;

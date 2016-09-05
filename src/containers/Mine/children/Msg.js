@@ -30,9 +30,8 @@ export default class Msg extends Component {
       '5':'已晒单'
     },
     navList:[
-      {name:'全部'},
-      {name:'进行中'},
-      {name:'已揭晓'}
+      {name:'物流信息'},
+      {name:'系统信息'},
     ],
     activeIndex:0
   }
@@ -85,32 +84,37 @@ export default class Msg extends Component {
                 </li>)
             }
             <li></li>
-          </ul>        </h3>
+          </ul>
+        </h3>
         <div className="f-pr">
           <div id="frame" className={styles.frame}>
             <ul id="slidee" className="f-cb">
               {result && result.data && result.data.buyLogList.map((item,index) =>
+              {  return activeIndex == 0 ?
                 <li key={index} className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}>
                   <div className={styles.luckyLeft}>
                     <img src={item.coverImgUrl} className={styles.coverImg}/>
                   </div>
                   <div className={styles.luckyRight}>
-                    <p className={styles.goodsName}>{item.goodsName}</p>
-                    <div className={styles.goodsDesc}>
-                      <p className={styles.id+' f-ib'}>
-                        期号: 31273474577
-                      </p>
-                      <p className={styles.joinNumber+' f-ib'}>
-                        本期参与: 2人次
-                      </p>
-                      <a className={styles.textBlue+' f-ib'}>查看夺宝号></a>
+                    <div className={styles.logic+' f-cb'}>
+                      <span className={styles.name}>外星人 15.6 英寸游戏本</span>
+                      <span className={' f-fr'}>2016-01-12 18:23</span>
                     </div>
-                    <div className={styles.goodsStatus + ' f-cb'}>
-                      {orderStatus[item.status]}
-                      <a className={styles.goodsBtn+' f-fr'}>设置收货地址</a>
-                    </div>
+                    <p className={styles.logicDesc}>
+                      您中奖的商品“（第12345期）外星人 15.6 英寸游戏本”已经发货，请耐心等待哦！
+                    </p>
                   </div>
+                </li> :
+                <li key={index} className={styles.paragraph +' '+styles.system+ ' f-cb'}>
+                  <div className={styles.systemTitle}>
+                    9月23号凌晨服务器升级公告<span className={styles.time}>今天</span>
+                  </div>
+                  <p className={styles.desc}>
+                    亲爱的用户：<br/>
+                    为给广大用户提供更顺畅的夺宝体验，9月23日凌晨2:00，我们将对服务器进行全面升级。届时零钱夺宝将对服务器进行停机维护，预计时间为1月3日9…
+                  </p>
                 </li>
+              }
               )}
             </ul>
           </div>
