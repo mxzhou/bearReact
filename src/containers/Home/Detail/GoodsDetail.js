@@ -11,7 +11,7 @@ import { Link } from 'react-router';
 export default class PayRecord extends Component {
 
   static propTypes = {
-    result:PropTypes.object
+    result: PropTypes.object
   };
   render() {
     const {result} = this.props;
@@ -22,7 +22,7 @@ export default class PayRecord extends Component {
           <div> 
             {
               result.data.map((item,index) =>
-                <img key={'detail-item'+index} src={item}/>
+                <img className={styles.img} key={'detail-item'+index} src={item}/>
               )
             }
           </div>

@@ -161,8 +161,7 @@ export default class Detail extends Component {
         $slidee = $('#slidee'),
         $wrap = $frame.parent();
       $frame.sly({
-        slidee: $slidee,
-        parataxis: 2,
+        slidee:$slidee,
         itemNav: 'basic',
         smart: 2,
         mouseDragging: 1,
