@@ -13,10 +13,10 @@ export default class Recharge extends Component {
     numPayList:[10,50,100,200,500,1000,2000],
     typeIndex:0,
     typePayList:[
-      {img:wechat,text:'微信'},
-      {img:alipay,text:'支付宝'},
-      {img:'',text:'储蓄卡'},
-      {img:'',text:'信用卡'}
+      {img:wechat,text:'微信',type:1},
+      {img:alipay,text:'支付宝',type:2},
+      {img:'',text:'储蓄卡',type:3},
+      {img:'',text:'信用卡',type:4}
     ]
   }
   // 构造器
