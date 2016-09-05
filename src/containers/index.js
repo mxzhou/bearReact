@@ -2,6 +2,7 @@ import App from './App/App';
 import Home from './Home/Home';
 import List from './Home/List';
 import Detail from './Home/Detail';
+import GoodsDetail from './Home/Detail/GoodsDetail';
 
 import Announce from './Announce/Announce';
 import Mine from './Mine/Mine';
@@ -14,5 +15,6 @@ export {
   Detail,
   Announce,
   Mine,
-  NotFound
+  NotFound,
+  GoodsDetail
 }
