@@ -15,6 +15,7 @@ import toast from './toast';
 import announce from './announce';
 import detail from './detail/detail';
 import detailUser from './detail/detail.user';
+import detailGoods from './detail/detail.goods';
 import detailJoiner from './detail/detail.joiner';
 import payRecord from './mine/payRecord';
 import lucky from './mine/lucky';
@@ -41,6 +42,7 @@ export default combineReducers({
   announce,
   detail,
   detailJoiner,
+  detailGoods,
   detailUser,
   payRecord,
   lucky,

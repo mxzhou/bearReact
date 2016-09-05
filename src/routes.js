@@ -8,6 +8,7 @@ import {
   Detail,
   Announce,
   Mine,
+  GoodsDetail,
   NotFound
 } from 'containers';
 import {
@@ -51,7 +52,11 @@ export default (store) => {
        */ }
       <Route path="home" component={Home}>
         <IndexRoute component={List}/>
-        <Route path="detail/:id" component={Detail} />
+        <Route path="detail" component={Detail} >
+          <Route path="goods" component={GoodsDetail} />
+          <Route path="join" component={GoodsDetail} />
+          <Route path="past" component={GoodsDetail} />
+        </Route>
       </Route>
       <Route path="announce" component={Announce}></Route>
       <Route path="mine" component={Mine}>

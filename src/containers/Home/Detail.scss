@@ -1,13 +1,13 @@
 .swiper {
 	position: absolute;
-	width: 290px;
-	height: 290px;
+	width: 270px;
+	height: 270px;
 	margin: auto;
 	top: 50%;
 	margin-top: -145px;
 	overflow: hidden;
 	img {
-		max-width: 290px;
+		max-width: 270px;
 	}
 	ul,li {
 		margin: 0;
@@ -230,4 +230,58 @@
 	color: #999;
 	text-align: center;
 	border-radius: 3px;
+}
+.tabNav {
+	position: relative;
+	border-bottom: 2px solid #0191D3;
+	height: 24px;
+	padding-left: 10px;
+	a {
+		font-size: 12px;
+		position: relative;
+		padding: 0 20px;
+		display: block;
+		float: left;
+		height: 24px;
+		line-height: 24px;
+		text-align: center;
+		color: #0066AC;
+		margin-left: 3px;
+		background: url(../../../static/assets/bg_segment.png) center top no-repeat;
+		&:before {
+			display: block;
+			content: ' ';
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 20px;
+			height: 24px;
+			background: url(../../../static/assets/bg_segment.png) left top no-repeat;
+		}
+		&:after {
+			display: block;
+			content: ' ';
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 20px;
+			height: 24px;
+			background: url(../../../static/assets/bg_segment.png) right top no-repeat;
+		}
+		&.active {
+			color: #FFF;
+			height: 30px;
+			background: url(../../../static/assets/bg_segment_a.png) center top no-repeat;
+			&:before {
+				background: url(../../../static/assets/bg_segment_a.png) left top no-repeat;
+			}
+			&:after {
+				background: url(../../../static/assets/bg_segment_a.png) right top no-repeat;
+			}
+		}
+	}
+}
+.detail {
+	position: relative;
+	width: 100%;
 }
