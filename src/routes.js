@@ -15,6 +15,9 @@ import {
   Join,
   Lucky,
   Address,
+  Select,
+  AddAddress,
+  EditAddress,
   PayRecord,
   Intro,
   Recharge,
@@ -59,6 +62,10 @@ export default (store) => {
         <Route path="join" component={Join} />
         <Route path="lucky" component={Lucky} />
         <Route path="address" component={Address} />
+        <Route path="selectAddress" component={Select} />
+        <Route path="addAddress" component={AddAddress} />
+        <Route path="editAddress/:id" component={EditAddress} />
+
         <Route path="payRecord" component={PayRecord} />
         <Route path="intro" component={Intro} />
         <Route path="recharge" component={Recharge} />

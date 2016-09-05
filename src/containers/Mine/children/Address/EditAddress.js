@@ -1,11 +1,11 @@
 import React, { Component,PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { IndexLink,Link } from 'react-router';
-import Close from './Close';
-import alipay from '../../../../static/assets/img_alipay.jpg'
-import wechat from '../../../../static/assets/img_wechatpay.jpg'
+import Close from './../Close';
+import alipay from '../../../../../static/assets/img_alipay.jpg'
+import wechat from '../../../../../static/assets/img_wechatpay.jpg'
 
-export default class Recharge extends Component {
+export default class Address extends Component {
   static propTypes = {
   };
   static defaultProps = {
@@ -13,10 +13,10 @@ export default class Recharge extends Component {
     numPayList:[10,50,100,200,500,1000,2000],
     typeIndex:0,
     typePayList:[
-      {img:wechat,text:'微信'},
-      {img:alipay,text:'支付宝'},
-      {img:'',text:'储蓄卡'},
-      {img:'',text:'信用卡'}
+      {img:wechat,text:'微信',type:1},
+      {img:alipay,text:'支付宝',type:2},
+      {img:'',text:'储蓄卡',type:3},
+      {img:'',text:'信用卡',type:4}
     ]
   }
   // 构造器
@@ -51,12 +51,13 @@ export default class Recharge extends Component {
       val = numPayList[numIndex];
     }
     type = typePayList[typeIndex].type;
+    alert(0)
     alert(val+':'+type)
   }
   render() {
     const {numPayList,typePayList} = this.props
     const {numIndex,typeIndex} = this.state;
-    const styles = require('../Mine.scss')
+    const styles = require('../../Mine.scss')
     return (
       <div className={styles.content}>
         <h3 className={styles.title + ' f-cb'}>
@@ -83,14 +84,14 @@ export default class Recharge extends Component {
               <li key={index} className={styles.item + ' '+styles.type+(index == typeIndex ? ' '+styles.active:'')}
                   onClick={this.selectType.bind(this,index)}>
                 <a>
-                {item.img == '' ? item.text : <img src={item.img}/>}
-              </a>
+                  {item.img == '' ? item.text : <img src={item.img}/>}
+                </a>
               </li>
             )}
 
           </ul>
           <div className={styles.blockBtn}>
-            <a className={styles.btn+' '+styles.pay} onClick={this.submitFunc.bind(this)}>确认充值</a>
+            <a className={styles.payBtn} onClick={this.submitFunc.bind(this)}>确认充值</a>
           </div>
         </div>
       </div>

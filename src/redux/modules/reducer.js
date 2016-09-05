@@ -20,6 +20,7 @@ import payRecord from './mine/payRecord';
 import lucky from './mine/lucky';
 import join from './mine/join';
 import mask from './mine/mask';
+import addressList from './mine/addressList';
 
 
 export default combineReducers({
@@ -45,5 +46,6 @@ export default combineReducers({
   payRecord,
   lucky,
   join,
-  mask
+  mask,
+  addressList
 });

@@ -4,12 +4,12 @@
   background: #fff;
   .left{
     float: left;
-    width: 220px;
+    width: 210px;
     height: 100%;
     position: relative;
     .mask{
       position: absolute;
-      width: 100%;
+      width: 220px;
       height: 100%;
       z-index: 1000;
       top:0;
@@ -73,10 +73,17 @@
       }
     }
   }
+  .shadow{
+    height: 100%;
+    width: 10px;
+    float: left;
+    opacity: 0.04;
+    background-image: linear-gradient(-270deg, rgba(0,0,0,0.00) 0%, #000000 100%);
+  }
   .right{
     float: right;
     background: #F9FAFB;
-    width: 511px;
+    width: 521px;
     height: 100%;
     .linkList{
       padding: 50px 32px 0;
@@ -147,7 +154,7 @@
     .paragraph{
       padding: 10px;
       border-bottom: solid 1px #ebebeb;
-      width: 471px;
+      width: 481px;
     }
     .scroll{
       height: 418px;
@@ -271,6 +278,194 @@
         margin-right: 40px;
       }
 
+    }
+    .addressList{
+      .item{
+        padding: 10px 0;
+        font-size: 14px;
+        color: #333;
+        border-bottom: 1px solid #ebebeb;
+        .default{
+          color: #32BB48;
+        }
+        .check{
+          width: 35px;
+          float: left;
+          img{
+            width: 20px;
+            height: 20px;
+            vertical-align: top;
+          }
+        }
+        .desc{
+          line-height: 20px;
+          font-size: 14px;
+          margin-bottom: 5px;
+          .name{
+            color: #0066AC;
+          }
+          .phone{
+            color: #999999;
+            float: right;
+            margin-right: 10px;
+          }
+        }
+        .aLeft{
+          width: 415px;
+          float: left;
+          margin-right: 5px;
+        }
+        .sLeft{
+          width: 380px;
+          float: left;
+          margin-right: 5px;
+        }
+        .aRight{
+          text-align: center;
+          float: left;
+          color: #0299CD;
+          border-left: 1px solid #d3d6da;
+          line-height: 40px;
+          width: 80px;
+          .edit{
+            width: 18px;
+            height: 18px;
+            margin-left: 5px;
+            position: relative;
+            top: 3px;
+          }
+        }
+      }
+    }
+    .addressForm{
+      .control{
+        margin-top: 20px;
+        line-height: 40px;
+      }
+      .label{
+        width: 83px;
+        margin-right: 10px;
+        font-size: 14px;
+        color: #333333;
+        text-align: right;
+        display: block;
+        float: left;
+      }
+      .formControl{
+        border: 1px solid #D3D6DA;
+        border-radius: 4px;
+        line-height: 18px;
+        font-size: 14px;
+        padding: 10px;
+        width: 360px;
+      }
+      .selectControl{
+        border: 1px solid #D3D6DA;
+        border-radius: 4px;
+        line-height: 18px;
+        font-size: 14px;
+        padding: 10px;
+        width: 120px;
+        margin-right: 10px;
+      }
+      .offset{
+        margin-left: 93px;
+        display: block;
+        .default{
+          .image{
+            vertical-align: middle;
+            margin-right: 5px;
+            position: relative;
+            top: -1px;
+          }
+          font-size: 14px;
+          color: #333333;
+          line-height: 40px;
+        }
+      }
+    }
+  }
+  .blockRecharge{
+    padding: 0 10px;
+    .h3{
+      line-height: 20px;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #333333;
+    }
+    .ulList{
+      margin-top: 10px;
+      .item{
+        border: 1px solid #999999;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-right: 20px;
+        float: left;
+        line-height: 36px;
+        height: 36px;
+        width: 98px;
+        text-align: center;
+        margin-bottom: 10px;
+        a{
+          display: block;
+          color: #999;
+        }
+        .input{
+          width: 88px;
+          height: 26px;
+          padding: 5px;
+          background: #F9FAFB;
+          border: 0;
+          color: #999999;
+          border-radius: 4px;
+        }
+      }
+      .item.type{
+        width: 118px;
+      }
+      .item img{
+        width: 116px;
+        margin: 0 auto;
+        height: 35px;
+        vertical-align: middle;
+      }
+      .item.active{
+        border: 1px solid #0299CD;
+        border-radius: 4px;
+        a{
+          color: #0299CD;
+        }
+      }
+
+    }
+
+  }
+  .blockBtn{
+    border-top: 1px solid #ebebeb;
+    margin-top: 20px;
+    .btn{
+      transform: scale(1);
+      margin: 20px auto;
+      text-align: center;
+      width: 120px;
+      height: 26px;
+      line-height: 26px;
+      display: block;
+      font-size: 12px;
+      background:#038FFF;
+      background-image: linear-gradient(-180deg, #0DB4FF 0%, #038FFF 100%);
+      border: 1px solid #B1BECA;
+      box-shadow: inset 0px -2px 6px 0px rgba(255,255,255,0.60);
+      border-radius: 4px;
+    }
+    .btn:hover{
+      transform: scale(1.1);
+    }
+    .pay{
+      color: #FFF703;
+    }
+    .addressBtn{
+      color: #fff;
     }
   }
 }

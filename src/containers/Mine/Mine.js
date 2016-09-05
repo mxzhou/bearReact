@@ -27,12 +27,22 @@ export default class Mine extends Component {
             <div className={styles.mask} style={{display:show ? 'block':'none'}}></div>
             <Left></Left>
           </div>
+          <div className={styles.shadow}></div>
           <div className={styles.right}>
             {this.props.children}
           </div>
         </ReactCSSTransitionGroup>
       </div>
     );
+  }
+  componentWillUpdate(){
+
+  }
+  componentDidUpdate() {
+    const path = this.props.location.pathname
+    if(path == '/mine'){
+      this.props.unload()
+    }
   }
   componentDidMount(){
   }
