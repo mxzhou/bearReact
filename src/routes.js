@@ -55,7 +55,8 @@ export default (store) => {
        */ }
       <Route path="home" component={Home}>
         <IndexRoute component={List}/>
-        <Route path="detail" component={Detail} >
+        <Route path="detail/:id" component={Detail} >
+          <IndexRoute component={GoodsDetail}/>
           <Route path="goods" component={GoodsDetail} />
           <Route path="join" component={GoodsDetail} />
           <Route path="past" component={GoodsDetail} />
