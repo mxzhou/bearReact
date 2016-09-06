@@ -25,8 +25,9 @@ export default class List extends Component {
     this.state = {
     }
   }
-  editFunc(){
-
+  editFunc(obj){
+    addressObject = obj;
+    location.href="#/mine/editAddress/"+obj.id;
   }
   render() {
     const {list} = this.props
@@ -51,9 +52,9 @@ export default class List extends Component {
                   {item.ifDefault ? <span className={styles.default}>[默认]</span> :''}
                   {item.province+item.city+item.area+item.addressDetail}
                 </div>
-                <Link className={styles.aRight} to={"/mine/editAddress/"+item.id}>
+                <a className={styles.aRight} onClick={this.editFunc.bind(this,item)}>
                   编辑<img src={edit} className={styles.edit +' f-ib'}/>
-                </Link>
+                </a>
               </div>
             </li>
           )}

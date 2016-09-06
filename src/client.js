@@ -49,7 +49,7 @@ const client = new ApiClient();
 const dest = document.getElementById('content');
 
 const store = createStore(client);
-
+global.addressObject={}
 const component = (
   <Router history={hashHistory}>
     {getRoutes(store)}
