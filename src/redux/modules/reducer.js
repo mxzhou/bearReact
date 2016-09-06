@@ -17,6 +17,7 @@ import detail from './detail/detail';
 import detailUser from './detail/detail.user';
 import detailGoods from './detail/detail.goods';
 import detailJoiner from './detail/detail.joiner';
+import detailPast from './detail/detail.past';
 import payRecord from './mine/payRecord';
 import lucky from './mine/lucky';
 import join from './mine/join';
@@ -45,6 +46,7 @@ export default combineReducers({
   detailJoiner,
   detailGoods,
   detailUser,
+  detailPast,
   payRecord,
   lucky,
   join,

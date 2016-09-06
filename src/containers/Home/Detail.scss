@@ -239,7 +239,7 @@
 	a {
 		font-size: 12px;
 		position: relative;
-		padding: 0 20px;
+		padding: 0 15px;
 		display: block;
 		float: left;
 		height: 24px;
@@ -254,7 +254,7 @@
 			position: absolute;
 			left: 0;
 			top: 0;
-			width: 20px;
+			width: 15px;
 			height: 24px;
 			background: url(../../../static/assets/bg_segment.png) left top no-repeat;
 		}
@@ -264,7 +264,7 @@
 			position: absolute;
 			right: 0;
 			top: 0;
-			width: 20px;
+			width: 15px;
 			height: 24px;
 			background: url(../../../static/assets/bg_segment.png) right top no-repeat;
 		}
@@ -285,4 +285,28 @@
 	position: relative;
 	width: 100%;
 	margin-top: -5px;
+}
+.btnBottomArea {
+	position: fixed;
+	width: 456px;
+	height: 44px;
+	top: 452px;
+	left: 50%;
+	margin-left: -35px;
+	background: rgba(255,255,255,0.9);
+	border-top: 1px solid #EEE;
+	.btn{
+        transform: scale(1);
+        margin-top: 15px;
+        background: #038FFF;
+        background-image: linear-gradient(-180deg, #0DB4FF 0%, #038FFF 100%);
+        border: 1px solid #B1BECA;
+        box-shadow: inset 0px -2px 6px 0px rgba(255,255,255,0.60);
+        border-radius: 4px;
+        width: 80px;
+        line-height: 24px;
+        text-align: center;
+        color: #fff;
+        font-size: 12px;
+      }
 }

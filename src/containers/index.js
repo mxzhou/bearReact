@@ -3,6 +3,8 @@ import Home from './Home/Home';
 import List from './Home/List';
 import Detail from './Home/Detail';
 import GoodsDetail from './Home/Detail/GoodsDetail';
+import GoodsJoiner from './Home/Detail/GoodsJoiner';
+import GoodsPast from './Home/Detail/GoodsPast';
 
 import Announce from './Announce/Announce';
 import Mine from './Mine/Mine';
@@ -16,5 +18,7 @@ export {
   Announce,
   Mine,
   NotFound,
-  GoodsDetail
+  GoodsDetail,
+  GoodsJoiner,
+  GoodsPast,
 }

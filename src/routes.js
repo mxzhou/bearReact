@@ -9,6 +9,8 @@ import {
   Announce,
   Mine,
   GoodsDetail,
+  GoodsJoiner,
+  GoodsPast,
   NotFound
 } from 'containers';
 import {
@@ -57,11 +59,11 @@ export default (store) => {
        */ }
       <Route path="home" component={Home}>
         <IndexRoute component={List}/>
-        <Route path="detail/:id" component={Detail} >
+        <Route path="detail" component={Detail} >
           <IndexRoute component={GoodsDetail}/>
           <Route path="goods" component={GoodsDetail} />
-          <Route path="join" component={GoodsDetail} />
-          <Route path="past" component={GoodsDetail} />
+          <Route path="join" component={GoodsJoiner} />
+          <Route path="past" component={GoodsPast} />
         </Route>
       </Route>
       <Route path="announce" component={Announce}></Route>

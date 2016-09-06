@@ -113,7 +113,11 @@ export default class Detail extends Component {
                 <div className={styles.detail}>
                  {this.props.children}
                 </div>
+
               </div>
+            </div>
+            <div className={styles.btnBottomArea}>
+                
             </div>
             <div className="scrollbar">
               <div className="handle">
