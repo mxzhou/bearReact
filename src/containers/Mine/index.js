@@ -14,6 +14,7 @@ import EditAddress from './children/Address/EditAddress';
 import PayRecord from './children/PayRecord';
 import Intro from './children/Intro';
 import Recharge from './children/Recharge';
+import PayEnd from './children/payEnd'
 import Msg from './children/Msg';
 
 export {
@@ -27,5 +28,6 @@ export {
   PayRecord,
   Intro,
   Recharge,
+  PayEnd,
   Msg
 }

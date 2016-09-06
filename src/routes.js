@@ -22,6 +22,7 @@ import {
   PayRecord,
   Intro,
   Recharge,
+  PayEnd,
   Msg
 } from './containers/Mine';
 export default (store) => {
@@ -75,6 +76,8 @@ export default (store) => {
         <Route path="payRecord" component={PayRecord} />
         <Route path="intro" component={Intro} />
         <Route path="recharge" component={Recharge} />
+        <Route path="payEnd" component={PayEnd} />
+
         <Route path="msg" component={Msg} />
       </Route>
       {

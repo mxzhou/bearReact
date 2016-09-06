@@ -52,6 +52,7 @@ export default class Recharge extends Component {
     }
     type = typePayList[typeIndex].type;
     alert(val+':'+type)
+    location.href="#/mine/payEnd"
   }
   render() {
     const {numPayList,typePayList} = this.props
