@@ -103,11 +103,10 @@ export default class Join extends Component {
                       <p className={styles.joinNumber+' f-ib'}>
                         本期参与: 2人次
                       </p>
-                      <a className={styles.textBlue+' f-ib'}>查看夺宝号></a>
+                      <Link to={'/mine/joinDetail/'+item.id} className={styles.textBlue+' f-ib'}>查看夺宝号></Link>
                     </div>
                     <div className={styles.goodsStatus + ' f-cb'}>
                       {orderStatus[item.status]}
-                      <a className={styles.goodsBtn+' f-fr'}>设置收货地址</a>
                     </div>
                   </div>
                 </li>

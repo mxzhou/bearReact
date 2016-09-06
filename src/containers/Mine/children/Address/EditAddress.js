@@ -1,23 +1,18 @@
 import React, { Component,PropTypes } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import { connect } from 'react-redux';
 import { IndexLink,Link } from 'react-router';
-import Close from './../Close';
-import alipay from '../../../../../static/assets/img_alipay.jpg'
-import wechat from '../../../../../static/assets/img_wechatpay.jpg'
+import { load as loadMask,unload} from '../../../../redux/modules/mine/mask';
+import marker from '../../../../../static/assets/btn_select.png'
+import aMarker from '../../../../../static/assets/btn_select_a.png'
+@connect(
+  state => ({}),
+  {loadMask,unload})
 
-export default class Address extends Component {
+export default class EditAddress extends Component {
   static propTypes = {
   };
   static defaultProps = {
-    numIndex:0,
-    numPayList:[10,50,100,200,500,1000,2000],
-    typeIndex:0,
-    typePayList:[
-      {img:wechat,text:'微信',type:1},
-      {img:alipay,text:'支付宝',type:2},
-      {img:'',text:'储蓄卡',type:3},
-      {img:'',text:'信用卡',type:4}
-    ]
+    bSelect:true
   }
   // 构造器
   constructor(props, context) {
@@ -25,8 +20,7 @@ export default class Address extends Component {
 
     // 在这里设置初始出台
     this.state = {
-      numIndex: props.numIndex,
-      typeIndex:props.typeIndex
+      bSelect:props.bSelect
     }
   }
   selectNum(index){
@@ -36,65 +30,74 @@ export default class Address extends Component {
     this.setState({typeIndex:index})
 
   }
-  inputFunc(){
+  checkFunc(){
+    this.setState({
+      bSelect:!this.state.bSelect
+    })
   }
   focusFunc(){
-    this.setState({numIndex:this.props.numPayList.length+1})
   }
   submitFunc(){
-    let val,type;
-    const {numIndex,typeIndex} = this.state;
-    const {numPayList,typePayList} = this.props;
-    if(numIndex == this.props.numPayList.length+1){
-      val = $(".j-input").val()
-    }else{
-      val = numPayList[numIndex];
-    }
-    type = typePayList[typeIndex].type;
-    alert(0)
-    alert(val+':'+type)
+  }
+  closeHandler(){
+    history.back()
   }
   render() {
     const {numPayList,typePayList} = this.props
-    const {numIndex,typeIndex} = this.state;
+    const {bSelect} = this.state;
+
     const styles = require('../../Mine.scss')
+    const back = require('../../../../../static/assets/ic_backpage.png')
+
     return (
       <div className={styles.content}>
         <h3 className={styles.title + ' f-cb'}>
-          <Close></Close>
-          充值
+          <Link to="/mine"><img src={back} className={styles.close} onClick={this.closeHandler.bind(this)}/></Link>
+          修改收货地址
         </h3>
-        <div className={styles.blockRecharge}>
-          <h3 className={styles.h3}>选择充值金额（元）</h3>
-          <ul className={styles.ulList + ' f-cb'}>
-            {numPayList.map((item,index)=>
-              <li key={index} className={styles.item+(index == numIndex ? ' '+styles.active:'')}
-                  onClick={this.selectNum.bind(this,index)}>
-                <a>{item}</a>
-              </li>
-            )}
-            <li className={styles.item+(numIndex == (numPayList.length+1) ? ' '+styles.active:'')}>
-              <input className={styles.input+' j-input'} onFocus ={this.focusFunc.bind(this)}/>
-            </li>
-
-          </ul>
-          <h3 className={styles.h3}>选择支付方式</h3>
-          <ul className={styles.ulList + ' f-cb'}>
-            {typePayList.map((item,index)=>
-              <li key={index} className={styles.item + ' '+styles.type+(index == typeIndex ? ' '+styles.active:'')}
-                  onClick={this.selectType.bind(this,index)}>
-                <a>
-                  {item.img == '' ? item.text : <img src={item.img}/>}
-                </a>
-              </li>
-            )}
-
-          </ul>
-          <div className={styles.blockBtn}>
-            <a className={styles.payBtn} onClick={this.submitFunc.bind(this)}>确认充值</a>
+        <div className={styles.addressForm}>
+          <div className={styles.control+' f-cb'}>
+            <label className={styles.label}>收货人</label>
+            <div className="f-fl">
+              <input type="text" className={styles.formControl} placeholder="请使用真实姓名，长度不超过8个字"/>
+            </div>
           </div>
+          <div className={styles.control+' f-cb'}>
+            <label className={styles.label}>手机号码</label>
+            <div className="f-fl">
+              <input type="text" className={styles.formControl} placeholder=""/>
+            </div>
+          </div>
+          <div className={styles.control+' f-cb'}>
+            <label className={styles.label}>所在地区</label>
+            <div className="f-fl">
+              <select className={'f-ib '+styles.selectControl}></select>
+              <select className={'f-ib '+styles.selectControl}></select>
+              <select className={'f-ib '+styles.selectControl}></select>
+            </div>
+          </div>
+          <div className={styles.control+' f-cb'}>
+            <label className={styles.label}>街道地址</label>
+            <div className="f-fl">
+              <textarea rows="2" type="text" className={styles.formControl} placeholder=""></textarea>
+            </div>
+          </div>
+          <div className={styles.control+' f-cb'}>
+            <div className={styles.offset}>
+              <a className={styles.default} onClick={this.checkFunc.bind(this)}>
+                <img src={bSelect ? aMarker:marker} className={styles.image}/>
+                设置为默认收货地址
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className={styles.blockBtn}>
+          <a className={styles.btn + ' '+styles.addressBtn} onClick={this.submitFunc.bind(this)}>保存</a>
         </div>
       </div>
     );
+  }
+  componentDidMount(){
+    this.props.loadMask()
   }
 }

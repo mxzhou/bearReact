@@ -4,6 +4,8 @@
 * */
 import Nav from './children/Nav';
 import Join from './children/Join';
+import JoinDetail from './children/JoinDetail';
+
 import Lucky from './children/Lucky';
 import Address from './children/Address/List';
 import Select from './children/Address/Select';
@@ -20,6 +22,7 @@ import Msg from './children/Msg';
 export {
   Nav,
   Join,
+  JoinDetail,
   Lucky,
   Address,
   Select,

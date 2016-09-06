@@ -97,4 +97,7 @@ export default class Address extends Component {
       </div>
     );
   }
+  componentDidMount(){
+    this.props.loadMask()
+  }
 }

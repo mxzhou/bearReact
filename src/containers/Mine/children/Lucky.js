@@ -76,11 +76,11 @@ export default class Lucky extends Component {
                       <p className={styles.joinNumber+' f-ib'}>
                         本期参与: 2人次
                       </p>
-                      <a className={styles.textBlue+' f-ib'}>查看夺宝号></a>
+                      <Link to={'/mine/joinDetail/'+item.id} className={styles.textBlue+' f-ib'}>查看夺宝号></Link>
                     </div>
                     <div className={styles.goodsStatus + ' f-cb'}>
                       {orderStatus[item.orderStatus]}
-                      <a className={styles.goodsBtn+' f-fr'}>设置收货地址</a>
+                      <Link to={'/mine/selectAddress/'+item.id} className={styles.goodsBtn+' f-fr'}>设置收货地址</Link>
                     </div>
                   </div>
                 </li>

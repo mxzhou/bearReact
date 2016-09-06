@@ -14,6 +14,7 @@ import {
 import {
   Nav,
   Join,
+  JoinDetail,
   Lucky,
   Address,
   Select,
@@ -67,9 +68,10 @@ export default (store) => {
       <Route path="mine" component={Mine}>
         <IndexRoute component={Nav}/>
         <Route path="join" component={Join} />
+        <Route path="joinDetail/:id" component={JoinDetail} />
         <Route path="lucky" component={Lucky} />
         <Route path="address" component={Address} />
-        <Route path="selectAddress" component={Select} />
+        <Route path="selectAddress/:id" component={Select} />
         <Route path="addAddress" component={AddAddress} />
         <Route path="editAddress/:id" component={EditAddress} />
 
