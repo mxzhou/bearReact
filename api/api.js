@@ -27,9 +27,9 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 
-app.use('/', home);
-app.use('/', open);
-app.use('/', address);
+app.use('/pc/', home);
+app.use('/pc/', open);
+app.use('/pc/', address);
 
 //app.use((req, res) => {
 //  const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
