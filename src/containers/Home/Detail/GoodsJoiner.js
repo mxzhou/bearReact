@@ -22,7 +22,7 @@ export default class GoodsJoiner extends Component {
           <div> 
             {
               result.data.userList.map((item,index) =>
-                <div className={styles.item}>
+                <div className={styles.item} key={'joiner-item'+index}>
                   <span className={styles.time}>{this.formateYMD(item.joinTime)}<br/>{this.formateDate(item.joinTime)}</span>
                   <span className={styles.pic}><img src={item.avatarUrl}/></span>
                   <p className={styles.info}>

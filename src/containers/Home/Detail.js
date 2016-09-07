@@ -5,6 +5,7 @@ import { loadDetail } from '../../redux/modules/detail/detail';
 import { loadDetailUser } from '../../redux/modules/detail/detail.user';
 import { loading,unloading } from '../../redux/modules/loading';
 import { Link } from 'react-router';
+import Pay from './Detail/Pay';
 @connect(
   state => ({result: state.detail.data,resultUser: state.detailUser.data}),
   {loadDetail, loadDetailUser, loading, unloading})
@@ -13,8 +14,21 @@ export default class Detail extends Component {
   static propTypes = {
     result: PropTypes.object,
     children: PropTypes.object.isRequired,
-  };
+  }
+  static defaultProps = {
+    num: 1
+  }
+  // 构造器
+  constructor(props, context) {
+    super(props, context);
+
+    // 在这里设置初始出台
+    this.state = {
+      num: props.num
+    }
+  }
   render() {
+    const num = this.state.num
     const {result,resultUser} = this.props;
     const homeStyles = require('./Home.scss');
     const styles = require('./Detail.scss');
@@ -113,12 +127,21 @@ export default class Detail extends Component {
                 <div className={styles.detail}>
                  {this.props.children}
                 </div>
-
               </div>
             </div>
-            <div className={styles.btnBottomArea}>
-                
+            <div id="btnBottomArea" className={styles.btnBottomArea}>
+              <div className="f-fr">
+                <a className={styles.btn+' '+styles.active} onClick={this.showPay.bind(this)}>立即夺宝</a>
+              </div>
+              <div className="f-fl">
+              <span className="f-fl">参与人数</span>
+                <a className={styles.btn+' '+styles.left} onClick={this.minus.bind(this)}>-</a>
+                <input type="text" value={num} onChange={this.changeNum.bind(this)} />
+                <a className={styles.btn+' '+styles.right} onClick={this.plus.bind(this)}>+</a>
+                <a className={styles.btn+' '+styles.all} onClick={this.addAll.bind(this)}>包尾</a>
+              </div>
             </div>
+            <Pay money={num}></Pay>
             <div className="scrollbar">
               <div className="handle">
                 <div className="mousearea"></div>
@@ -130,6 +153,36 @@ export default class Detail extends Component {
         </ReactCSSTransitionGroup>
       </div>
     );
+  }
+  plus (e) {
+    e.preventDefault()
+    let needNumber = this.props.result.data.needNumber
+    let num = this.state.num
+    if(num<needNumber){
+      this.setState({num: num-1+2});
+    }
+  }
+  minus (e) {
+    e.preventDefault()
+    let num = this.state.num
+    if(num>1){
+      this.setState({num: this.state.num-1});
+    }
+  }
+  changeNum (e) {
+    let val = e.target.value
+    let needNumber = this.props.result.data.needNumber
+    if(val>0 && val < needNumber){
+     this.setState({num: parseInt(e.target.value)});
+    }
+  }
+  addAll (e) {
+    let needNumber = this.props.result.data.needNumber
+    this.setState({num: needNumber});
+  } 
+  showPay (e) {
+    $('#payBlock').animate({top:215,opacity:1},300)
+    $('#btnBottomArea').animate({top: 500,opacity:0},300)
   }
   showAllCodes (e) {
     let $this = $(e.target)

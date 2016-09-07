@@ -1,0 +1,126 @@
+.payBlock {
+	position: fixed;
+	width: 454px;
+	height: 280px;
+	top: 600px;
+	left: 50%;
+	margin-left: -33px;
+	background: rgba(255,255,255,0.9);
+	border-top: 1px solid #CCC;	
+	.title {
+		position: relative;
+		margin: 0 10px;
+		height: 44px;
+		line-height: 44px;
+		color: #333;
+		font-size: 14px;
+		font-weight: bold;
+		border-bottom: 1px solid #CCC;
+		em {
+			color: #F3200B;
+			font-size: 18px;
+			margin: 0 5px;
+		}
+	}
+	.consume {
+		position: relative;
+		margin: 0 10px;
+		height: 44px;
+		line-height: 44px;
+		color: #333;
+		font-size: 14px;
+		border-bottom: 1px solid #CCC;
+		em {
+			color: #F3200B;
+			margin: 0 5px;
+			font-weight: normal;
+		}
+		.fr {
+			float: right;
+			color: #999;
+		}
+	}
+	.otherPay {
+		.title {
+			font-size: 14px;
+			font-weight: normal;
+			border-bottom: none;
+			em {
+				font-size: 14px;
+				font-weight: normal;
+			}
+		}
+		.ulList {
+	      .item {
+	        border: 1px solid #999;
+	        border-radius: 4px;
+	        font-size: 16px;
+	        margin-right: 20px;
+	        float: left;
+	        line-height: 36px;
+	        height: 36px;
+	        width: 98px;
+			margin-left: 10px;
+	        text-align: center;
+	        margin-bottom: 10px;
+	        a {
+	          display: block;
+	          color: #333;
+	          background: #FFF;
+	          border-radius: 4px;
+	        }
+	        .input {
+	          width: 88px;
+	          height: 26px;
+	          padding: 4px;
+	          background: #F9FAFB;
+	          border: 0;
+	          color: #999999;
+	          border-radius: 4px;
+	        }
+	      }
+	      .item.type {
+	        width: 118px;
+	      }
+	      .item img{
+	        width: 116px;
+	        margin: 0 auto;
+	        height: 34px;
+	        vertical-align: middle;
+	      }
+	      .item.active{
+	        border: 1px solid #0299CD;
+	        border-radius: 4px;
+	        a{
+	          color: #0299CD;
+	        }
+	      }
+	    }
+	}
+}
+.btnBottom {
+	text-align: center;
+	a {
+		color: #0299CD;
+	}
+	.btn{
+		display: inline-block;
+	    transform: scale(1);
+	    margin-top: 8px;
+	    margin-right: 25px;
+	    margin-left: 70px;
+	    background: #038FFF;
+	    background-image: linear-gradient(-180deg, #0DB4FF 0%, #038FFF 100%);
+	    border: 1px solid #B1BECA;
+	    box-shadow: inset 0px -2px 6px 0px rgba(255,255,255,0.60);
+	    border-radius: 4px;
+	    width: 120px;
+	    line-height: 24px;
+	    text-align: center;
+	    color: #FFF703;
+	    font-size: 12px;
+	    &:hover {
+	    	color: #FFF703;
+	    }
+	}
+}

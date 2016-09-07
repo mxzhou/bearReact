@@ -22,7 +22,7 @@ export default class GoodsPast extends Component {
           <div style={{paddingTop:15}}> 
             {
               result.data.goodsList.map((item,index) =>
-                <div className={styles.item}>
+                <div className={styles.item} key={'joiner-item'+index}>
                   <div className={styles.title}>
                     <span className="f-fr">揭晓时间：{this.formateDate(item.openTime)}</span>
                     <span className="f-fl">期号：{item.id}</span>
