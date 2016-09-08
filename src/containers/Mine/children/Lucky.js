@@ -80,7 +80,8 @@ export default class Lucky extends Component {
                     </div>
                     <div className={styles.goodsStatus + ' f-cb'}>
                       {orderStatus[item.orderStatus]}
-                      <Link to={'/mine/selectAddress/'+item.id} className={styles.goodsBtn+' f-fr'}>设置收货地址</Link>
+                      {item.orderStatus == 0 && <Link to={'/mine/selectAddress/'+item.id} className={styles.goodsBtn+' f-fr'}>设置收货地址</Link>}
+                      {item.orderStatus == 3 && <Link to={'/mine/selectAddress/'+item.id} className={styles.goodsBtn+' f-fr'}>查看物流</Link>}
                     </div>
                   </div>
                 </li>
