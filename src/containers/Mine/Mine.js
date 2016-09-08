@@ -22,7 +22,7 @@ export default class Mine extends Component {
     const {show} =this.props;
     return (
       <div className={styles.mine + ' f-cb'}>
-        <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionLeaveTimeout={300} transitionAppearTimeout={300} transitionEnterTimeout={300}>
+        <ReactCSSTransitionGroup transitionName="example"  transitionAppear={true} transitionAppearTimeout={500}>
           <div className={styles.left}>
             <div className={styles.mask} style={{display:show ? 'block':'none'}}></div>
             <Left></Left>

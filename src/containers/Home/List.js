@@ -25,7 +25,7 @@ export default class List extends Component {
     return (
       <div className={styles.home}>
         <div className={styles.section}>
-            <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionLeaveTimeout={300} transitionAppearTimeout={300} transitionEnterTimeout={300}>
+          <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionAppearTimeout={500}>
               <div className={styles.content}>
                 <div className={styles.homeList}>
                   <div className={styles.frame} id="frame">

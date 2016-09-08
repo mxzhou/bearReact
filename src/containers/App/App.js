@@ -25,6 +25,7 @@ export default class App extends Component {
     // 左侧菜单 nav
     const {nav} = this.props;
     const styles = require('./App.scss');
+    require('./animate.css');
     return (
       <div className={styles.app}>
         <div className={styles.appTitle}>
