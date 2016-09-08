@@ -38,9 +38,9 @@ export function isLoaded(globalState) {
   return globalState.home && globalState.widgets.loaded;
 }
 
-export function load() {
+export function load(option) {
   return {
     types: [LOAD_LIST, LOAD_LIST_SUCCESS, LOAD_LIST_FAIL],
-    promise: (client) => client.post('/goods/list') // params not used, just shown as demonstration
+    promise: (client) => client.post('/goods/list',option) // params not used, just shown as demonstration
   };
 }

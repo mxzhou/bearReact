@@ -1,0 +1,34 @@
+.btn {
+	display: inline-block;
+	height: 15px;
+	text-indent: -10000px;
+	margin: 0 5px;
+	&.btnFirst {	
+		width: 0 13px;
+		background: url(../../../static/assets/btn-first.png) no-repeat;
+	}
+	&.btnPrev {	
+		width: 9px;
+		background: url(../../../static/assets/btn-prev.png) no-repeat;
+	}
+	&.btnNext {	
+		width: 9px;
+		background: url(../../../static/assets/btn-next.png) no-repeat;
+	}
+	&.btnLast {	
+		width: 15px;
+		background: url(../../../static/assets/btn-last.png) no-repeat;
+	}
+}
+.paging {
+	position: relative;
+	width: 100%;
+	text-align: center;
+	line-height: 14px;
+	.page {
+		margin: 0 20px;
+		line-height: 14px;
+		font-size: 14px;
+		color: #018DD0;
+	}
+}

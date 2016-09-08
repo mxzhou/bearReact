@@ -32,7 +32,7 @@ export default class List extends Component {
     return (
       <div className={styles.home}>
         <div className={styles.section}>
-          <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionAppearTimeout={500}>
+            <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionLeaveTimeout={300} transitionAppearTimeout={300} transitionEnterTimeout={300}>
               <div className={styles.content}>
                 <div className={styles.homeList}>
                   <div className={styles.frame} id="frame">
@@ -44,17 +44,17 @@ export default class List extends Component {
                       }
                     </ul>
                   </div>
-                  { result && 
-                    <Paging list={result.data.goodsList} curPage={curPage} total={result.data.total} pageSize={pageSize} onLoadFirst={this.loadFirst.bind(this)}  
-                    onLoadLast={this.loadLast.bind(this)} onLoadNext={this.loadNext.bind(this)} 
-                    onLoadPrev={this.loadPrev.bind(this)} ></Paging>
-                  }
                   <div className="scrollbar">
                     <div className="handle">
                       <div className="mousearea"></div>
                     </div>
                   </div>
                 </div>
+                { result && 
+                  <Paging list={result.data.goodsList} curPage={curPage} total={result.data.total} pageSize={pageSize} onLoadFirst={this.loadFirst.bind(this)}  
+                  onLoadLast={this.loadLast.bind(this)} onLoadNext={this.loadNext.bind(this)} 
+                  onLoadPrev={this.loadPrev.bind(this)} ></Paging>
+                }
               </div>
             </ReactCSSTransitionGroup>
           </div>
@@ -77,7 +77,6 @@ export default class List extends Component {
     console.log('componentDidMount')
     this.props.loading()
     //this.props.loadToast('11225444')
-
     this.props.load();
 
   }
