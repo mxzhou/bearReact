@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import { IndexLink,Link } from 'react-router';
 export default class Paging extends Component {
   static propTypes = {
-    loadPaging: PropTypes.func,
+    onLoadPaging: PropTypes.func,
     pageSize: PropTypes.number,
     total: PropTypes.number,
     pageNumber: PropTypes.number,

@@ -58,7 +58,6 @@ export default class List extends Component {
     );
   }
   loadPaging (nums) {
-    this.setState({pageNumber:nums});
     this.props.loading()
     this.props.load({type:0,pageSize:this.props.pageSize,pageNumber:nums});
   }
