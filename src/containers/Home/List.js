@@ -5,6 +5,7 @@ import { load } from 'redux/modules/home';
 import { loading,unloading } from '../../redux/modules/loading';
 import { loadToast,removeToast } from '../../redux/modules/toast';
 import Single from './Single'
+import { Paging } from '../../components/index'
 import { Link } from 'react-router';
 @connect(
   state => ({result: state.home.data}),
@@ -13,12 +14,16 @@ export default class List extends Component {
 
   static propTypes = {
     result: PropTypes.object,
+    pageSize: PropTypes.number,
+  };
+  static defaultProps = {
+    pageSize: 10,
   };
   componentWillMount(){
     console.log('componentWillMount')
   }
   render() {
-    const {result} = this.props;
+    const {result,pageSize} = this.props;
     const styles = require('./Home.scss');
     console.log('listRender');
 
@@ -37,6 +42,9 @@ export default class List extends Component {
                       }
                     </ul>
                   </div>
+                  { result && 
+                    <Paging total={result.data.total} pageSize={pageSize} onLoadPaging={this.loadPaging.bind(this)} ></Paging>
+                  }
                   <div className="scrollbar">
                     <div className="handle">
                       <div className="mousearea"></div>
@@ -49,14 +57,15 @@ export default class List extends Component {
         </div>
     );
   }
-
+  loadPaging (nums) {
+    this.setState({pageNumber:nums});
+    this.props.loading()
+    this.props.load({type:0,pageSize:this.props.pageSize,pageNumber:nums});
+  }
   componentDidMount(){
     console.log('componentDidMount')
     this.props.loading()
-    //this.props.loadToast('11225444')
-
-    this.props.load();
-
+    this.loadPaging(1);
   }
   componentWillUpdate(){
     this.props.unloading()

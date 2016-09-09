@@ -10,7 +10,7 @@ function formatUrl(path) {
     return 'http://' + config.apiHost + ':' + config.apiPort + adjustedPath;
   }
   // Prepend `/api` to relative URL, to proxy to API server.
-  return '/api/pc' + adjustedPath;
+  return '/api/api/kugou_live' + adjustedPath;
 }
 
 export default class ApiClient {
@@ -31,6 +31,7 @@ export default class ApiClient {
           }
 
           if (data) {
+            Object.assign(data,{"kgUid":791949749,"token":"2bb14f008c7ccf7aaeec82c8b81b167e358d794fc671fade2bb3fc78f5e38f32"});        
             request.send(data);
           }
 
