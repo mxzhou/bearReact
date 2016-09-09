@@ -58,7 +58,7 @@ export default class JoinDetail extends Component {
           查看夺宝号
         </h3>
         <div className={styles.secondContent +' f-cb'}>
-          {data && data.data.map((item,i)=>
+          {data && data.data != null && data.data.map((item,i)=>
           <div key={i} className={styles.item}>
             {item}
           </div>)}

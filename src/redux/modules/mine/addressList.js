@@ -40,6 +40,6 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD_ADDRESS_LIST, LOAD_ADDRESS_LIST_SUCCESS, LOAD_ADDRESS_LIST_FAIL],
-    promise: (client) => client.post('/user/address/list') // params not used, just shown as demonstration
+    promise: (client) => client.post('/user/address/list',{data:{}}) // params not used, just shown as demonstration
   };
 }

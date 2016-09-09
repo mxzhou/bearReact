@@ -10,13 +10,8 @@ export default class Paging extends Component {
   }
   constructor(props, context) {
     super(props, context);
-    const {total,pageSize} = this.props;
-    let totalPage = parseInt(total/pageSize)
-    if(total%pageSize!=0){
-      totalPage++
-    }
     this.state = {
-      totalPage: totalPage,
+      totalPage: 0,
       pageNumber: 1
     }
   }
@@ -33,6 +28,17 @@ export default class Paging extends Component {
         <a className={styles.btn + ' ' + styles.btnLast} onClick={this.last.bind(this)}>末页</a>
       </div>
     );
+  }
+  componentDidMount(){
+    const {total,pageSize} = this.props;
+    let totalPage = parseInt(total/pageSize)
+    if(total%pageSize!=0){
+      totalPage++
+    }
+    this.setState({
+      totalPage: totalPage,
+      pageNumber: 1
+    })
   }
   first () {
     if(this.state.pageNumber>1) {

@@ -8,6 +8,7 @@ import { loading,unloading } from '../../../../redux/modules/loading';
 import edit from '../../../../../static/assets/img_edit.png'
 import marker from '../../../../../static/assets/btn_marker.png'
 import aMarker from '../../../../../static/assets/btn_marker_a.png'
+import ApiClient from '../../../../helpers/ApiClient'
 
 @connect(
   state => ({list: state.addressList.data}),
@@ -31,22 +32,45 @@ export default class Select extends Component {
   selectFunc(index){
     this.setState({index:index})
   }
+  editFunc(obj){
+    addressObject = obj;
+    location.href="#/mine/editAddress/"+this.props.params.id;
+  }
+  submitFunc(){
+    const {list} = this.props
+    const client = new ApiClient();
+    var data = {
+      userAddressId:list.data[this.state.index].id,
+      id:this.props.params.id
+    }
+    console.log(data)
+    //异步获取数据 promise
+    client.post('/user/win/setAddress',{
+      data:data
+    }).then(function(data){
+      if(data.errorCode == 0){
+        location.href="#/mine/lucky"
+      }
+      console.log(data)
+    })
+  }
   render() {
     const {list} = this.props
     const {index} = this.state;
+    const id = this.props.params.id;
     const styles = require('../../Mine.scss')
     return (
       <div className={styles.content}>
         <h3 className={styles.title + ' f-cb'}>
           <Close></Close>
           收货地址
-          <Link className={'f-fr ' +styles.goodsBtn} to="/mine/addAddress">添加收货地址</Link>
+          <Link className={'f-fr ' +styles.goodsBtn} to={"/mine/addAddress/"+id}>添加收货地址</Link>
         </h3>
         <ul className={styles.addressList}>
           {list && list.data.map((item,i)=>
             <li key={i} className={styles.item} onClick={this.selectFunc.bind(this,i)}>
               <div className={styles.desc+' f-cb'}>
-                <span className={styles.name}>{item.receiver}</span>
+                <span className={styles.name} style={{'paddingLeft':'35px'}}>{item.receiver}</span>
                 <span className={styles.phone}>{item.mobile}</span>
               </div>
               <div className={'f-cb'}>
@@ -57,18 +81,20 @@ export default class Select extends Component {
                   {item.ifDefault ? <span className={styles.default}>[默认]</span> :''}
                   {item.province+item.city+item.area+item.addressDetail}
                 </div>
-                <Link className={styles.aRight} to={"/mine/editAddress/"+item.id}>
+                <a className={styles.aRight} onClick={this.editFunc.bind(this,item)}>
                   编辑<img src={edit} className={styles.edit +' f-ib'}/>
-                </Link>
+                </a>
               </div>
             </li>
           )}
         </ul>
+        <div className={styles.blockBtn+' '+styles.selectAddressBtn}>
+          <a className={styles.btn + ' '+styles.addressBtn} onClick={this.submitFunc.bind(this)}>保存</a>
+        </div>
       </div>
     );
   }
   componentDidMount(){
-    alert(0)
     this.props.loading()
     this.props.load();
 

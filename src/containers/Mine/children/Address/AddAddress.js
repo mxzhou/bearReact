@@ -24,14 +24,14 @@ export default class EditAddress extends Component {
     areaList:[],
     addressDetail:'',
     mobile:'',
-    bSelect:true
+    defaultFlag:true
   }
   // 构造器
   constructor(props, context) {
     super(props, context);
     // 在这里设置初始出台
     this.state = {
-      bSelect:props.bSelect,
+      defaultFlag:props.defaultFlag,
       receiver:props.receiver,
       addressId:props.addressId,
       provinceId:props.provinceId,
@@ -109,10 +109,6 @@ export default class EditAddress extends Component {
     var _this = this;
     promise.then(function(data){
       _this.setState({provinceList:data.data})
-      if(type == 2){
-        _this.setState({provinceId:addressObject.provinceId})
-        _this.getCity(type);
-      }
     })
   }
   getCity(type,addressType,state){
@@ -120,10 +116,6 @@ export default class EditAddress extends Component {
     var _this = this;
     promise.then(function(data){
       _this.setState({cityList:data.data})
-      if(type == 2){
-        _this.setState({cityId:addressObject.cityId})
-        _this.getArea(type);
-      }
     })
   }
   getArea(type,addressType,state){
@@ -131,25 +123,46 @@ export default class EditAddress extends Component {
     var _this = this;
     promise.then(function(data){
       _this.setState({areaList:data.data})
-      if(type == 2){
-        _this.setState({areaId:addressObject.areaId})
-      }
     })
   }
   checkFunc(){
     this.setState({
-      bSelect:!this.state.bSelect
+      defaultFlag:!this.state.defaultFlag
     })
   }
   submitFunc(){
-    console.log(this.state);
+    const client = new ApiClient();
+    var data = {
+      provinceId:this.state.provinceId,
+      cityId:this.state.cityId,
+      areaId:this.state.areaId,
+      addressDetail:this.state.addressDetail,
+      mobile:this.state.mobile,
+      defaultFlag:this.state.defaultFlag,
+      receiver:this.state.receiver,
+    }
+    const id = this.props.params.id;
+    console.log(data)
+     //异步获取数据 promise
+    client.post('/user/address/add',{
+      data:data
+    }).then(function(data){
+      if(data.errorCode == 0){
+        if(id){
+          location.href="#/mine/selectAddress/"+id
+        }else{
+          location.href="#/mine/address"
+        }
+      }
+      console.log(data)
+    })
   }
   closeHandler(){
     history.back()
   }
   render() {
     const {numPayList,typePayList} = this.props
-    const {bSelect,receiver,provinceId,cityId,areaId,addressDetail,mobile,provinceList,cityList,areaList} = this.state;
+    const {defaultFlag,receiver,provinceId,cityId,areaId,addressDetail,mobile,provinceList,cityList,areaList} = this.state;
 
     const styles = require('../../Mine.scss')
     const back = require('../../../../../static/assets/ic_backpage.png')
@@ -157,14 +170,14 @@ export default class EditAddress extends Component {
     return (
       <div className={styles.content}>
         <h3 className={styles.title + ' f-cb'}>
-          <Link to="/mine"><img src={back} className={styles.close} onClick={this.closeHandler.bind(this)}/></Link>
+          <a><img src={back} className={styles.close} onClick={this.closeHandler.bind(this)}/></a>
              新增收货地址
         </h3>
         <div className={styles.addressForm}>
           <div className={styles.control+' f-cb'}>
             <label className={styles.label}>收货人</label>
             <div className="f-fl">
-              <input type="text" className={styles.formControl} value={receiver} placeholder="请使用真实姓名，长度不超过8个字" onChange={this.handlerChange.bind(this,'receiver')}/>
+              <input type="text" className={styles.formControl} value={receiver} placeholder="请使用真实姓名，长度不超过8个字" onChange={this.handlerChange.bind(this,'receiver')} maxLength="8"/>
             </div>
           </div>
           <div className={styles.control+' f-cb'}>
@@ -202,7 +215,7 @@ export default class EditAddress extends Component {
           <div className={styles.control+' f-cb'}>
             <div className={styles.offset}>
               <a className={styles.default} onClick={this.checkFunc.bind(this)}>
-                <img src={bSelect ? aMarker:marker} className={styles.image}/>
+                <img src={defaultFlag ? aMarker:marker} className={styles.image}/>
                 设置为默认收货地址
               </a>
             </div>

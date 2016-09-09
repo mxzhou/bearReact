@@ -14,6 +14,7 @@ export default class EditAddress extends Component {
   static propTypes = {
   };
   static defaultProps = {
+    userAddressId:'',
     receiver:'',
     provinceId:'',
     cityId:'',
@@ -23,14 +24,15 @@ export default class EditAddress extends Component {
     areaList:[],
     addressDetail:'',
     mobile:'',
-    bSelect:true
+    defaultFlag:true
   }
   // 构造器
   constructor(props, context) {
     super(props, context);
     // 在这里设置初始出台
     this.state = {
-      bSelect:props.bSelect,
+      userAddressId:'',
+      defaultFlag:props.defaultFlag,
       receiver:props.receiver,
       provinceId:props.provinceId,
       cityId:props.cityId,
@@ -61,6 +63,9 @@ export default class EditAddress extends Component {
   handlerSelect(type,e){
     // select change
     var state = e.target.value;
+    this.setState({
+      addressId:state
+    })
     switch(type){
       case 'province':
         this.setState({
@@ -73,7 +78,7 @@ export default class EditAddress extends Component {
         if(state == ''){
           return;
         }
-        this.getCity()
+        this.getCity(1,2,state)
         break;
       case 'city':
         this.setState({
@@ -84,7 +89,7 @@ export default class EditAddress extends Component {
         if(state == ''){
           return;
         }
-        this.getArea()
+        this.getArea(1,3,state)
         break;
       case 'area':
         this.setState({areaId:state})
@@ -92,38 +97,37 @@ export default class EditAddress extends Component {
       default:;
     }
   }
-  getAreaData(type){
+  getAreaData(type,state = 1){
     const client = new ApiClient();
-    const _this = this;
     // 异步获取数据 promise
     return client.post('/address/get',{
-      data:{addressType:type}
+      data:{addressType:type,addressId:state}
     })
   }
-  getProvince(type){
-    var promise = this.getAreaData(1);
+  getProvince(type,addressType){
+    var promise = this.getAreaData(addressType);
     var _this = this;
     promise.then(function(data){
       _this.setState({provinceList:data.data})
       if(type == 2){
         _this.setState({provinceId:addressObject.provinceId})
-        _this.getCity(type);
+        _this.getCity(type,2,addressObject.provinceId);
       }
     })
   }
-  getCity(type){
-    var promise = this.getAreaData(2);
+  getCity(type,addressType,state){
+    var promise = this.getAreaData(addressType,state);
     var _this = this;
     promise.then(function(data){
       _this.setState({cityList:data.data})
       if(type == 2){
         _this.setState({cityId:addressObject.cityId})
-        _this.getArea(type);
+        _this.getArea(type,3,addressObject.cityId);
       }
     })
   }
-  getArea(type){
-    var promise = this.getAreaData(3);
+  getArea(type,addressType,state){
+    var promise = this.getAreaData(addressType,state);
     var _this = this;
     promise.then(function(data){
       _this.setState({areaList:data.data})
@@ -134,18 +138,43 @@ export default class EditAddress extends Component {
   }
   checkFunc(){
     this.setState({
-      bSelect:!this.state.bSelect
+      defaultFlag:!this.state.defaultFlag
     })
   }
   submitFunc(){
-    console.log(this.state);
+    const client = new ApiClient();
+    const id = this.props.params.id;
+
+    var data = {
+      userAddressId:this.state.userAddressId,
+      provinceId:this.state.provinceId,
+      cityId:this.state.cityId,
+      areaId:this.state.areaId,
+      addressDetail:this.state.addressDetail,
+      mobile:this.state.mobile,
+      defaultFlag:this.state.defaultFlag,
+      receiver:this.state.receiver,
+    }
+    console.log(data)
+    //异步获取数据 promise
+    client.post('/user/address/update',{
+      data:data
+    }).then(function(data){
+      if(data.errorCode == 0){
+        if(id){
+          location.href="#/mine/selectAddress/"+id
+        }else{
+          location.href="#/mine/address"
+        }      }
+      console.log(data)
+    })
   }
   closeHandler(){
     history.back()
   }
   render() {
     const {numPayList,typePayList} = this.props
-    const {bSelect,receiver,provinceId,cityId,areaId,addressDetail,mobile,provinceList,cityList,areaList} = this.state;
+    const {defaultFlag,receiver,provinceId,cityId,areaId,addressDetail,mobile,provinceList,cityList,areaList} = this.state;
 
     const styles = require('../../Mine.scss')
     const back = require('../../../../../static/assets/ic_backpage.png')
@@ -153,14 +182,14 @@ export default class EditAddress extends Component {
     return (
       <div className={styles.content}>
         <h3 className={styles.title + ' f-cb'}>
-          <Link to="/mine"><img src={back} className={styles.close} onClick={this.closeHandler.bind(this)}/></Link>
+          <a><img src={back} className={styles.close} onClick={this.closeHandler.bind(this)}/></a>
           修改收货地址
         </h3>
         <div className={styles.addressForm}>
           <div className={styles.control+' f-cb'}>
             <label className={styles.label}>收货人</label>
             <div className="f-fl">
-              <input type="text" className={styles.formControl} value={receiver} placeholder="请使用真实姓名，长度不超过8个字" onChange={this.handlerChange.bind(this,'receiver')}/>
+              <input type="text" className={styles.formControl} value={receiver} maxLength="8" placeholder="请使用真实姓名，长度不超过8个字" onChange={this.handlerChange.bind(this,'receiver')}/>
             </div>
           </div>
           <div className={styles.control+' f-cb'}>
@@ -198,7 +227,7 @@ export default class EditAddress extends Component {
           <div className={styles.control+' f-cb'}>
             <div className={styles.offset}>
               <a className={styles.default} onClick={this.checkFunc.bind(this)}>
-                <img src={bSelect ? aMarker:marker} className={styles.image}/>
+                <img src={defaultFlag ? aMarker:marker} className={styles.image}/>
                 设置为默认收货地址
               </a>
             </div>
@@ -211,7 +240,14 @@ export default class EditAddress extends Component {
     );
   }
   componentDidMount(){
+    this.setState({
+      userAddressId:addressObject.id,
+      defaultFlag:addressObject.ifDefault,
+      receiver:addressObject.receiver,
+      addressDetail:addressObject.addressDetail,
+      mobile:addressObject.mobile,
+    })
     this.props.loadMask()
-    this.getProvince(2)
+    this.getProvince(2,1)
   }
 }

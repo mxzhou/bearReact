@@ -62,7 +62,7 @@ export default class Lucky extends Component {
         <div className="f-pr">
           <div id="frame" className={styles.frame}>
             <ul id="slidee" className="f-cb">
-              {result && result.data && result.data.buyLogList.map((item,index) =>
+              {result && result.data && result.data.winLogList.map((item,index) =>
                 <li key={index} className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}>
                   <div className={styles.luckyLeft}>
                     <img src={item.coverImgUrl} className={styles.coverImg}/>
@@ -114,7 +114,7 @@ export default class Lucky extends Component {
         $wrap = $frame.parent(),
         result = this.props.result;
 
-      if(result && result.data && result.data.buyLogList.length>0){
+      if(result && result.data && result.data.winLogList.length>0){
         $frame.sly({
           slidee:$slidee,
           itemNav: 'basic',

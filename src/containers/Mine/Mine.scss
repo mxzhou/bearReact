@@ -314,6 +314,8 @@
 
     }
     .addressList{
+      height: 340px;
+      overflow: hidden;
       .item{
         padding: 10px 0;
         font-size: 14px;
@@ -513,5 +515,9 @@
     .addressBtn{
       color: #fff;
     }
+  }
+  .selectAddressBtn{
+    margin-top: 0;
+    border: 0;
   }
 }

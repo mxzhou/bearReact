@@ -3,19 +3,19 @@
 	height: 15px;
 	text-indent: -10000px;
 	margin: 0 5px;
-	&.btnFirst {	
-		width: 0 13px;
+	&.btnFirst {
+		width: 13px;
 		background: url(../../../static/assets/btn-first.png) no-repeat;
 	}
-	&.btnPrev {	
+	&.btnPrev {
 		width: 9px;
 		background: url(../../../static/assets/btn-prev.png) no-repeat;
 	}
-	&.btnNext {	
+	&.btnNext {
 		width: 9px;
 		background: url(../../../static/assets/btn-next.png) no-repeat;
 	}
-	&.btnLast {	
+	&.btnLast {
 		width: 15px;
 		background: url(../../../static/assets/btn-last.png) no-repeat;
 	}

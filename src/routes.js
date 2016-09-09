@@ -75,8 +75,9 @@ export default (store) => {
         <Route path="address" component={Address} />
         <Route path="selectAddress/:id" component={Select} />
         <Route path="addAddress" component={AddAddress} />
+        <Route path="addAddress/:id" component={AddAddress} />
+        <Route path="editAddress" component={EditAddress} />
         <Route path="editAddress/:id" component={EditAddress} />
-
         <Route path="payRecord" component={PayRecord} />
         <Route path="intro" component={Intro} />
         <Route path="recharge" component={Recharge} />

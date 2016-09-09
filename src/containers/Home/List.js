@@ -42,7 +42,7 @@ export default class List extends Component {
                       }
                     </ul>
                   </div>
-                  { result && 
+                  { result &&
                     <Paging total={result.data.total} pageSize={pageSize} onLoadPaging={this.loadPaging.bind(this)} ></Paging>
                   }
                   <div className="scrollbar">

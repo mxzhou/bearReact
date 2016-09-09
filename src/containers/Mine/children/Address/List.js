@@ -27,7 +27,7 @@ export default class List extends Component {
   }
   editFunc(obj){
     addressObject = obj;
-    location.href="#/mine/editAddress/"+obj.id;
+    location.href="#/mine/editAddress";
   }
   render() {
     const {list} = this.props
