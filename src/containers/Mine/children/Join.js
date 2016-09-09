@@ -64,9 +64,19 @@ export default class Join extends Component {
     return year + '.' + month + '.' + day + ' ' + hours + ':' + minutes+ ':' + seconds
   }
   changeType(index){
+    var type;
+    if(index == 0){
+      type = 0
+    }else if(index == 1){
+      type = 3
+    }else if(index ==2){
+      type = 5
+    }
     this.setState({activeIndex:index})
+    var data = {pageNumber:1,pageSize:10,type:type }
+
     this.props.loading()
-    this.props.load()
+    this.props.load(data)
   }
   render() {
     const {result,payType,payStatus,orderStatus,navList} = this.props;

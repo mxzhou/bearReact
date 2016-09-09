@@ -24,6 +24,7 @@ import lucky from './mine/lucky';
 import join from './mine/join';
 import mask from './mine/mask';
 import addressList from './mine/addressList';
+import user from './mine/user';
 
 
 export default combineReducers({
@@ -53,5 +54,6 @@ export default combineReducers({
   lucky,
   join,
   mask,
-  addressList
+  addressList,
+  user
 });

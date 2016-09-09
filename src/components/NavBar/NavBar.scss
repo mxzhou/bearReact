@@ -37,6 +37,15 @@
     border-bottom:solid 1px #cdcdcd\9;
     box-shadow: inset 0px 1px 0px 0px #CDCDCD,inset 0px 2px 0px 0px #FFF,inset 0px -1px 0px 0px #fff,inset 0px -2px 0px 0px #cdcdcd;
   }
+  @media screen and (min-width:0\0) {
+    .nav {
+      border-top:0;
+    }
+    .last{
+      border-bottom:0;
+    }
+  }
+
   .tap0{
     background: url(../../../static/assets/ic_tap1.png) no-repeat;
   }
