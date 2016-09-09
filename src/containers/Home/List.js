@@ -14,18 +14,16 @@ export default class List extends Component {
 
   static propTypes = {
     result: PropTypes.object,
-    curPage: PropTypes.number,
     pageSize: PropTypes.number,
   };
   static defaultProps = {
-    curPage: 1,
     pageSize: 10,
   };
   componentWillMount(){
     console.log('componentWillMount')
   }
   render() {
-    const {result,curPage,pageSize} = this.props;
+    const {result,pageSize} = this.props;
     const styles = require('./Home.scss');
     console.log('listRender');
 
@@ -45,9 +43,7 @@ export default class List extends Component {
                     </ul>
                   </div>
                   { result && 
-                    <Paging list={result.data.goodsList} curPage={curPage} total={result.data.total} pageSize={pageSize} onLoadFirst={this.loadFirst.bind(this)}  
-                    onLoadLast={this.loadLast.bind(this)} onLoadNext={this.loadNext.bind(this)} 
-                    onLoadPrev={this.loadPrev.bind(this)} ></Paging>
+                    <Paging total={result.data.total} pageSize={pageSize} onLoadPaging={this.loadPaging.bind(this)} ></Paging>
                   }
                   <div className="scrollbar">
                     <div className="handle">
@@ -61,25 +57,15 @@ export default class List extends Component {
         </div>
     );
   }
-  loadFirst (i) {
-    alert(i)
-  }
-  loadNext (i) {
-    alert(i)
-  }
-  loadPrev (i) {
-    alert(i)
-  }
-  loadLast (i) {
-    alert(i)
+  loadPaging (nums) {
+    this.setState({pageNumber:nums});
+    this.props.loading()
+    this.props.load({type:0,pageSize:this.props.pageSize,pageNumber:nums});
   }
   componentDidMount(){
     console.log('componentDidMount')
     this.props.loading()
-    //this.props.loadToast('11225444')
-
-    this.props.load();
-
+    this.loadPaging(1);
   }
   componentWillUpdate(){
     this.props.unloading()
