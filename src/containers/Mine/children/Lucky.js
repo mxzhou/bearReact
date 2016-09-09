@@ -100,7 +100,7 @@ export default class Lucky extends Component {
   }
   componentDidMount() {
     this.props.loading()
-    this.props.load()
+    this.props.load({pageNumber:1,pageSize:10})
   }
   componentWillUpdate(){
     this.props.unloading()

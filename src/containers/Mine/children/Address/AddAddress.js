@@ -15,6 +15,7 @@ export default class EditAddress extends Component {
   };
   static defaultProps = {
     receiver:'',
+    addressId:1,
     provinceId:'',
     cityId:'',
     areaId:'',
@@ -32,6 +33,7 @@ export default class EditAddress extends Component {
     this.state = {
       bSelect:props.bSelect,
       receiver:props.receiver,
+      addressId:props.addressId,
       provinceId:props.provinceId,
       cityId:props.cityId,
       areaId:props.areaId,
@@ -61,6 +63,9 @@ export default class EditAddress extends Component {
   handlerSelect(type,e){
     // select change
     var state = e.target.value;
+    this.setState({
+      addressId:state
+    })
     switch(type){
       case 'province':
         this.setState({
@@ -73,7 +78,7 @@ export default class EditAddress extends Component {
         if(state == ''){
           return;
         }
-        this.getCity()
+        this.getCity(1,2,state)
         break;
       case 'city':
         this.setState({
@@ -84,7 +89,7 @@ export default class EditAddress extends Component {
         if(state == ''){
           return;
         }
-        this.getArea()
+        this.getArea(1,3,state)
         break;
       case 'area':
         this.setState({areaId:state})
@@ -92,16 +97,15 @@ export default class EditAddress extends Component {
       default:;
     }
   }
-  getAreaData(type){
+  getAreaData(type,state = 1){
     const client = new ApiClient();
-    const _this = this;
     // 异步获取数据 promise
     return client.post('/address/get',{
-      data:{addressType:type}
+      data:{addressType:type,addressId:state}
     })
   }
-  getProvince(type){
-    var promise = this.getAreaData(1);
+  getProvince(type,addressType){
+    var promise = this.getAreaData(addressType);
     var _this = this;
     promise.then(function(data){
       _this.setState({provinceList:data.data})
@@ -111,8 +115,8 @@ export default class EditAddress extends Component {
       }
     })
   }
-  getCity(type){
-    var promise = this.getAreaData(2);
+  getCity(type,addressType,state){
+    var promise = this.getAreaData(addressType,state);
     var _this = this;
     promise.then(function(data){
       _this.setState({cityList:data.data})
@@ -122,8 +126,8 @@ export default class EditAddress extends Component {
       }
     })
   }
-  getArea(type){
-    var promise = this.getAreaData(3);
+  getArea(type,addressType,state){
+    var promise = this.getAreaData(addressType,state);
     var _this = this;
     promise.then(function(data){
       _this.setState({areaList:data.data})
@@ -212,6 +216,6 @@ export default class EditAddress extends Component {
   }
   componentDidMount(){
     this.props.loadMask()
-    this.getProvince()
+    this.getProvince(1,1)
   }
 }

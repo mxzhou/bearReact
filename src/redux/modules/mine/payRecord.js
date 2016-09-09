@@ -37,9 +37,9 @@ export function isLoaded(globalState) {
   return globalState.payRecord;
 }
 
-export function load() {
+export function load(data) {
   return {
     types: [LOAD_PAY_RECORD, LOAD_PAY_RECORD_SUCCESS, LOAD_PAY_RECORD_FAIL],
-    promise: (client) => client.post('/user/payLog') // params not used, just shown as demonstration
+    promise: (client) => client.post('/user/payLog',{data:data}) // params not used, just shown as demonstration
   };
 }

@@ -37,9 +37,9 @@ export function isLoaded(globalState) {
   return globalState.lucky;
 }
 
-export function load() {
+export function load(data) {
   return {
     types: [LOAD_LUCKY, LOAD_LUCKY_SUCCESS, LOAD_LUCKY_FAIL],
-    promise: (client) => client.post('/user/win/log') // params not used, just shown as demonstration
+    promise: (client) => client.post('/user/win/log',{data:data}) // params not used, just shown as demonstration
   };
 }

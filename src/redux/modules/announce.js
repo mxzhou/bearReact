@@ -62,10 +62,10 @@ export function isLoaded(globalState) {
   return globalState.announce;
 }
 
-export function load() {
+export function load(data) {
   return {
     types: [LOAD_ANNOUNCE, LOAD_ANNOUNCE_SUCCESS, LOAD_ANNOUNCE_FAIL],
-    promise: (client) => client.post('/goods/open') // params not used, just shown as demonstration
+    promise: (client) => client.post('/goods/open',{data:data}) // params not used, just shown as demonstration
   };
 }
 export function win() {

@@ -52,7 +52,7 @@ export default class Announce extends Component {
   componentDidMount(){
     console.log('componentDidMount')
     this.props.loading()
-    this.props.load();
+    this.props.load({lastId:0,pageSize:10});
 
   }
   componentWillUpdate(){

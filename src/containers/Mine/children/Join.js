@@ -124,7 +124,7 @@ export default class Join extends Component {
   }
   componentDidMount() {
     this.props.loading()
-    this.props.load()
+    this.props.load({pageNumber:1,pageSize:10,type:0})
   }
   componentWillUpdate(){
     this.props.unloading()

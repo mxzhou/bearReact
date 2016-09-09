@@ -61,10 +61,10 @@ export function isLoaded(globalState) {
   return globalState.join;
 }
 
-export function load() {
+export function load(data) {
   return {
     types: [LOAD_JOIN, LOAD_JOIN_SUCCESS, LOAD_JOIN_FAIL],
-    promise: (client) => client.post('/user/buyLog/list') // params not used, just shown as demonstration
+    promise: (client) => client.post('/user/buyLog/list',{data:data}) // params not used, just shown as demonstration
   };
 }
 export function loadCodes(id) {
