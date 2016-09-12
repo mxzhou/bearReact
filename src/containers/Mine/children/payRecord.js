@@ -55,23 +55,28 @@ export default class PayRecord extends Component {
         </h3>
         <div className="f-pr">
           <div id="frame" className={styles.frame}>
-            <ul id="slidee" className="f-cb">
-              {result && result.data && result.data.payLogList.map((item,index) =>
-                <li key={index} className={styles.paragraph +' '+styles.rechargeRecord+ ' f-cb'}>
-                  <div className={styles.reLeft}>
-                    <p className={styles.type}>{payType[item.payType]}</p>
-                    <p className={styles.desc}>
-                      {this.formData(item.createTime)}
-                      <br/>
-                      {payStatus[item.payStatus]}
-                    </p>
-                  </div>
-                  <div className={styles.reRight}>
-                    <p className={styles.money}>{item.money}元</p>
-                  </div>
-                </li>
-              )}
-            </ul>
+            {result && result.data &&
+              <ul id="slidee" className="f-cb">
+                {result.data.payLogList.map((item,index) =>
+                  <li key={index} className={styles.paragraph +' '+styles.rechargeRecord+ ' f-cb'}>
+                    <div className={styles.reLeft}>
+                      <p className={styles.type}>{payType[item.payType]}</p>
+                      <p className={styles.desc}>
+                        {this.formData(item.createTime)}
+                        <br/>
+                        {payStatus[item.payStatus]}
+                      </p>
+                    </div>
+                    <div className={styles.reRight}>
+                      <p className={styles.money}>{item.money}元</p>
+                    </div>
+                  </li>
+                )}
+              </ul>
+            }
+            {result && result.data &&result.data.payLogList.length ==0 &&
+              <div className={"errorMsg " + styles.payRecordMsg} >暂时还未有数据哦！</div>
+            }
           </div>
           <div className={"scrollbar " +styles.scroll}>
             <div className="handle">

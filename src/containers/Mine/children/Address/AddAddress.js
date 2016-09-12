@@ -2,13 +2,15 @@ import React, { Component,PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { IndexLink,Link } from 'react-router';
 import { load as loadMask,unload} from '../../../../redux/modules/mine/mask';
+import { loadToast,removeToast } from '../../../../redux/modules/toast';
+
 import marker from '../../../../../static/assets/btn_select.png'
 import aMarker from '../../../../../static/assets/btn_select_a.png'
 import ApiClient from '../../../../helpers/ApiClient'
 
 @connect(
   state => ({}),
-  {loadMask,unload})
+  {loadMask,unload,loadToast})
 
 export default class EditAddress extends Component {
   static propTypes = {
@@ -143,6 +145,18 @@ export default class EditAddress extends Component {
     }
     const id = this.props.params.id;
     console.log(data)
+    if(data.provinceId == ''){
+      this.props.loadToast('请选择省/直辖市')
+      return;
+    }
+    if(data.cityId == ''){
+      this.props.loadToast('请选择地级市')
+      return;
+    }
+    if(data.areaId == ''){
+      this.props.loadToast('请选择县/区')
+      return;
+    }
      //异步获取数据 promise
     client.post('/user/address/add',{
       data:data

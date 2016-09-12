@@ -169,6 +169,22 @@ export default class EditAddress extends Component {
       console.log(data)
     })
   }
+  deleteFunc(){
+    const client = new ApiClient();
+    const id = this.props.params.id;
+    const userAddressId = this.state.userAddressId;
+    client.post('/user/address/delete',{
+      data:{userAddressId:userAddressId}
+    }).then(function(data){
+      if(data.errorCode == 0){
+        if(id){
+          location.href="#/mine/selectAddress/"+id
+        }else{
+          location.href="#/mine/address"
+        }      }
+      console.log(data)
+    })
+  }
   closeHandler(){
     history.back()
   }
@@ -234,7 +250,8 @@ export default class EditAddress extends Component {
           </div>
         </div>
         <div className={styles.blockBtn}>
-          <a className={styles.btn + ' '+styles.addressBtn} onClick={this.submitFunc.bind(this)}>保存</a>
+          <a className={styles.btn + ' '+styles.addressBtn+' f-ib f-mr15'} onClick={this.deleteFunc.bind(this)}>删除</a>
+          <a className={styles.btn + ' '+styles.addressBtn+' f-ib'} onClick={this.submitFunc.bind(this)}>保存</a>
         </div>
       </div>
     );

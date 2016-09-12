@@ -100,7 +100,7 @@ a, a:hover {
     zoom: 1;
   }
   .f-ib {
-    display: inline-block;
+    display: inline-block!important;
     *display: inline;
     *zoom: 1;
   }
@@ -217,6 +217,9 @@ a, a:hover {
     -o-user-select: none;
     user-select: none;
   }
+  .f-mr15{
+    margin-right: 15px!important;
+  }
   /* Scrollbar */
   .scrollbar {
     top: 10px;
@@ -245,7 +248,14 @@ a, a:hover {
     height: 430px;
   }
 
-
+  .errorMsg{
+    color: #ccc;
+    font-size: 16px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+  }
 }
 
 .app {

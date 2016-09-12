@@ -28,4 +28,9 @@ export default class Toast extends Component {
       </div>
     );
   }
+  componentDidUpdate(){
+
+  }
+  componentDidMount(){
+  }
 }

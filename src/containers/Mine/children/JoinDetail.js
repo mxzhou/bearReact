@@ -58,10 +58,14 @@ export default class JoinDetail extends Component {
           查看夺宝号
         </h3>
         <div className={styles.secondContent +' f-cb'}>
-          {data && data.data != null && data.data.map((item,i)=>
-          <div key={i} className={styles.item}>
-            {item}
-          </div>)}
+          {data && data.data != null && data.data.joinCodeList!=null&&data.data.joinCodeList.map((item,i)=>
+            <div key={i} className={styles.item}>
+              {item}
+            </div>)
+          }
+          {data && data.data != null && data.data.joinNumber == 0 &&
+            <div className="errorMsg">暂时还未有数据哦！</div>
+          }
         </div>
       </div>
     );

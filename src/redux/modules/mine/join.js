@@ -70,6 +70,6 @@ export function load(data) {
 export function loadCodes(id) {
   return {
     types: [LOAD_CODE_JOIN, LOAD_CODE_JOIN_SUCCESS, LOAD_CODE_JOIN_FAIL],
-    promise: (client) => client.post('/user/buyInfo/codes',{data:{id:id}}) // params not used, just shown as demonstration
+    promise: (client) => client.post('/goods/user',{data:{id:id}}) // params not used, just shown as demonstration
   };
 }
