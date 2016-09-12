@@ -3,18 +3,21 @@ import { connect } from 'react-redux';
 import { IndexLink,Link } from 'react-router';
 import { load as loadMask,unload} from '../../../redux/modules/mine/mask';
 import { loadCodes} from '../../../redux/modules/mine/join';
+import { loadToast,removeToast } from '../../../redux/modules/toast';
 
 import marker from '../../../../static/assets/btn_select.png'
 import aMarker from '../../../../static/assets/btn_select_a.png'
+import ApiClient from '../../../helpers/ApiClient'
 @connect(
-  state => ({data:state.join.code}),
-  {loadMask,unload,loadCodes})
+  state => ({}),
+  {loadMask,unload,loadCodes,loadToast})
 
 export default class JoinDetail extends Component {
   static propTypes = {
   };
   static defaultProps = {
-    bSelect:true
+    bSelect:true,
+    data:{}
   }
   // 构造器
   constructor(props, context) {
@@ -22,7 +25,8 @@ export default class JoinDetail extends Component {
 
     // 在这里设置初始出台
     this.state = {
-      bSelect:props.bSelect
+      bSelect:props.bSelect,
+      data:props.data
     }
   }
   selectNum(index){
@@ -34,7 +38,7 @@ export default class JoinDetail extends Component {
   }
   checkFunc(){
     this.setState({
-      bSelect:!this.state.bSelect
+      bSelect:!this.state.bSelect,
     })
   }
   focusFunc(){
@@ -44,10 +48,25 @@ export default class JoinDetail extends Component {
   closeHandler(){
     history.back()
   }
+  fetchData(){
+    const client = new ApiClient();
+    const id = this.props.params.id
+    var _this = this;
+    //异步获取数据 promise
+    client.post('/goods/user',{
+      data:{id:id}
+    }).then(function(data){
+      if(data.errorCode!=0){
+        _this.props.loadToast(data.errorMessage)
+        return;
+      }
+      _this.setState({
+        data:data
+      });
+    })
+  }
   render() {
-    const {data} = this.props
-    const {bSelect} = this.state;
-
+    const {data,bSelect} = this.state;
     const styles = require('../Mine.scss')
     const back = require('../../../../static/assets/ic_backpage.png')
 
@@ -72,6 +91,6 @@ export default class JoinDetail extends Component {
   }
   componentDidMount(){
     this.props.loadMask()
-    this.props.loadCodes(this.props.params.id)
+    this.fetchData()
   }
 }

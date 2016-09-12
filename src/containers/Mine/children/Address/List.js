@@ -40,25 +40,30 @@ export default class List extends Component {
           收货地址
           <Link className={'f-fr ' +styles.goodsBtn} to="/mine/addAddress">添加收货地址</Link>
         </h3>
-        <ul className={styles.addressList}>
-          {list && list.data.map((item,index)=>
-            <li key={index} className={styles.item}>
-              <div className={styles.desc+' f-cb'}>
-                <span className={styles.name}>{item.receiver}</span>
-                <span className={styles.phone}>{item.mobile}</span>
-              </div>
-              <div className={'f-cb'}>
-                <div className={styles.aLeft}>
-                  {item.ifDefault ? <span className={styles.default}>[默认]</span> :''}
-                  {item.province+item.city+item.area+item.addressDetail}
+        {list && list.data.length > 0 &&
+          <ul className={styles.addressList}>
+            {list && list.data.map((item,index)=>
+              <li key={index} className={styles.item}>
+                <div className={styles.desc+' f-cb'}>
+                  <span className={styles.name}>{item.receiver}</span>
+                  <span className={styles.phone}>{item.mobile}</span>
                 </div>
-                <a className={styles.aRight} onClick={this.editFunc.bind(this,item)}>
-                  编辑<img src={edit} className={styles.edit +' f-ib'}/>
-                </a>
-              </div>
-            </li>
-          )}
-        </ul>
+                <div className={'f-cb'}>
+                  <div className={styles.aLeft}>
+                    {item.ifDefault ? <span className={styles.default}>[默认]</span> :''}
+                    {item.province+item.city+item.area+item.addressDetail}
+                  </div>
+                  <a className={styles.aRight} onClick={this.editFunc.bind(this,item)}>
+                    编辑<img src={edit} className={styles.edit +' f-ib'}/>
+                  </a>
+                </div>
+              </li>
+            )}
+          </ul>
+        }
+        {list && list.data && (list.data == null || list.data.length == 0) &&
+          <div className={"errorMsg "+styles.payRecordMsg}>暂时还未有数据哦！</div>
+        }
       </div>
     );
   }

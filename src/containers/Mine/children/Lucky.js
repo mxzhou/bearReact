@@ -50,7 +50,6 @@ export default class Lucky extends Component {
   }
   render() {
     const {result,payType,payStatus,orderStatus} = this.props;
-    console.log(result)
     const styles = require('../Mine.scss');
     const close = require('../../../../static/assets/ic_closepage.png')
     return (

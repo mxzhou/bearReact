@@ -66,28 +66,33 @@ export default class Select extends Component {
           收货地址
           <Link className={'f-fr ' +styles.goodsBtn} to={"/mine/addAddress/"+id}>添加收货地址</Link>
         </h3>
-        <ul className={styles.addressList}>
-          {list && list.data.map((item,i)=>
-            <li key={i} className={styles.item} onClick={this.selectFunc.bind(this,i)}>
-              <div className={styles.desc+' f-cb'}>
-                <span className={styles.name} style={{'paddingLeft':'35px'}}>{item.receiver}</span>
-                <span className={styles.phone}>{item.mobile}</span>
-              </div>
-              <div className={'f-cb'}>
-                <div className={styles.check}>
-                  <img src={index == i ? aMarker:marker}/>
+        {list && list.data.length > 0 &&
+          <ul className={styles.addressList}>
+            {list && list.data.map((item, i)=>
+              <li key={i} className={styles.item} onClick={this.selectFunc.bind(this,i)}>
+                <div className={styles.desc+' f-cb'}>
+                  <span className={styles.name} style={{'paddingLeft':'35px'}}>{item.receiver}</span>
+                  <span className={styles.phone}>{item.mobile}</span>
                 </div>
-                <div className={styles.sLeft}>
-                  {item.ifDefault ? <span className={styles.default}>[默认]</span> :''}
-                  {item.province+item.city+item.area+item.addressDetail}
+                <div className={'f-cb'}>
+                  <div className={styles.check}>
+                    <img src={index == i ? aMarker:marker}/>
+                  </div>
+                  <div className={styles.sLeft}>
+                    {item.ifDefault ? <span className={styles.default}>[默认]</span> : ''}
+                    {item.province + item.city + item.area + item.addressDetail}
+                  </div>
+                  <a className={styles.aRight} onClick={this.editFunc.bind(this,item)}>
+                    编辑<img src={edit} className={styles.edit +' f-ib'}/>
+                  </a>
                 </div>
-                <a className={styles.aRight} onClick={this.editFunc.bind(this,item)}>
-                  编辑<img src={edit} className={styles.edit +' f-ib'}/>
-                </a>
-              </div>
-            </li>
-          )}
-        </ul>
+              </li>
+            )}
+          </ul>
+        }
+        {list && list.data && (list.data == null || list.data.length == 0) &&
+          <div className={"errorMsg "+styles.payRecordMsg}>暂时还未有数据哦！</div>
+        }
         <div className={styles.blockBtn+' '+styles.selectAddressBtn}>
           <a className={styles.btn + ' '+styles.addressBtn} onClick={this.submitFunc.bind(this)}>保存</a>
         </div>

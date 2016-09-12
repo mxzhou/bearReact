@@ -144,7 +144,20 @@ export default class EditAddress extends Component {
       receiver:this.state.receiver,
     }
     const id = this.props.params.id;
-    console.log(data)
+    var rMobile = /^1[3|4|5|7|8]\d{9}$/;
+
+    if(data.receiver.trim() == ''){
+      this.props.loadToast('收货人不能为空！')
+      return;
+    }
+    if(data.mobile.trim() == ''){
+      this.props.loadToast('手机号码不能为空！')
+      return;
+    }
+    if(!rMobile.test(data.mobile.trim())){
+      this.props.loadToast('手机号码不合规范！')
+      return;
+    }
     if(data.provinceId == ''){
       this.props.loadToast('请选择省/直辖市')
       return;
@@ -157,18 +170,25 @@ export default class EditAddress extends Component {
       this.props.loadToast('请选择县/区')
       return;
     }
+    if(data.addressDetail.trim() == ''){
+      this.props.loadToast('街道地址不能为空！')
+      return;
+    }
+    var _this = this;
      //异步获取数据 promise
     client.post('/user/address/add',{
       data:data
     }).then(function(data){
-      if(data.errorCode == 0){
-        if(id){
-          location.href="#/mine/selectAddress/"+id
-        }else{
-          location.href="#/mine/address"
-        }
+      if(data.errorCode!=0){
+        _this.props.loadToast(data.errorMessage)
+        return;
       }
-      console.log(data)
+      _this.props.loadToast('保存成功！')
+      if(id){
+        location.href="#/mine/selectAddress/"+id
+      }else{
+        location.href="#/mine/address"
+      }
     })
   }
   closeHandler(){

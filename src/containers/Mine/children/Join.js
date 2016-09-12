@@ -98,30 +98,39 @@ export default class Join extends Component {
           </ul>        </h3>
         <div className="f-pr">
           <div id="frame" className={styles.frame}>
-            <ul id="slidee" className="f-cb">
-              {result && result.data && result.data.buyLogList.map((item,index) =>
-                <li key={index} className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}>
-                  <div className={styles.luckyLeft}>
-                    <img src={item.coverImgUrl} className={styles.coverImg}/>
-                  </div>
-                  <div className={styles.luckyRight}>
-                    <p className={styles.goodsName}>{item.goodsName}</p>
-                    <div className={styles.goodsDesc}>
-                      <p className={styles.id+' f-ib'}>
-                        期号: 31273474577
-                      </p>
-                      <p className={styles.joinNumber+' f-ib'}>
-                        本期参与: 2人次
-                      </p>
-                      <Link to={'/mine/joinDetail/'+item.id} className={styles.textBlue+' f-ib'}>查看夺宝号></Link>
+            {result && result.data && result.data.buyLogList!=null && result.data.buyLogList.length>0 &&
+              <ul id="slidee" className="f-cb">
+                {result.data.buyLogList.map((item,index) =>
+                  <li key={index} className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}>
+                    <div className={styles.luckyLeft}>
+                      <img src={item.coverImgUrl} className={styles.coverImg}/>
                     </div>
-                    <div className={styles.goodsStatus + ' f-cb'}>
-                      {orderStatus[item.status]}
+                    <div className={styles.luckyRight}>
+                      <p className={styles.goodsName}>{item.goodsName}</p>
+                      <div className={styles.goodsDesc}>
+                        <p className={styles.id+' f-ib'}>
+                          期号: 31273474577
+                        </p>
+                        <p className={styles.joinNumber+' f-ib'}>
+                          本期参与: 2人次
+                        </p>
+                        <Link to={'/mine/joinDetail/'+item.id} className={styles.textBlue+' f-ib'}>查看夺宝号></Link>
+                      </div>
+                      <div className={styles.goodsStatus + ' f-cb'}>
+                        {orderStatus[item.status]}
+                      </div>
                     </div>
-                  </div>
-                </li>
-              )}
-            </ul>
+                  </li>
+                )}
+              </ul>
+            }
+            {result && result.data &&result.data.buyLogList==null &&
+             <div className={"errorMsg "+styles.payRecordMsg}>暂时还未有数据哦！</div>
+            }
+            {result && result.data &&result.data.buyLogList.length==0 &&
+              <div className={"errorMsg "+styles.payRecordMsg}>暂时还未有数据哦！</div>
+
+            }
           </div>
           <div className={"scrollbar " +styles.scroll}>
             <div className="handle">

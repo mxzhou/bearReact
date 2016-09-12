@@ -9,6 +9,7 @@ export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOAD:
       return {
+        time:action.time,
         show:true,
         text:action.text
       };
@@ -21,9 +22,10 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 // 加载loading
-export function loadToast(text) {
+export function loadToast(text,time = 2000) {
   return {
     text:text,
+    time:time,
     type: LOAD
   };
 }

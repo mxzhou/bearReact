@@ -2,14 +2,14 @@ import React, { Component,PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { IndexLink,Link } from 'react-router';
 import { load as loadMask,unload} from '../../../../redux/modules/mine/mask';
+import { loadToast,removeToast } from '../../../../redux/modules/toast';
 import marker from '../../../../../static/assets/btn_select.png'
 import aMarker from '../../../../../static/assets/btn_select_a.png'
 import ApiClient from '../../../../helpers/ApiClient'
 
 @connect(
   state => ({}),
-  {loadMask,unload})
-
+  {loadMask,unload,loadToast})
 export default class EditAddress extends Component {
   static propTypes = {
   };
@@ -154,35 +154,71 @@ export default class EditAddress extends Component {
       mobile:this.state.mobile,
       defaultFlag:this.state.defaultFlag,
       receiver:this.state.receiver,
+    };
+    var rMobile = /^1[3|4|5|7|8]\d{9}$/;
+    if(data.receiver.trim() == ''){
+      this.props.loadToast('收货人不能为空！')
+      return;
     }
-    console.log(data)
+    if(data.mobile.trim() == ''){
+      this.props.loadToast('手机号码不能为空！')
+      return;
+    }
+    if(!rMobile.test(data.mobile.trim())){
+      this.props.loadToast('手机号码不合规范！')
+      return;
+    }
+    if(data.provinceId == ''){
+      this.props.loadToast('请选择省/直辖市')
+      return;
+    }
+    if(data.cityId == ''){
+      this.props.loadToast('请选择地级市')
+      return;
+    }
+    if(data.areaId == ''){
+      this.props.loadToast('请选择县/区')
+      return;
+    }
+    if(data.addressDetail.trim() == ''){
+      this.props.loadToast('街道地址不能为空！')
+      return;
+    }
+    var _this = this;
     //异步获取数据 promise
     client.post('/user/address/update',{
       data:data
     }).then(function(data){
-      if(data.errorCode == 0){
-        if(id){
-          location.href="#/mine/selectAddress/"+id
-        }else{
-          location.href="#/mine/address"
-        }      }
-      console.log(data)
+      if(data.errorCode!=0){
+        _this.props.loadToast(data.errorMessage)
+        return;
+      }
+      _this.props.loadToast('保存成功！')
+      if(id){
+        location.href="#/mine/selectAddress/"+id
+      }else{
+        location.href="#/mine/address"
+      }
     })
   }
   deleteFunc(){
     const client = new ApiClient();
     const id = this.props.params.id;
     const userAddressId = this.state.userAddressId;
+    var _this = this;
     client.post('/user/address/delete',{
       data:{userAddressId:userAddressId}
     }).then(function(data){
-      if(data.errorCode == 0){
-        if(id){
-          location.href="#/mine/selectAddress/"+id
-        }else{
-          location.href="#/mine/address"
-        }      }
-      console.log(data)
+      if(data.errorCode!=0){
+        _this.props.loadToast(data.errorMessage)
+        return;
+      }
+      _this.props.loadToast('删除成功！')
+      if(id){
+        location.href="#/mine/selectAddress/"+id
+      }else{
+        location.href="#/mine/address"
+      }
     })
   }
   closeHandler(){
