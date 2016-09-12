@@ -38,9 +38,9 @@ export function isLoaded(globalState) {
   return globalState.detailUser;
 }
 
-export function loadDetailUser() {
+export function loadDetailUser(option) {
   return {
     types: [LOAD_DETAIL_USER, LOAD_DETAIL_USER_SUCCESS, LOAD_DETAIL_USER_FAIL],
-    promise: (client) => client.post('/goods/user') 
+    promise: (client) => client.post('/goods/user',{data:option})
   };
 }

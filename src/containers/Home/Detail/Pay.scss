@@ -97,6 +97,18 @@
 	      }
 	    }
 	}
+	.btnCheck {
+		display: inline-block;
+		width: 16px;
+		height: 16px;
+		vertical-align: -3px;
+		margin-right: 5px;
+		cursor: pointer;
+		background: url(../../../../static/assets/btn_select.png) no-repeat;
+		&.active {
+			background: url(../../../../static/assets/btn_select_a.png) no-repeat;
+		}
+	}
 }
 .btnBottom {
 	text-align: center;

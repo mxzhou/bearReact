@@ -38,9 +38,9 @@ export function isLoaded(globalState) {
   return globalState.detailJoiner;
 }
 
-export function loadDetailJoiner() {
+export function loadDetailJoiner(option) {
   return {
     types: [LOAD_DETAIL_JOINER, LOAD_DETAIL_JOINER_SUCCESS, LOAD_DETAIL_JOINER_FAIL],
-    promise: (client) => client.post('/goods/joiner') 
+    promise: (client) => client.post('/goods/joiner/list',{data:option}) 
   };
 }

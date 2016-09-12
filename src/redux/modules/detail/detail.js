@@ -42,10 +42,10 @@ export function isLoaded(globalState) {
   return globalState.detail;
 }
 
-export function loadDetail() {
+export function loadDetail(option) {
   return {
     types: [LOAD_DETAIL, LOAD_DETAIL_SUCCESS, LOAD_DETAIL_FAIL],
-    promise: (client) => client.post('/goods/detail')
+    promise: (client) => client.post('/goods/detail',{data:option})
   };
 }
 export function win() {

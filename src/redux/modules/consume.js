@@ -38,9 +38,9 @@ export function isLoaded(globalState) {
   return globalState.consumeMoney;
 }
 
-export function loadConsumeMoney() {
+export function loadConsumeMoney(option) {
   return {
     types: [LOAD_CONSUME, LOAD_CONSUME_SUCCESS, LOAD_CONSUME_FAIL],
-    promise: (client) => client.get('/user/consumeMoney') 
+    promise: (client) => client.post('/user/consumeMoney',{data:option}) 
   };
 }

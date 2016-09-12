@@ -51,7 +51,7 @@ export default class GoodsJoiner extends Component {
   }
   componentDidMount() {
     this.props.loading()
-    this.props.loadDetailJoiner()
+    this.props.loadDetailJoiner({id:this.props.location.query.id,lastId:0,pageSize:10})
   }
   componentWillUpdate(){
     this.props.unloading()

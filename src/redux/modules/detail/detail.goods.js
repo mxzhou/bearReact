@@ -38,9 +38,9 @@ export function isLoaded(globalState) {
   return globalState.detailGoods;
 }
 
-export function loadDetailGoods() {
+export function loadDetailGoods(option) {
   return {
     types: [LOAD_DETAIL_GOODS, LOAD_DETAIL_GOODS_SUCCESS, LOAD_DETAIL_GOODS_FAIL],
-    promise: (client) => client.get('/goods/picDetail') 
+    promise: (client) => client.get('/goods/'+option.id+'/info')
   };
 }

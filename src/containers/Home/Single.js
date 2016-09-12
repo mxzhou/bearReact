@@ -28,7 +28,7 @@ export default class Single extends Component {
           </div>
 
           <div className='f-cb'>
-            <Link to={{pathname:'/home/detail/goods',query:{id:item.id}}}  className={styles.btn + ' f-fr'}>立即夺宝</Link>
+            <Link to={{pathname:'/home/detail/goods',query:{id:item.id,goodsId:item.goodsId}}}  className={styles.btn + ' f-fr'}>立即夺宝</Link>
           </div>
         </div>
       </li>

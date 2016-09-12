@@ -13,6 +13,7 @@ export default class Detail extends Component {
 
   static propTypes = {
     result: PropTypes.object,
+    num: PropTypes.number,
     children: PropTypes.object.isRequired,
   }
   static defaultProps = {
@@ -114,13 +115,13 @@ export default class Detail extends Component {
                   </div>
                 }
                 <div className={styles.tabNav}>
-                  <Link to={'/home/detail/goods'} activeClassName={styles.active}>
+                  <Link to={{pathname:'/home/detail/goods',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
                     <span>图文详情</span>
                   </Link>
-                  <Link to={'/home/detail/join'} activeClassName={styles.active}>
+                  <Link to={{pathname:'/home/detail/join',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
                     <span>夺宝参与记录</span>
                   </Link>
-                  <Link to={'/home/detail/past'} activeClassName={styles.active}>
+                  <Link to={{pathname:'/home/detail/past',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
                     <span>往期揭晓</span>
                   </Link>
                 </div>
@@ -141,7 +142,7 @@ export default class Detail extends Component {
                 <a className={styles.btn+' '+styles.all} onClick={this.addAll.bind(this)}>包尾</a>
               </div>
             </div>
-            <Pay money={num}></Pay>
+            <Pay money={num} ref="pay"></Pay>
             <div className="scrollbar">
               <div className="handle">
                 <div className="mousearea"></div>
@@ -181,6 +182,7 @@ export default class Detail extends Component {
     this.setState({num: needNumber});
   } 
   showPay (e) {
+    console.log(this.refs.pay)
     $('#payBlock').animate({top:215,opacity:1},300)
     $('#btnBottomArea').animate({top: 500,opacity:0},300)
   }
@@ -200,10 +202,10 @@ export default class Detail extends Component {
   componentDidMount(){
     console.log('componentDidMount')
     this.props.loading()
-    this.props.loadDetail()
-    this.props.loadDetailUser()
+    this.props.loadDetail({id:this.props.location.query.id})
+    this.props.loadDetailUser({id:this.props.location.query.id})
   }
-  componentWillUpdate(){
+  componentWillUpdate () {
     this.props.unloading()
   }
   componentDidUpdate () {
