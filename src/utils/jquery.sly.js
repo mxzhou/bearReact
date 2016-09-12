@@ -280,6 +280,9 @@
 
         // Resize SLIDEE to fit all items
         if(o.parataxis > 1){
+          if($items.length%2 !=0){
+            slideeSize = slideeSize + slideeSize/$items.length
+          }
           slideeSize = slideeSize/ o.parataxis
           $slidee[0].style[o.horizontal ? 'width' : 'height'] = (borderBox ? slideeSize: slideeSize - paddingStart - paddingEnd) + 'px';
 
