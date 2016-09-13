@@ -49,8 +49,9 @@ function slyFunc(
     $('#frame').sly('on', 'move', function(e){
       if(!bLast){
         var pos = this.pos;
-        if(pos.end - pos.cur<=0){
-          //console.log('LoadMore')
+        console.log(pos.end - pos.cur)
+        if(pos.end - pos.cur <= 30){
+          console.log('LoadMore')
           loadMore()
           $('#frame').sly(false)
         }

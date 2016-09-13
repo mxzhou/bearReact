@@ -273,7 +273,7 @@ export default class EditAddress extends Component {
           <div className={styles.control+' f-cb'}>
             <label className={styles.label}>街道地址</label>
             <div className="f-fl">
-              <textarea rows="2" className={styles.formControl} placeholder="" value={addressDetail}  onChange={this.handlerChange.bind(this,'addressDetail')}></textarea>
+              <textarea className={styles.formControl + ' '+styles.formTextArea } placeholder="" value={addressDetail}  onChange={this.handlerChange.bind(this,'addressDetail')}></textarea>
             </div>
           </div>
           <div className={styles.control+' f-cb'}>
