@@ -20,6 +20,7 @@ import detailJoiner from './detail/detail.joiner';
 import detailPast from './detail/detail.past';
 import payRecord from './mine/payRecord';
 import consumeMoney from './consume';
+import pay from './pay';
 import lucky from './mine/lucky';
 import join from './mine/join';
 import mask from './mine/mask';
@@ -54,6 +55,7 @@ export default combineReducers({
   payRecord,
   lucky,
   join,
+  pay,
   mask,
   addressList,
   user,
