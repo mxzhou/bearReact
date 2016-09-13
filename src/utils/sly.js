@@ -18,14 +18,13 @@ function slyFunc(
       $wrap = $frame.parent(), // wrap
       h1 = $frame.height(), // frame height
       h2 = $slidee.height(); // slidee height
-
+      console.log(h1+' '+h2)
     if( h2 > h1){
       $('#scrollbar').show();
     }else{
       $('#scrollbar').hide();
       return;
     }
-
     $('#frame').sly(false)
     $frame.sly({
       slidee:$slidee,
