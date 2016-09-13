@@ -296,6 +296,11 @@
           width: 100%;
           height: 100%;
           display: block;
+          cursor: pointer;
+          transform: scale(1);
+        }
+        .coverImg:hover{
+          transform: scale(1.1);
         }
       }
       .luckyRight{
@@ -550,10 +555,14 @@
   }
   .won{
 
-    line-height: 20px;
-    margin: 14px 0 4px;
+    line-height: 28px;
+    margin: 10px 0 0;
     font-size: 14px;
     color: #999;
+    .time{
+      font-size: 20px;
+      color: #F24957;
+    }
     img{
       position: absolute;
       left: 10px;

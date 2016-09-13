@@ -19,13 +19,6 @@ export default class Lucky extends Component {
     result:PropTypes.array
   };
   static defaultProps = {
-    payType:{
-      1:'微信',
-      2:'支付宝'
-    },
-    payStatus:{
-      1:'已支付'
-    },
     orderStatus:{
       '0':'恭喜您获得商品',
       '1':'等待奖品派发',
@@ -143,9 +136,9 @@ export default class Lucky extends Component {
           <div id="frame" className={styles.frame}>
             <ul id="slidee" className="f-cb">
               {result && result.map((item,index) =>
-                <li key={index} className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}  onClick={this.detailFunc.bind(this,item)}>
+                <li key={index} className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}>
                   <div className={styles.luckyLeft}>
-                    <img src={item.coverImgUrl} className={styles.coverImg}/>
+                    <img src={item.coverImgUrl} className={styles.coverImg}  onClick={this.detailFunc.bind(this,item)}/>
                   </div>
                   <div className={styles.luckyRight}>
                     <p className={styles.goodsName}>{item.goodsName}</p>
