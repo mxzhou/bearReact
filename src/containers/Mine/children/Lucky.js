@@ -5,14 +5,16 @@ import { load } from '../../../redux/modules/mine/lucky';
 import { loading,unloading } from '../../../redux/modules/loading';
 import { Link } from 'react-router';
 import Close from './Close';
-
+import {slyFunc} from '../../../utils/sly'
+import ApiClient from '../../../helpers/ApiClient'
+import { loadToast,removeToast } from '../../../redux/modules/toast';
 @connect(
   state => ({result:state.lucky.data}),
-  {load,loading,unloading})
+  {load,loading,unloading,loadToast})
 export default class Lucky extends Component {
 
   static propTypes = {
-    result:PropTypes.object
+    result:PropTypes.array
   };
   static defaultProps = {
     payType:{
@@ -28,7 +30,76 @@ export default class Lucky extends Component {
       '2':'奖品已派发',
       '3':'已发货',
       '5':'已晒单'
+    },
+    result:[]
+  }
+  constructor(props, context) {
+    super(props, context);
+
+    // 在这里设置初始出台
+    this.state = {
+      result:props.result,
+      bAdd:false,
+      lLeng:0,
+      pageNumber:1
     }
+
+  }
+  domFunc(bLast = false){
+    const {result} = this.state;
+
+    var _this = this;
+    slyFunc(
+      {
+        loadMore: function () {
+          _this.setState({
+            bAdd: true,
+            pageNumber:(_this.state.pageNumber+1)
+          })
+          _this.fetchData({pageNumber:_this.state.pageNumber,pageSize:20})
+        },
+        lLeng: this.state.lLeng,
+        bLast: bLast
+      })
+    //function(){
+    //  _this.fetchData({lastId:0,pageSize:10})
+    //},
+  }
+  fetchData(data){
+    const client = new ApiClient();
+    const _this = this;
+    // 异步获取数据 promise
+    this.props.loading()
+    client.post('/user/win/log',{data:data}).then(function(data) {
+      _this.props.unloading()
+      if(data.errorCode!=0){
+        _this.props.loadToast(data.errorMessage)
+        return;
+      }
+
+      var list,lLeng,bLast;
+      if(_this.state.bAdd){
+        list = _this.state.result.concat(data.data.winLogList);
+        lLeng = parseInt(_this.state.result.length);
+      }else{
+        list = data.data.winLogList;
+        lLeng = 0;
+      }
+
+      _this.setState({
+        result:list,
+        lLeng:lLeng
+      })
+      if(data.data.winLogList.length == 0){
+        bLast = true
+      }else{
+        bLast = false
+      }
+      _this.domFunc(bLast)
+      // success
+    }, function(value) {
+      // failure
+    });
   }
   formData(time){
     let tmpDate = new Date(time);
@@ -49,7 +120,8 @@ export default class Lucky extends Component {
     return year + '.' + month + '.' + day + ' ' + hours + ':' + minutes+ ':' + seconds
   }
   render() {
-    const {result,payType,payStatus,orderStatus} = this.props;
+    const {orderStatus} = this.props;
+    const {result} = this.state;
     const styles = require('../Mine.scss');
     const close = require('../../../../static/assets/ic_closepage.png')
     return (
@@ -61,7 +133,7 @@ export default class Lucky extends Component {
         <div className="f-pr">
           <div id="frame" className={styles.frame}>
             <ul id="slidee" className="f-cb">
-              {result && result.data && result.data.winLogList.map((item,index) =>
+              {result && result.map((item,index) =>
                 <li key={index} className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}>
                   <div className={styles.luckyLeft}>
                     <img src={item.coverImgUrl} className={styles.coverImg}/>
@@ -86,51 +158,20 @@ export default class Lucky extends Component {
                 </li>
               )}
             </ul>
+            {result.length==0 &&
+              <div className={"errorMsg "+styles.payRecordMsg}>暂时还未有数据哦！</div>
+            }
           </div>
-          <div className={"scrollbar " +styles.scroll}>
+          <div className={"scrollbar " +styles.scroll} id="scrollbar">
             <div className="handle">
               <div className="mousearea"></div>
             </div>
           </div>
-
         </div>
       </div>
     );
   }
   componentDidMount() {
-    this.props.loading()
-    this.props.load({pageNumber:1,pageSize:10})
-  }
-  componentWillUpdate(){
-    this.props.unloading()
-  }
-  componentDidUpdate() {
-    require('../../../utils/plugin')
-    require('../../../utils/jquery.sly')
-    setTimeout(() =>{
-      var $frame  = $('#frame'),
-        $slidee = $('#slidee'),
-        $wrap = $frame.parent(),
-        result = this.props.result;
-
-      if(result && result.data && result.data.winLogList.length>0){
-        $frame.sly({
-          slidee:$slidee,
-          itemNav: 'basic',
-          smart: 2,
-          mouseDragging: 1,
-          touchDragging: 1,
-          releaseSwing: 1,
-          startAt: 0,
-          scrollBar: $wrap.find('.scrollbar'),
-          scrollBy: 2,
-          speed: 300,
-          elasticBounds: 1,
-          easing: 'easeOutExpo',
-          dragHandle: 1
-        });
-      }
-    },500)
-    console.log('componentDidUpdate')
+    this.fetchData({pageNumber:1,pageSize:20})
   }
 }

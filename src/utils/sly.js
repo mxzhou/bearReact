@@ -10,6 +10,7 @@ function slyFunc(
     bLoadMore = true,
     parataxis =1
   } = {}){
+  $("#slidee").attr('style','')
   require('./plugin')
   require('./jquery.sly')
   setTimeout(() =>{

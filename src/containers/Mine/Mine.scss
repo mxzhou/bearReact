@@ -230,7 +230,7 @@
     }
     .goodsBtn{
       transform: scale(1);
-      margin: 11px 0;
+      margin: 9px 0;
       text-align: center;
       padding: 0 18px;
       height: 26px;
@@ -383,6 +383,9 @@
         }
       }
     }
+    .addressList.alist{
+      height: auto;
+    }
     .addressForm{
       .control{
         margin-top: 20px;
@@ -534,5 +537,10 @@
   }
   .payRecordMsg{
     line-height: 60px;
+  }
+  .selectAddressBar{
+    height: 340px;
+    top: 0;
+    right: -5px;
   }
 }

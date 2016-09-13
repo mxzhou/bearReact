@@ -69,7 +69,7 @@ export default (store) => {
       <Route path="announce" component={Announce}></Route>
       <Route path="mine" component={Mine}>
         <IndexRoute component={Nav}/>
-        <Route path="join" component={Join} />
+        <Route path="join/:id" component={Join} />
         <Route path="joinDetail/:id" component={JoinDetail} />
         <Route path="lucky" component={Lucky} />
         <Route path="address" component={Address} />

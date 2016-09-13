@@ -9,7 +9,7 @@ export default class Nav extends Component {
     return (
       <ul className={styles.linkList + ' f-cb'}>
         <li className={styles.li}>
-          <Link to="/mine/join" className={styles.linkClass}>
+          <Link to="/mine/join/0" className={styles.linkClass}>
             <div className={styles.icon + ' '+styles.join}></div>
             <p className={styles.linkText}>夺宝记录</p>
           </Link>

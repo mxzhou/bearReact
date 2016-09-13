@@ -5,6 +5,7 @@ import { load } from '../../../redux/modules/mine/payRecord';
 import { loading,unloading } from '../../../redux/modules/loading';
 import { Link } from 'react-router';
 import Close from './Close';
+import {slyFunc} from '../../../utils/sly'
 
 @connect(
   state => ({result:state.payRecord.data}),
@@ -95,31 +96,9 @@ export default class PayRecord extends Component {
     this.props.unloading()
   }
   componentDidUpdate() {
-    require('../../../utils/plugin')
-    require('../../../utils/jquery.sly')
-    setTimeout(() =>{
-      var $frame  = $('#frame'),
-        $slidee = $('#slidee'),
-        $wrap = $frame.parent(),
-        result = this.props.result;
-
-      if(result && result.data && result.data.payLogList.length>0){
-        $frame.sly({
-          slidee:$slidee,
-          itemNav: 'basic',
-          mouseDragging: 1,
-          touchDragging: 1,
-          releaseSwing: 1,
-          startAt: 0,
-          scrollBar: $wrap.find('.scrollbar'),
-          scrollBy: 2,
-          speed: 300,
-          elasticBounds: 1,
-          easing: 'easeOutExpo',
-          dragHandle: 1
-        });
-      }
-    },1000)
-    console.log('componentDidUpdate')
+    const {result,payType,payStatus} = this.props;
+    if(result && result.data &&result.data.payLogList.length > 0){
+      slyFunc({bLoadMore : false})
+    }
   }
 }

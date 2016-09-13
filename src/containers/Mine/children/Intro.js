@@ -5,6 +5,7 @@ import { load } from '../../../redux/modules/mine/join';
 import Close from './Close';
 import { loading,unloading } from '../../../redux/modules/loading';
 import { Link } from 'react-router';
+import {slyFunc} from '../../../utils/sly'
 
 @connect(
   state => ({result:state.join.data}),
@@ -94,37 +95,6 @@ export default class Intro extends Component {
     );
   }
   componentDidMount() {
-    this.props.loading()
-    this.props.load()
-  }
-  componentWillUpdate(){
-    this.props.unloading()
-  }
-  componentDidUpdate() {
-    require('../../../utils/plugin')
-    require('../../../utils/jquery.sly')
-    setTimeout(() =>{
-      var $frame  = $('#frame'),
-        $slidee = $('#slidee'),
-        $wrap = $frame.parent(),
-        result = this.props.result;
-      if(result && result.data && result.data.buyLogList.length>0){
-        $frame.sly({
-          slidee:$slidee,
-          itemNav: 'basic',
-          smart: 2,
-          mouseDragging: 1,
-          touchDragging: 1,
-          releaseSwing: 1,
-          startAt: 0,
-          scrollBar: $wrap.find('.scrollbar'),
-          scrollBy: 2,
-          speed: 300,
-          elasticBounds: 1,
-          easing: 'easeOutExpo',
-          dragHandle: 1
-        });
-      }
-    },500)
+    slyFunc({bLoadMore: false})
   }
 }

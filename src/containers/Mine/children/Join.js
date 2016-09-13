@@ -26,9 +26,9 @@ export default class Join extends Component {
       '5':'已晒单'
     },
     navList:[
-      {name:'全部'},
-      {name:'进行中'},
-      {name:'已揭晓'}
+      {name:'全部',type:0},
+      {name:'进行中',type:3},
+      {name:'已揭晓',type:5}
     ],
     activeIndex:0,
     result:[]
@@ -66,20 +66,18 @@ export default class Join extends Component {
     return year + '.' + month + '.' + day + ' ' + hours + ':' + minutes+ ':' + seconds
   }
   changeType(index){
-    var type;
-    if(index == 0){
-      type = 0
-    }else if(index == 1){
-      type = 3
-    }else if(index ==2){
-      type = 5
-    }
-    this.setState({activeIndex:index,type:type,pageNumber:1,bAdd:false})
-    var data = {pageNumber:1,pageSize:20,type:type}
-    this.fetchData(data)
+    const {navList} =this.props;
+    this.setState({
+      bAdd:false
+    })
+    location.href="#/mine/join/"+navList[index].type
+    this.fetchData({pageNumber:1,pageSize:20,type:navList[index].type})
+
   }
   domFunc(bLast = false){
     const {result} = this.state;
+    const type = this.props.params.id;
+
     var _this = this;
     slyFunc(
       {
@@ -88,16 +86,17 @@ export default class Join extends Component {
             bAdd: true,
             pageNumber:(_this.state.pageNumber+1)
           })
-          _this.fetchData({pageNumber:_this.state.pageNumber,pageSize:20,type:_this.state.type})
+          _this.fetchData({pageNumber:_this.state.pageNumber,pageSize:20,type:type})
         },
         lLeng: this.state.lLeng,
         bLast: bLast
       })
-      //function(){
-      //  _this.fetchData({lastId:0,pageSize:10})
-      //},
+    //function(){
+    //  _this.fetchData({lastId:0,pageSize:10})
+    //},
   }
   fetchData(data){
+
     const client = new ApiClient();
     const _this = this;
     // 异步获取数据 promise
@@ -145,7 +144,7 @@ export default class Join extends Component {
           <ul className={styles.joinNav+' f-cb'}>
             {
               navList.map((item,index) =>
-                <li key={index} className={(index == 2 ? '' : styles.rMargin) + ' '+(index == activeIndex ? styles.active:' ')}>
+                <li key={index} className={(index == 2 ? '' : styles.rMargin) + ' '+(navList[index].type == this.props.params.id ? styles.active:' ')}>
                   <a onClick={this.changeType.bind(this,index)}>{item.name}</a>
                 </li>)
             }
@@ -154,58 +153,32 @@ export default class Join extends Component {
         </h3>
         <div className="f-pr">
           <div id="frame" className={styles.frame}>
-              <ul id="slidee" className="f-cb">
-                {result.map((item,index) =>
-                  <li key={index} className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}>
-                    <div className={styles.luckyLeft}>
-                      <img src={item.coverImgUrl} className={styles.coverImg}/>
+            <ul id="slidee" className="f-cb">
+              {result.map((item,index) =>
+                <li key={index} className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}>
+                  <div className={styles.luckyLeft}>
+                    <img src={item.coverImgUrl} className={styles.coverImg}/>
+                  </div>
+                  <div className={styles.luckyRight}>
+                    <p className={styles.goodsName}>{item.goodsName}</p>
+                    <div className={styles.goodsDesc}>
+                      <p className={styles.id+' f-ib'}>
+                        期号: 31273474577
+                      </p>
+                      <p className={styles.joinNumber+' f-ib'}>
+                        本期参与: 2人次
+                      </p>
+                      <Link to={'/mine/joinDetail/'+item.id} className={styles.textBlue+' f-ib'}>查看夺宝号></Link>
                     </div>
-                    <div className={styles.luckyRight}>
-                      <p className={styles.goodsName}>{item.goodsName}</p>
-                      <div className={styles.goodsDesc}>
-                        <p className={styles.id+' f-ib'}>
-                          期号: 31273474577
-                        </p>
-                        <p className={styles.joinNumber+' f-ib'}>
-                          本期参与: 2人次
-                        </p>
-                        <Link to={'/mine/joinDetail/'+item.id} className={styles.textBlue+' f-ib'}>查看夺宝号></Link>
-                      </div>
-                      <div className={styles.goodsStatus + ' f-cb'}>
-                        {orderStatus[item.status]}
-                      </div>
+                    <div className={styles.goodsStatus + ' f-cb'}>
+                      {orderStatus[item.status]}
                     </div>
-                  </li>
-                )}
-                {result.map((item,index) =>
-                  <li key={index} className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}>
-                    <div className={styles.luckyLeft}>
-                      <img src={item.coverImgUrl} className={styles.coverImg}/>
-                    </div>
-                    <div className={styles.luckyRight}>
-                      <p className={styles.goodsName}>{item.goodsName}</p>
-                      <div className={styles.goodsDesc}>
-                        <p className={styles.id+' f-ib'}>
-                          期号: 31273474577
-                        </p>
-                        <p className={styles.joinNumber+' f-ib'}>
-                          本期参与: 2人次
-                        </p>
-                        <Link to={'/mine/joinDetail/'+item.id} className={styles.textBlue+' f-ib'}>查看夺宝号></Link>
-                      </div>
-                      <div className={styles.goodsStatus + ' f-cb'}>
-                        {orderStatus[item.status]}
-                      </div>
-                    </div>
-                  </li>
-                )}
-              </ul>
-            {result && result.data &&result.data.buyLogList==null &&
-             <div className={"errorMsg "+styles.payRecordMsg}>暂时还未有数据哦！</div>
-            }
-            {result && result.data &&result.data.buyLogList.length==0 &&
-              <div className={"errorMsg "+styles.payRecordMsg}>暂时还未有数据哦！</div>
-
+                  </div>
+                </li>
+              )}
+            </ul>
+            {result.length==0 &&
+            <div className={"errorMsg "+styles.payRecordMsg}>暂时还未有数据哦！</div>
             }
           </div>
           <div className={"scrollbar " +styles.scroll} id="scrollbar">
@@ -218,7 +191,7 @@ export default class Join extends Component {
     );
   }
   componentDidMount() {
-    this.setState({type:0})
-    this.fetchData({pageNumber:1,pageSize:20,type:this.state.type})
+    const type = this.props.params.id;
+    this.fetchData({pageNumber:1,pageSize:20,type:type})
   }
 }
