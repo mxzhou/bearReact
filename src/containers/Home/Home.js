@@ -7,7 +7,7 @@ export default class Home extends Component {
     const styles = require('./Home.scss');
 
     return (
-      <div className={styles.home}>
+      <div>
         {this.props.children}
       </div>
     );

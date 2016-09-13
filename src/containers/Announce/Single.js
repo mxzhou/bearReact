@@ -1,6 +1,11 @@
 import React, { Component,PropTypes } from 'react';
 import ApiClient from '../../helpers/ApiClient'
+import { load } from '../../redux/modules/history';
+import { connect } from 'react-redux';
 
+@connect(
+  state => ({}),
+  {load})
 export default class Single extends Component {
   static propTypes = {
     item: PropTypes.object,
@@ -46,6 +51,8 @@ export default class Single extends Component {
     this.timeTemp = parseInt(this.timeTemp / 24);
   }
   begin(){
+    const {item,servertime} = this.props;
+
     var hour = 0,                           // 最终显示小时
       min = 0,                            // 最终显示分钟
       sec = 0,                            // 最终显示秒
@@ -62,7 +69,7 @@ export default class Single extends Component {
         const client = new ApiClient();
         const _this = this;
         // 异步获取数据 promise
-        client.post('/goods/win').then(function(data) {
+        client.post('/goods/win',{data:{id:item.id}}).then(function(data) {
           _this.setState({imgShow:!_this.state.imgShow});
           _this.setState({result:data});
           // success
@@ -109,13 +116,17 @@ export default class Single extends Component {
       return dt.getFullYear()+'-'+(dt.getMonth()+1)+'-'+dt.getDate()+' '+intNumber(dt.getHours())+":"+intNumber(dt.getMinutes());
     }
   }
+  detailFunc(item){
+    this.props.load('announce')
+    location.href = '#/announce/detail/goods?id='+item.id+'&goodsId='+item.goodsId
+  }
   render() {
     const {item,index,servertime} = this.props;
     const {time,result,imgShow} = this.state;
     const styles = require('./Announce.scss');
     const label = require('../../../static/assets/img_lable.png')
     return (
-      <li className={styles.item + (index%2 != 0 ? (' '+styles.even):'')}>
+      <li className={styles.item + (index%2 != 0 ? (' '+styles.even):'')} onClick={this.detailFunc.bind(this,item)}>
         <div className={styles.left}>
           <img src={item.coverImgUrl} className={styles.coverImg}/>
         </div>

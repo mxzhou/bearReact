@@ -7,6 +7,7 @@ import {
   List,
   Detail,
   Announce,
+  AnnounceList,
   Mine,
   GoodsDetail,
   GoodsJoiner,
@@ -66,7 +67,15 @@ export default (store) => {
           <Route path="past" component={GoodsPast} />
         </Route>
       </Route>
-      <Route path="announce" component={Announce}></Route>
+      <Route path="announce" component={Announce}>
+        <IndexRoute component={AnnounceList}/>
+        <Route path="detail" component={Detail} >
+          <IndexRoute component={GoodsDetail}/>
+          <Route path="goods" component={GoodsDetail} />
+          <Route path="join" component={GoodsJoiner} />
+          <Route path="past" component={GoodsPast} />
+        </Route>
+      </Route>
       <Route path="mine" component={Mine}>
         <IndexRoute component={Nav}/>
         <Route path="join/:id" component={Join} />

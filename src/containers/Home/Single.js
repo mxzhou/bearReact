@@ -1,10 +1,20 @@
 import React, { Component,PropTypes } from 'react';
 import { Link } from 'react-router';
+import { load } from '../../redux/modules/history';
+import { connect } from 'react-redux';
+
+@connect(
+  state => ({}),
+  {load})
 export default class Single extends Component {
 
   static propTypes = {
     item: PropTypes.object,
   };
+  detailFunc(item){
+    this.props.load('home')
+    location.href = '#/home/detail/goods?id='+item.id+'&goodsId'+item.goodsId
+  }
   render() {
     const {item,index} = this.props;
     const styles = require('./Home.scss');
@@ -28,7 +38,7 @@ export default class Single extends Component {
           </div>
 
           <div className='f-cb'>
-            <Link to={{pathname:'/home/detail/goods',query:{id:item.id,goodsId:item.goodsId}}}  className={styles.btn + ' f-fr'}>立即夺宝</Link>
+            <a  className={styles.btn + ' f-fr'} onClick={this.detailFunc.bind(this,item)}>立即夺宝</a>
           </div>
         </div>
       </li>

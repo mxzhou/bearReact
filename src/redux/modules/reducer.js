@@ -25,6 +25,7 @@ import join from './mine/join';
 import mask from './mine/mask';
 import addressList from './mine/addressList';
 import user from './mine/user';
+import history from './history';
 
 
 export default combineReducers({
@@ -55,5 +56,6 @@ export default combineReducers({
   join,
   mask,
   addressList,
-  user
+  user,
+  history
 });

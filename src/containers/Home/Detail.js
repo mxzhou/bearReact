@@ -7,7 +7,7 @@ import { loading,unloading } from '../../redux/modules/loading';
 import { Link } from 'react-router';
 import Pay from './Detail/Pay';
 @connect(
-  state => ({result: state.detail.data,resultUser: state.detailUser.data}),
+  state => ({result: state.detail.data,resultUser: state.detailUser.data,link:state.history.link}),
   {loadDetail, loadDetailUser, loading, unloading})
 export default class Detail extends Component {
 
@@ -37,7 +37,7 @@ export default class Detail extends Component {
     return (
       <div>
         <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionLeaveTimeout={300} transitionAppearTimeout={300} transitionEnterTimeout={300}>
-          { result && 
+          { result &&
           <div className={homeStyles.homeDetail +' f-cb'}>
             <div className={homeStyles.left}>
               <div className={styles.swiper}>
@@ -67,7 +67,7 @@ export default class Detail extends Component {
                     <div className={styles.active} style={{width:((result.data.needNumber-result.data.surplusNumber)/result.data.needNumber)*100+'%'}}></div>
                   </div>
                   <p className={styles.number}><span className="f-fr">剩余: <em>{result.data.surplusNumber}</em></span><span className="f-fl">总需: {result.data.needNumber}</span></p>
-                </div> 
+                </div>
                 {/* 奖品状态 */}
                 { result.data.status == 3 &&
                   <div className={styles.countdown}>
@@ -89,7 +89,7 @@ export default class Detail extends Component {
                     <div className={styles.luckyNum}>
                         <a className="f-fr">计算详情&gt;</a>
                         幸运号码：10004435
-                    </div> 
+                    </div>
                   </div>
                 }
                 { result.data.status == -1 &&
@@ -103,7 +103,7 @@ export default class Detail extends Component {
                     <p><span className={styles.title}>你参与了：</span><i>{resultUser.data.joinNumber}</i>人次</p>
                     <p><span className={styles.title}>夺宝号码：</span>
                       {
-                        resultUser.data.joinCodeList.map((item,index) => 
+                        resultUser.data.joinCodeList.map((item,index) =>
                           <em key={'detail'+index} className={index>=11?'hideCodeItem':'showCodeItem'} style={{display:index>=11?'none':'inline-block'}}>{item}</em>
                         )
                       }
@@ -148,12 +148,17 @@ export default class Detail extends Component {
                 <div className="mousearea"></div>
               </div>
             </div>
-            <a className={styles.btnBack} id="btnBack"><img src={iconBack}/></a>
+            <a className={styles.btnBack} onClick={this.backFunc.bind(this)}><img src={iconBack}/></a>
           </div>
           }
         </ReactCSSTransitionGroup>
       </div>
     );
+  }
+  backFunc(){
+    const {link} = this.props;
+    console.log(link)
+    location.href="#/"+link;
   }
   plus (e) {
     e.preventDefault()
@@ -180,7 +185,7 @@ export default class Detail extends Component {
   addAll (e) {
     let needNumber = this.props.result.data.needNumber
     this.setState({num: needNumber});
-  } 
+  }
   showPay (e) {
     console.log(this.refs.pay)
     $('#payBlock').animate({top:215,opacity:1},300)
@@ -235,7 +240,7 @@ export default class Detail extends Component {
         dragHandle: 1
       });
     },200)
-  } 
+  }
   componentWillUnmount () {
     clearInterval(this.timer)
   }
