@@ -7,6 +7,8 @@ import { loadToast,removeToast } from '../../redux/modules/toast';
 import Single from './Single'
 import { Paging } from '../../components/index'
 import { Link } from 'react-router';
+import {slyFunc} from '../../utils/sly'
+
 @connect(
   state => ({result: state.home.data}),
   {load,loading,unloading,loadToast,removeToast})
@@ -45,7 +47,7 @@ export default class List extends Component {
                   { result &&
                     <Paging total={result.data.total} pageSize={pageSize} onLoadPaging={this.loadPaging.bind(this)} ></Paging>
                   }
-                  <div className="scrollbar">
+                  <div className="scrollbar" id="scrollbar">
                     <div className="handle">
                       <div className="mousearea"></div>
                     </div>
@@ -72,36 +74,10 @@ export default class List extends Component {
 
   }
   componentDidUpdate() {
-    require('../../utils/plugin')
-    require('../../utils/jquery.sly')
-    setTimeout(() =>{
-      var $frame  = $('#frame'),
-        $slidee = $('#slidee'),
-        $wrap = $frame.parent(),
-        result = this.props.result;
-
-      if(result && result.data && result.data.goodsList.length>0){
-        $frame.sly({
-          slidee:$slidee,
-          parataxis:2,
-          itemNav: 'basic',
-          smart: 2,
-          mouseDragging: 1,
-          touchDragging: 1,
-          releaseSwing: 1,
-          startAt: 0,
-          scrollBar: $wrap.find('.scrollbar'),
-          scrollBy: 2,
-          speed: 300,
-          elasticBounds: 1,
-          easing: 'easeOutExpo',
-          dragHandle: 1
-        });
-      }
-    },200)
-    console.log('componentDidUpdate')
-
-
+    var result = this.props.result;
+    if(result && result.data && result.data.goodsList.length>0){
+      slyFunc({bLoadMore : false, parataxis :2})
+    }
   }
   componentWillUnmount(){
     console.log('componentWillUnmount')

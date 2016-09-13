@@ -36,19 +36,21 @@ export default class Announce extends Component {
     var _this = this;
     if(result.length>0) {
       slyFunc(
-        function(){
-          var lastId = result[result.length-1].id
-          _this.setState({
-            bAdd:true
-          })
-          _this.fetchData({lastId:lastId,pageSize:10})
-        },
-        function(){
-          _this.fetchData({lastId:0,pageSize:10})
-        },
-        this.state.lLeng,
-        bLast
-      )
+        {
+          loadMore: function () {
+            var lastId = result[result.length - 1].id
+            _this.setState({
+              bAdd: true
+            })
+            _this.fetchData({lastId: lastId, pageSize: 10})
+          },
+          parataxis :2,
+          lLeng: this.state.lLeng,
+          bLast: bLast
+        })
+      //function(){
+      //  _this.fetchData({lastId:0,pageSize:10})
+      //},
     }
   }
   fetchData(data){
@@ -70,7 +72,7 @@ export default class Announce extends Component {
         list = data.data.goodsList;
         lLeng = 0;
       }
-      console.log(lLeng)
+
       _this.setState({
         result:list,
         lLeng:lLeng
