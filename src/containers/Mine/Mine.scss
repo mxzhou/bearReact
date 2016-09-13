@@ -166,6 +166,7 @@
       padding: 10px;
       border-bottom: solid 1px #ebebeb;
       width: 481px;
+      position: relative;
     }
     .scroll{
       height: 418px;
@@ -204,6 +205,7 @@
       font-size: 14px;
       color: #333333;
       line-height: 20px;
+      height: 40px;
       margin-bottom: 5px;
     }
     .goodsDesc{
@@ -542,5 +544,17 @@
     height: 340px;
     top: 0;
     right: -5px;
+  }
+  .won{
+
+    line-height: 20px;
+    margin: 14px 0 4px;
+    font-size: 14px;
+    color: #999;
+    img{
+      position: absolute;
+      left: 10px;
+      top: 75px;
+    }
   }
 }

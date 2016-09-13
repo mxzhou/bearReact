@@ -67,6 +67,61 @@ export default class Msg extends Component {
     this.props.loading()
     this.props.load()
   }
+  domFunc(bLast = false){
+    const {result} = this.state;
+    const type = this.props.params.id;
+
+    var _this = this;
+    slyFunc(
+      {
+        loadMore: function () {
+          _this.setState({
+            bAdd: true,
+            pageNumber:(_this.state.pageNumber+1)
+          })
+          _this.fetchData({pageNumber:_this.state.pageNumber,pageSize:20,type:type})
+        },
+        lLeng: this.state.lLeng,
+        bLast: bLast
+      })
+    //function(){
+    //  _this.fetchData({lastId:0,pageSize:10})
+    //},
+  }
+  fetchData(data){
+    const client = new ApiClient();
+    const _this = this;
+    // 异步获取数据 promise
+    this.props.loading()
+    client.post('/user/buyLog/list',{data:data}).then(function(data) {
+      _this.props.unloading()
+      if(data.errorCode!=0){
+        _this.props.loadToast(data.errorMessage)
+        return;
+      }
+      var list,lLeng,bLast;
+      if(_this.state.bAdd){
+        list = _this.state.result.concat(data.data.buyLogList);
+        lLeng = parseInt(_this.state.result.length);
+      }else{
+        list = data.data.buyLogList;
+        lLeng = 0;
+      }
+      _this.setState({
+        result:list,
+        lLeng:lLeng
+      })
+      if(data.data.buyLogList.length == 0){
+        bLast = true
+      }else{
+        bLast = false
+      }
+      _this.domFunc(bLast)
+      // success
+    }, function(value) {
+      // failure
+    });
+  }
   render() {
     const {result,payType,payStatus,orderStatus,navList} = this.props;
     const {activeIndex} = this.state;

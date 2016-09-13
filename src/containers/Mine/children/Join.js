@@ -9,9 +9,9 @@ import {slyFunc} from '../../../utils/sly'
 import ApiClient from '../../../helpers/ApiClient'
 import { loadToast,removeToast } from '../../../redux/modules/toast';
 import { load as loadHistory } from '../../../redux/modules/history';
-
+import wonBg from '../../../../static/assets/img_bingostamp.png'
 @connect(
-  state => ({result:state.join.data}),
+  state => ({}),
   {load,loading,unloading,loadToast,loadHistory})
 export default class Join extends Component {
 
@@ -36,7 +36,6 @@ export default class Join extends Component {
   }
   constructor(props, context) {
     super(props, context);
-
     // 在这里设置初始出台
     this.state = {
       activeIndex: props.activeIndex,
@@ -137,9 +136,8 @@ export default class Join extends Component {
   }
   render() {
     const {orderStatus,navList} = this.props;
-    const {activeIndex,result} = this.state;
+    const {result} = this.state;
     const styles = require('../Mine.scss');
-    const close = require('../../../../static/assets/ic_closepage.png')
     return (
       <div className={styles.content}>
         <h3 className={styles.title + ' f-cb'}>
@@ -174,7 +172,35 @@ export default class Join extends Component {
                       <Link to={'/mine/joinDetail/'+item.id} className={styles.textBlue+' f-ib'} onClick={this.stopPropagation}>查看夺宝号></Link>
                     </div>
                     <div className={styles.goodsStatus + ' f-cb'}>
-                      {orderStatus[item.status]}
+                      {item.status == 5 &&
+                        <div className={'f-cb '+styles.won}>
+                          <img src={wonBg}/>
+                          <div className="f-fl">
+                            获得者：<span className={styles.textBlue}>{item.nickname}</span>
+                          </div>
+                          <div className="f-fr">
+                            幸运号码：{item.code}
+                          </div>
+                          </div>
+                      }
+                      {item.status ==3 &&
+                      <div className={'f-cb '+styles.won}>
+                        <div>
+                          揭晓倒计时：<span className={styles.textBlue}>{item.nickname}</span>
+                        </div>
+                      </div>
+                      }
+                      {item.status ==0 &&
+                      <div className={'f-cb '+styles.won}>
+                        <img/>
+                        <div className="f-fl">
+                          获得者：<span className={styles.textBlue}>{item.nickname}</span>
+                        </div>
+                        <div className="f-fr">
+                          幸运号码：{item.code}
+                        </div>
+                      </div>
+                      }
                     </div>
                   </div>
                 </li>
