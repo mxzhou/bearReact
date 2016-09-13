@@ -1,13 +1,13 @@
 .swiper {
 	position: absolute;
-	width: 270px;
-	height: 270px;
+	width: 250px;
+	height: 250px;
 	margin: auto;
 	top: 50%;
 	margin-top: -145px;
 	overflow: hidden;
 	img {
-		max-width: 270px;
+		max-width: 250px;
 	}
 	ul,li {
 		margin: 0;
@@ -129,7 +129,7 @@
 		em {
 			display: inline-block;
 			word-wrap:break-word;
-			margin-right: 10px;
+			margin-right: 6px;
 			font-weight: normal;
 		}
 	}
@@ -147,6 +147,7 @@
 	width: 431px;
 	height: 60px;
 	margin: auto;
+	margin-bottom: 10px;
 	text-align: center;
 	background: url(../../../static/assets/bg_itemcounting.png) no-repeat;
 	p {
@@ -289,11 +290,11 @@
 }
 .btnBottomArea {
 	position: fixed;
-	width: 456px;
+	width: 476px;
 	height: 44px;
 	top: 452px;
 	left: 50%;
-	margin-left: -35px;
+	margin-left: -55px;
 	background: rgba(255,255,255,0.9);
 	border-top: 1px solid #EEE;	
 	.btn{

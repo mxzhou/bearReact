@@ -1,6 +1,6 @@
-const LOAD_DETAIL_USER = 'redux-example/DETAIL/USER/LOAD_LIST';
-const LOAD_DETAIL_USER_SUCCESS = 'redux-example/DETAIL/USER/LOAD_LIST_SUCCESS';
-const LOAD_DETAIL_USER_FAIL = 'redux-example/DETAIL/USER/LOAD_LIST_FAIL';
+const LOAD_PAY = 'redux-example/home/LOAD_PAY';
+const LOAD_PAY_SUCCESS = 'redux-example/home/LOAD_PAY_SUCCESS';
+const LOAD_PAY_FAIL = 'redux-example/home/LOAD_PAY_FAIL';
 
 const initialState = {
   loaded: false
@@ -8,12 +8,12 @@ const initialState = {
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case LOAD_DETAIL_USER:
+    case LOAD_PAY:
       return {
         ...state,
         loading: true
       };
-    case LOAD_DETAIL_USER_SUCCESS:
+    case LOAD_PAY_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -21,7 +21,7 @@ export default function reducer(state = initialState, action = {}) {
         data: action.result,
         error: null
       };
-    case LOAD_DETAIL_USER_FAIL:
+    case LOAD_PAY_FAIL:
       return {
         ...state,
         loading: false,
@@ -35,13 +35,13 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 export function isLoaded(globalState) {
-  return globalState.detailUser;
+  return globalState.paySubmit;
 }
 
-export function loadDetailUser(option) {
-  option.id = parseInt(option.id)
+export function paySubmit(option) {
+  console.log(option)
   return {
-    types: [LOAD_DETAIL_USER, LOAD_DETAIL_USER_SUCCESS, LOAD_DETAIL_USER_FAIL],
-    promise: (client) => client.post('/goods/user',{data:option})
+    types: [LOAD_PAY, LOAD_PAY_SUCCESS, LOAD_PAY_FAIL],
+    promise: (client) => client.post('/cart/submit',{data:option}) // params not used, just shown as demonstration
   };
 }

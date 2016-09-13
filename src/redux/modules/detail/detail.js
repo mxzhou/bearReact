@@ -43,6 +43,7 @@ export function isLoaded(globalState) {
 }
 
 export function loadDetail(option) {
+  option.id = parseInt(option.id)
   return {
     types: [LOAD_DETAIL, LOAD_DETAIL_SUCCESS, LOAD_DETAIL_FAIL],
     promise: (client) => client.post('/goods/detail',{data:option})

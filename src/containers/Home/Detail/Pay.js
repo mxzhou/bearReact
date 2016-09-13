@@ -3,18 +3,23 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { loadConsumeMoney } from '../../../redux/modules/consume';
+import { paySubmit } from '../../../redux/modules/pay';
 import { loading,unloading } from '../../../redux/modules/loading';
+import ApiClient from '../../../helpers/ApiClient'
 
 import alipay from '../../../../static/assets/img_alipay.jpg'
 import wechat from '../../../../static/assets/img_wechatpay.jpg'
 
 @connect(
   state => ({result: state.consumeMoney.data}),
-  {loadConsumeMoney, loading, unloading})
-export default class Single extends Component {
+  {loadConsumeMoney, paySubmit, loading, unloading})
+export default class Pay extends Component {
   static propTypes = {
     consumeMoney: PropTypes.number,
     money: PropTypes.number,
+    goodsId: PropTypes.number,
+    robId: PropTypes.number,
+    loadData: PropTypes.func,
   };
   // porps 的默认值
   static defaultProps = {
@@ -76,7 +81,24 @@ export default class Single extends Component {
     );
   }
   goPay () {
-
+    let money = this.props.money
+    let data = {
+      consumeCost: money,
+      otherPayType: 0,
+      goodsList:[{goodsId:this.props.goodsId,total:money,robId:this.props.robId}]
+    }
+    const client = new ApiClient();
+    const _this = this;
+    // 异步获取数据 promise
+    client.post('/cart/submit',{data:data}).then(function(data) {
+      if(data.status==1){
+        _this.props.loadData()
+        $('#payBlock').animate({top:600,opacity:0},300)
+        $('#btnBottomArea').animate({top: 452,opacity:1},300)
+      }
+    }, function(value) {
+      console.log(value)
+    });
   }
   selectConsume () {
     let consume = this.state.consumeMoney
@@ -104,7 +126,6 @@ export default class Single extends Component {
     this.props.loadConsumeMoney({id:1})
     $('#payBlock').css({opacity:0})
     this.setState({typeIndex:-1})
-
   }
   componentWillMount () {
 
@@ -129,17 +150,7 @@ export default class Single extends Component {
     
   }
   updateMoney () {
-    let money = this.props.money
-    let consume = this.props.result.data
-    if(consume>=money){
-      this.setState({consumeMoney:consume,hasInitData:true,typeIndex:-1,useConsumeMoney:money,useConsume:true})
-    }else{
-      if(consume!=0){
-        this.setState({consumeMoney:consume,hasInitData:true,typeIndex:0,useConsumeMoney:money,useConsume:true,otherPayMoney:(money-consume)})
-      }else{
-        this.setState({consumeMoney:consume,hasInitData:true,typeIndex:0,useConsume:false,otherPayMoney:money})
-      }
-    }
+   
   }
   selectType(index){
     let consume = this.state.consumeMoney
