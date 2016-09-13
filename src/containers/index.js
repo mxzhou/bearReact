@@ -10,6 +10,7 @@ import Announce from './Announce/Announce';
 import AnnounceList from './Announce/AnnounceList';
 
 import Mine from './Mine/Mine';
+import MineContent from './Mine/MineContent';
 
 import NotFound from './NotFound/NotFound';
 export {
@@ -20,6 +21,7 @@ export {
   Announce,
   AnnounceList,
   Mine,
+  MineContent,
   NotFound,
   GoodsDetail,
   GoodsJoiner,

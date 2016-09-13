@@ -157,7 +157,6 @@ export default class Detail extends Component {
   }
   backFunc(){
     const {link} = this.props;
-    console.log(link)
     location.href="#/"+link;
   }
   plus (e) {

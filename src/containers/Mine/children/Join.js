@@ -8,10 +8,11 @@ import { Link } from 'react-router';
 import {slyFunc} from '../../../utils/sly'
 import ApiClient from '../../../helpers/ApiClient'
 import { loadToast,removeToast } from '../../../redux/modules/toast';
+import { load as loadHistory } from '../../../redux/modules/history';
 
 @connect(
   state => ({result:state.join.data}),
-  {load,loading,unloading,loadToast})
+  {load,loading,unloading,loadToast,loadHistory})
 export default class Join extends Component {
 
   static propTypes = {
@@ -45,7 +46,6 @@ export default class Join extends Component {
       lLeng:0,
       pageNumber:1
     }
-
   }
   formData(time){
     let tmpDate = new Date(time);
@@ -56,13 +56,10 @@ export default class Join extends Component {
     day = day<10 ? ('0'+day) : day;
     let hours = tmpDate.getHours();
     hours = hours<10 ? ('0'+hours) : hours;
-
     let minutes = tmpDate.getMinutes();
     minutes = minutes<10 ? ('0'+minutes) : minutes;
-
     let seconds = tmpDate.getSeconds();
     seconds = seconds<10 ? ('0'+seconds) : seconds;
-
     return year + '.' + month + '.' + day + ' ' + hours + ':' + minutes+ ':' + seconds
   }
   changeType(index){
@@ -96,7 +93,6 @@ export default class Join extends Component {
     //},
   }
   fetchData(data){
-
     const client = new ApiClient();
     const _this = this;
     // 异步获取数据 promise
@@ -107,7 +103,6 @@ export default class Join extends Component {
         _this.props.loadToast(data.errorMessage)
         return;
       }
-
       var list,lLeng,bLast;
       if(_this.state.bAdd){
         list = _this.state.result.concat(data.data.buyLogList);
@@ -116,7 +111,6 @@ export default class Join extends Component {
         list = data.data.buyLogList;
         lLeng = 0;
       }
-
       _this.setState({
         result:list,
         lLeng:lLeng
@@ -131,6 +125,15 @@ export default class Join extends Component {
     }, function(value) {
       // failure
     });
+  }
+  detailFunc(item,e){
+    console.log(e)
+    const type = this.props.params.id;
+    this.props.loadHistory('mine/join/'+type)
+    location.href = '#/mine/detail/goods?id='+item.id+'&goodsId='+item.goodsId
+  }
+  stopPropagation(e){
+    e.stopPropagation();
   }
   render() {
     const {orderStatus,navList} = this.props;
@@ -155,7 +158,7 @@ export default class Join extends Component {
           <div id="frame" className={styles.frame}>
             <ul id="slidee" className="f-cb">
               {result.map((item,index) =>
-                <li key={index} className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}>
+                <li key={index} className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}  onClick={this.detailFunc.bind(this,item)}>
                   <div className={styles.luckyLeft}>
                     <img src={item.coverImgUrl} className={styles.coverImg}/>
                   </div>
@@ -168,7 +171,7 @@ export default class Join extends Component {
                       <p className={styles.joinNumber+' f-ib'}>
                         本期参与: 2人次
                       </p>
-                      <Link to={'/mine/joinDetail/'+item.id} className={styles.textBlue+' f-ib'}>查看夺宝号></Link>
+                      <Link to={'/mine/joinDetail/'+item.id} className={styles.textBlue+' f-ib'} onClick={this.stopPropagation}>查看夺宝号></Link>
                     </div>
                     <div className={styles.goodsStatus + ' f-cb'}>
                       {orderStatus[item.status]}

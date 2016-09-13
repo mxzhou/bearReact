@@ -4,6 +4,8 @@ import { IndexLink,Link } from 'react-router';
 import Close from './../Close';
 import { connect } from 'react-redux';
 import {load} from '../../../../redux/modules/mine/addressList'
+import { load as loadMask,unload} from '../../../../redux/modules/mine/mask';
+
 import { loading,unloading } from '../../../../redux/modules/loading';
 import edit from '../../../../../static/assets/img_edit.png'
 import marker from '../../../../../static/assets/btn_marker.png'
@@ -13,7 +15,7 @@ import {slyFunc} from '../../../../utils/sly'
 
 @connect(
   state => ({list: state.addressList.data}),
-  {load, loading, unloading})
+  {load, loading, unloading,loadMask})
 export default class Select extends Component {
   static propTypes = {
     list: PropTypes.object
@@ -64,10 +66,12 @@ export default class Select extends Component {
     const {index} = this.state;
     const id = this.props.params.id;
     const styles = require('../../Mine.scss')
+    const back = require('../../../../../static/assets/ic_backpage.png')
+
     return (
       <div className={styles.content}>
         <h3 className={styles.title + ' f-cb'}>
-          <Close></Close>
+          <Link to="/mine/lucky"><img src={back} className={styles.close}/></Link>
           收货地址
           <Link className={'f-fr ' +styles.goodsBtn} to={"/mine/addAddress/"+id}>添加收货地址</Link>
         </h3>
@@ -115,6 +119,7 @@ export default class Select extends Component {
   }
 
   componentDidMount() {
+    this.props.loadMask()
     this.props.loading()
     this.props.load();
 

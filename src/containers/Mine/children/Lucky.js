@@ -8,9 +8,11 @@ import Close from './Close';
 import {slyFunc} from '../../../utils/sly'
 import ApiClient from '../../../helpers/ApiClient'
 import { loadToast,removeToast } from '../../../redux/modules/toast';
+import { load as loadHistory } from '../../../redux/modules/history';
+
 @connect(
   state => ({result:state.lucky.data}),
-  {load,loading,unloading,loadToast})
+  {load,loading,unloading,loadToast,loadHistory})
 export default class Lucky extends Component {
 
   static propTypes = {
@@ -119,6 +121,13 @@ export default class Lucky extends Component {
 
     return year + '.' + month + '.' + day + ' ' + hours + ':' + minutes+ ':' + seconds
   }
+  detailFunc(item){
+    this.props.loadHistory('mine/lucky')
+    location.href = '#/mine/detail/goods?id='+item.id+'&goodsId='+item.goodsId
+  }
+  stopPropagation(e){
+    e.stopPropagation();
+  }
   render() {
     const {orderStatus} = this.props;
     const {result} = this.state;
@@ -134,7 +143,7 @@ export default class Lucky extends Component {
           <div id="frame" className={styles.frame}>
             <ul id="slidee" className="f-cb">
               {result && result.map((item,index) =>
-                <li key={index} className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}>
+                <li key={index} className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}  onClick={this.detailFunc.bind(this,item)}>
                   <div className={styles.luckyLeft}>
                     <img src={item.coverImgUrl} className={styles.coverImg}/>
                   </div>
@@ -147,12 +156,12 @@ export default class Lucky extends Component {
                       <p className={styles.joinNumber+' f-ib'}>
                         本期参与: 2人次
                       </p>
-                      <Link to={'/mine/joinDetail/'+item.id} className={styles.textBlue+' f-ib'}>查看夺宝号></Link>
+                      <Link to={'/mine/joinDetail/'+item.id} className={styles.textBlue+' f-ib'} onClick={this.stopPropagation}>查看夺宝号></Link>
                     </div>
                     <div className={styles.goodsStatus + ' f-cb'}>
                       {orderStatus[item.orderStatus]}
-                      {item.orderStatus == 0 && <Link to={'/mine/selectAddress/'+item.id} className={styles.goodsBtn+' f-fr'}>设置收货地址</Link>}
-                      {item.orderStatus == 3 && <Link to={'/mine/selectAddress/'+item.id} className={styles.goodsBtn+' f-fr'}>查看物流</Link>}
+                      {item.orderStatus == 0 && <Link to={'/mine/selectAddress/'+item.id} className={styles.goodsBtn+' f-fr'} onClick={this.stopPropagation}>设置收货地址</Link>}
+                      {item.orderStatus == 3 && <Link to={'/mine/selectAddress/'+item.id} className={styles.goodsBtn+' f-fr'} onClick={this.stopPropagation}>查看物流</Link>}
                     </div>
                   </div>
                 </li>

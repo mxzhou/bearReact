@@ -9,6 +9,7 @@ import {
   Announce,
   AnnounceList,
   Mine,
+  MineContent,
   GoodsDetail,
   GoodsJoiner,
   GoodsPast,
@@ -77,22 +78,29 @@ export default (store) => {
         </Route>
       </Route>
       <Route path="mine" component={Mine}>
-        <IndexRoute component={Nav}/>
-        <Route path="join/:id" component={Join} />
-        <Route path="joinDetail/:id" component={JoinDetail} />
-        <Route path="lucky" component={Lucky} />
-        <Route path="address" component={Address} />
-        <Route path="selectAddress/:id" component={Select} />
-        <Route path="addAddress" component={AddAddress} />
-        <Route path="addAddress/:id" component={AddAddress} />
-        <Route path="editAddress" component={EditAddress} />
-        <Route path="editAddress/:id" component={EditAddress} />
-        <Route path="payRecord" component={PayRecord} />
-        <Route path="intro" component={Intro} />
-        <Route path="recharge" component={Recharge} />
-        <Route path="payEnd" component={PayEnd} />
-
-        <Route path="msg" component={Msg} />
+        <Route component={MineContent}>
+          <IndexRoute component={Nav}/>
+          <Route path="join/:id" component={Join} />
+          <Route path="joinDetail/:id" component={JoinDetail} />
+          <Route path="lucky" component={Lucky} />
+          <Route path="address" component={Address} />
+          <Route path="selectAddress/:id" component={Select} />
+          <Route path="addAddress" component={AddAddress} />
+          <Route path="addAddress/:id" component={AddAddress} />
+          <Route path="editAddress" component={EditAddress} />
+          <Route path="editAddress/:id" component={EditAddress} />
+          <Route path="payRecord" component={PayRecord} />
+          <Route path="intro" component={Intro} />
+          <Route path="recharge" component={Recharge} />
+          <Route path="payEnd" component={PayEnd} />
+          <Route path="msg" component={Msg} />
+        </Route>
+        <Route path="detail" component={Detail} >
+          <IndexRoute component={GoodsDetail}/>
+          <Route path="goods" component={GoodsDetail} />
+          <Route path="join" component={GoodsJoiner} />
+          <Route path="past" component={GoodsPast} />
+        </Route>
       </Route>
       {
         /*
