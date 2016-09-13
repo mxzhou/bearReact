@@ -57,10 +57,10 @@ export default class JoinItem extends Component {
           <p className={styles.goodsName}>{item.goodsName}</p>
           <div className={styles.goodsDesc}>
             <p className={styles.id+' f-ib'}>
-              期号: 31273474577
+              期号: {item.id}
             </p>
             <p className={styles.joinNumber+' f-ib'}>
-              本期参与: 2人次
+              本期参与: {item.userJoinNumber}人次
             </p>
             <Link to={'/mine/joinDetail/'+item.id} className={styles.textBlue+' f-ib'} onClick={this.stopPropagation}>查看夺宝号></Link>
           </div>
@@ -85,12 +85,19 @@ export default class JoinItem extends Component {
             }
             {item.status ==0 &&
             <div className={'f-cb '+styles.won}>
-              <img/>
               <div className="f-fl">
-                获得者：<span className={styles.textBlue}>{item.nickname}</span>
+                <div className={styles.bar}>
+                  <div className={styles.active} style={{width:(item.needNumber-item.surplusNumber)/item.needNumber*100+'%'}}></div>
+                </div>
+                <div className={"f-cb "+styles.going}>
+                  总需: {item.needNumber}
+                  <span className="f-fr">
+                    剩余: <span className={styles.last}>{item.surplusNumber}</span>
+                  </span>
+                </div>
               </div>
               <div className="f-fr">
-                幸运号码：{item.code}
+                <a className={styles.goodsBtn+' f-fr'} onClick={this.detailFunc.bind(this,item)}>追加</a>
               </div>
             </div>
             }

@@ -568,5 +568,37 @@
       left: 10px;
       top: 75px;
     }
+    .goodsBtn{
+      margin: 0 auto;
+    }
+    .going{
+      font-size: 12px;
+      color: #999999;
+      line-height: 14px;
+      margin-top: 5px;
+      .last{
+        color: #033668;
+      }
+    }
+  }
+
+  .bar {
+    position: relative;
+    background: #D5DDE3;
+    background-image: linear-gradient(0deg, #D5DDE3 0%, #A8BDCD 99%);
+    box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.33);
+    border-radius: 12px;
+    width: 305px;
+    height: 8px;
+    .active {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 8px;
+      background: #2FC1DF;
+      background-image: linear-gradient(0deg, #018DD0 0%, #2FC1DF 100%);
+      box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.33);
+      border-radius: 14px;
+    }
   }
 }
