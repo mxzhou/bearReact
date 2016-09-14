@@ -51,7 +51,7 @@ export default class Lucky extends Component {
             bAdd: true,
             pageNumber:(_this.state.pageNumber+1)
           })
-          _this.fetchData({pageNumber:_this.state.pageNumber,pageSize:20})
+          _this.fetchData({pageNumber:_this.state.pageNumber,pageSize:10})
         },
         lLeng: this.state.lLeng,
         bLast: bLast
@@ -154,7 +154,7 @@ export default class Lucky extends Component {
                     <div className={styles.goodsStatus + ' f-cb'}>
                       {orderStatus[item.orderStatus]}
                       {item.orderStatus == 0 && <Link to={'/mine/selectAddress/'+item.id} className={styles.goodsBtn+' f-fr'} onClick={this.stopPropagation}>设置收货地址</Link>}
-                      {item.orderStatus == 3 && <Link to={'/mine/selectAddress/'+item.id} className={styles.goodsBtn+' f-fr'} onClick={this.stopPropagation}>查看物流</Link>}
+                      {item.orderStatus == 3 && <Link to={'/mine/msg'} className={styles.goodsBtn+' f-fr'} onClick={this.stopPropagation}>查看物流</Link>}
                     </div>
                   </div>
                 </li>
@@ -174,6 +174,6 @@ export default class Lucky extends Component {
     );
   }
   componentDidMount() {
-    this.fetchData({pageNumber:1,pageSize:20})
+    this.fetchData({pageNumber:1,pageSize:10})
   }
 }

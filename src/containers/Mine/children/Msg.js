@@ -21,6 +21,7 @@ export default class Msg extends Component {
       {name:'物流信息'},
       {name:'系统信息'},
     ],
+    status:{1:'已下单',2:'已出库',3:'已发货',4:'已签收'},
     activeIndex:0
   }
   constructor(props, context) {
@@ -36,28 +37,10 @@ export default class Msg extends Component {
     }
 
   }
-  formData(time){
-    let tmpDate = new Date(time);
-    let year = tmpDate.getFullYear();
-    let month = tmpDate.getMonth() + 1;
-    month = month<10 ? ('0'+month) : month;
-    let day = tmpDate.getDate();
-    day = day<10 ? ('0'+day) : day;
-    let hours = tmpDate.getHours();
-    hours = hours<10 ? ('0'+hours) : hours;
-
-    let minutes = tmpDate.getMinutes();
-    minutes = minutes<10 ? ('0'+minutes) : minutes;
-
-    let seconds = tmpDate.getSeconds();
-    seconds = seconds<10 ? ('0'+seconds) : seconds;
-
-    return year + '.' + month + '.' + day + ' ' + hours + ':' + minutes+ ':' + seconds
-  }
   changeType(index){
-    this.setState({activeIndex:index})
+    this.setState({activeIndex:index,result:[]})
     setTimeout(()=>{
-      this.fetchData({pageNumber:1,pageSize:20})
+      this.fetchData({pageNumber:1,pageSize:10})
     },100)
   }
   domFunc(bLast = false){
@@ -69,7 +52,7 @@ export default class Msg extends Component {
             bAdd: true,
             pageNumber:(_this.state.pageNumber+1)
           })
-          _this.fetchData({pageNumber:_this.state.pageNumber,pageSize:20})
+          _this.fetchData({pageNumber:_this.state.pageNumber,pageSize:10})
         },
         lLeng: this.state.lLeng,
         bLast: bLast
@@ -115,7 +98,7 @@ export default class Msg extends Component {
     });
   }
   render() {
-    const {navList} = this.props;
+    const {navList,status} = this.props;
     const {activeIndex,result} = this.state;
     const styles = require('../Mine.scss');
     return (
@@ -143,11 +126,11 @@ export default class Msg extends Component {
                     </div>
                     <div className={styles.luckyRight}>
                       <div className={styles.logic+' f-cb'}>
-                        <span className={styles.name}>外星人 15.6 英寸游戏本</span>
-                        <span className={' f-fr'}>2016-01-12 18:23</span>
+                        <span className={styles.name}>{item.goodsName}</span>
+                        <span className={' f-fr'}>{item.createTime}</span>
                       </div>
                       <p className={styles.logicDesc}>
-                        您中奖的商品“（第12345期）外星人 15.6 英寸游戏本”已经发货，请耐心等待哦！
+                        您中奖的商品“{item.goodsName}”{status[item.logisticsStatus]}，请耐心等待哦！
                       </p>
                     </div>
                   </li> :
@@ -155,7 +138,7 @@ export default class Msg extends Component {
                     { item.sendType == 1 &&
                       <div>
                         <div className={styles.systemTitle}>
-                          {item.title}<span className={styles.time}>今天</span>
+                          {item.title}<span className={styles.time}>{item.sendTime}</span>
                         </div>
                         <p className={styles.desc}>
                           亲爱的用户：<br/>
@@ -166,7 +149,7 @@ export default class Msg extends Component {
                     {item.sendType == 2 &&
                       <div>
                         <div className={styles.systemTitle}>
-                          {item.title}<span className={styles.time}>今天</span>
+                          {item.title}<span className={styles.time}>{item.sendTime}</span>
                         </div>
                         <div className={styles.slucky}>
                           <img src={item.goodsImg}/>
@@ -178,7 +161,7 @@ export default class Msg extends Component {
                       item.sendType == 3 &&
                       <div>
                         <div className={styles.systemTitle}>
-                          {item.title}<span className={styles.time}>今天</span>
+                          {item.title}<span className={styles.time}>{item.sendTime}</span>
                         </div>
                         <p className={styles.desc}>
                           亲爱的用户：<br/>
@@ -190,7 +173,7 @@ export default class Msg extends Component {
                       item.sendType == 4 &&
                       <div>
                         <div className={styles.systemTitle}>
-                          {item.title}<span className={styles.time}>今天</span>
+                          {item.title}<span className={styles.time}>{item.sendTime}</span>
                         </div>
                         <p className={styles.desc}>
                           亲爱的用户：<br/>
@@ -213,6 +196,6 @@ export default class Msg extends Component {
     );
   }
   componentDidMount() {
-    this.fetchData({pageNumber:1,pageSize:20})
+    this.fetchData({pageNumber:1,pageSize:10})
   }
 }

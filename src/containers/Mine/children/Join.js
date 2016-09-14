@@ -53,7 +53,7 @@ export default class Join extends Component {
       bAdd:false
     })
     location.href="#/mine/join/"+navList[index].type
-    this.fetchData({pageNumber:1,pageSize:20,type:navList[index].type})
+    this.fetchData({pageNumber:1,pageSize:10,type:navList[index].type})
 
   }
   domFunc(bLast = false){
@@ -68,7 +68,7 @@ export default class Join extends Component {
             bAdd: true,
             pageNumber:(_this.state.pageNumber+1)
           })
-          _this.fetchData({pageNumber:_this.state.pageNumber,pageSize:20,type:type})
+          _this.fetchData({pageNumber:_this.state.pageNumber,pageSize:10,type:type})
         },
         lLeng: this.state.lLeng,
         bLast: bLast
@@ -152,6 +152,6 @@ export default class Join extends Component {
   }
   componentDidMount() {
     const type = this.props.params.id;
-    this.fetchData({pageNumber:1,pageSize:20,type:type})
+    this.fetchData({pageNumber:1,pageSize:10,type:type})
   }
 }
