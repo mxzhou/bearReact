@@ -655,6 +655,12 @@
           }
         }
         .helpContent{
+          img{
+            margin: 0 auto;
+            width: 400px;
+            height: 260px;
+            display: block;
+          }
           display: none;
           background: #eee;
           line-height: 24px;
