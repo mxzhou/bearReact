@@ -31,7 +31,7 @@ module.exports = {
   devtool: 'source-map',
   context: path.resolve(__dirname, '..'),
   entry: {
-    //'common':['react','react-dom','react-router','redux','superagent','jquery'],
+    'common':['react','react-dom','react-router','redux','superagent','jquery'],
     'main': [
       './src/client.js'
     ]
@@ -72,11 +72,11 @@ module.exports = {
       jQuery: "jquery",
       "window.jQuery": "jquery"
     }),
-    //new webpack.optimize.CommonsChunkPlugin({
-    //  name: "common",
-    //  //filename:"vendor.js",
-    //  minChunks: Infinity //Infinity
-    //}),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "common",
+      //filename:"vendor.js",
+      minChunks: Infinity //Infinity
+    }),
     // css files from the extract-text-plugin loader
     new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
     new webpack.DefinePlugin({
