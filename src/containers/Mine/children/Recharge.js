@@ -2,8 +2,8 @@ import React, { Component,PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { IndexLink,Link } from 'react-router';
 import Close from './Close';
-import alipay from '../../../../static/assets/img_alipay.jpg'
-import wechat from '../../../../static/assets/img_wechatpay.jpg'
+import alipay from '../../../assets/img_alipay.jpg'
+import wechat from '../../../assets/img_wechatpay.jpg'
 
 export default class Recharge extends Component {
   static propTypes = {

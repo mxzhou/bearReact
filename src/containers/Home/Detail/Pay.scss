@@ -6,7 +6,7 @@
 	left: 50%;
 	margin-left: -55px;
 	background: rgba(255,255,255,0.9);
-	border-top: 1px solid #CCC;	
+	border-top: 1px solid #CCC;
 	.title {
 		position: relative;
 		margin: 0 10px;
@@ -104,9 +104,9 @@
 		vertical-align: -3px;
 		margin-right: 5px;
 		cursor: pointer;
-		background: url(../../../../static/assets/btn_select.png) no-repeat;
+		background: url(../../../assets/btn_select.png) no-repeat;
 		&.active {
-			background: url(../../../../static/assets/btn_select_a.png) no-repeat;
+			background: url(../../../assets/btn_select_a.png) no-repeat;
 		}
 	}
 }

@@ -6,7 +6,7 @@ import Close from './Close';
 import { loading,unloading } from '../../../redux/modules/loading';
 import { Link } from 'react-router';
 import {slyFunc} from '../../../utils/sly'
-import introduction from '../../../../static/assets/img_introductionpic.jpg'
+import introduction from '../../../assets/img_introductionpic.jpg'
 @connect(
   state => ({result: state.join.data}),
   {load, loading, unloading})
@@ -76,7 +76,7 @@ export default class Intro extends Component {
     const {result,payType,payStatus,orderStatus,navList} = this.props;
     const {activeIndex} = this.state;
     const styles = require('../Mine.scss');
-    const close = require('../../../../static/assets/ic_closepage.png')
+    const close = require('../../../assets/ic_closepage.png')
     return (
       <div className={styles.content}>
         <h3 className={styles.title + ' f-cb'}>

@@ -115,21 +115,21 @@
     }
 
     .join{
-      background:url(../../../static/assets/ic_joinlist.png) no-repeat;
+      background:url(../../assets/ic_joinlist.png) no-repeat;
     }
     .lucky{
-      background:url(../../../static/assets/ic_luckylist.png) no-repeat;
+      background:url(../../assets/ic_luckylist.png) no-repeat;
 
     }
     .address{
-      background:url(../../../static/assets/ic_addresslist.png) no-repeat;
+      background:url(../../assets/ic_addresslist.png) no-repeat;
     }
     .payRecord{
-      background:url(../../../static/assets/ic_paylist.png) no-repeat;
+      background:url(../../assets/ic_paylist.png) no-repeat;
 
     }
     .intro{
-      background:url(../../../static/assets/ic_introduction.png) no-repeat;
+      background:url(../../assets/ic_introduction.png) no-repeat;
 
     }
     .linkClass{
@@ -642,7 +642,7 @@
             width: 5px;
             height: 10px;
             vertical-align: middle;
-            background: url(../../../static/assets/ic_arrow_grey.png);
+            background: url(../../assets/ic_arrow_grey.png);
             content:' '
           }
         }
@@ -650,7 +650,7 @@
           .helpActive{
             color:#0299CD;
             &:before{
-              background: url(../../../static/assets/ic_arrow_blue.png);
+              background: url(../../assets/ic_arrow_blue.png);
             }
           }
         }

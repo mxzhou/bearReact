@@ -16,7 +16,7 @@ export default class Close extends Component {
   }
   render() {
     const styles = require('../Mine.scss');
-    const close = require('../../../../static/assets/ic_closepage.png')
+    const close = require('../../../assets/ic_closepage.png')
     return (
       <Link to="/mine"><img src={close} className={styles.close} onClick={this.closeHandler.bind(this)}/></Link>
     );

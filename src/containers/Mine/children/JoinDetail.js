@@ -6,8 +6,8 @@ import { loadCodes} from '../../../redux/modules/mine/join';
 import { loadToast,removeToast } from '../../../redux/modules/toast';
 import {slyFunc} from '../../../utils/sly'
 
-import marker from '../../../../static/assets/btn_select.png'
-import aMarker from '../../../../static/assets/btn_select_a.png'
+import marker from '../../../assets/btn_select.png'
+import aMarker from '../../../assets/btn_select_a.png'
 import ApiClient from '../../../helpers/ApiClient'
 @connect(
   state => ({}),
@@ -76,7 +76,7 @@ export default class JoinDetail extends Component {
   render() {
     const {data,bSelect} = this.state;
     const styles = require('../Mine.scss')
-    const back = require('../../../../static/assets/ic_backpage.png')
+    const back = require('../../../assets/ic_backpage.png')
 
     return (
       <div className={styles.content}>

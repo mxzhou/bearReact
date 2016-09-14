@@ -2,8 +2,8 @@ import React, { Component,PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { IndexLink,Link } from 'react-router';
 import { load as loadMask,unload} from '../../../redux/modules/mine/mask';
-import marker from '../../../../static/assets/btn_select.png'
-import aMarker from '../../../../static/assets/btn_select_a.png'
+import marker from '../../../assets/btn_select.png'
+import aMarker from '../../../assets/btn_select_a.png'
 @connect(
   state => ({}),
   {loadMask,unload})
@@ -47,7 +47,7 @@ export default class PayEnd extends Component {
     const {bSelect} = this.state;
 
     const styles = require('../Mine.scss')
-    const back = require('../../../../static/assets/ic_backpage.png')
+    const back = require('../../../assets/ic_backpage.png')
 
     return (
       <div className={styles.content}>

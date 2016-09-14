@@ -10,7 +10,7 @@ import {slyFunc} from '../../../utils/sly'
 import ApiClient from '../../../helpers/ApiClient'
 import { loadToast,removeToast } from '../../../redux/modules/toast';
 import { load as loadHistory } from '../../../redux/modules/history';
-import wonBg from '../../../../static/assets/img_bingostamp.png'
+import wonBg from '../../../assets/img_bingostamp.png'
 @connect(
   state => ({}),
   {load,loading,unloading,loadToast,loadHistory})

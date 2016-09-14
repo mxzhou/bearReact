@@ -17,7 +17,7 @@ export default class Loading extends Component {
   }
   render() {
     const {text,show} = this.props; // eslint-disable-line no-shadow
-    const loading = require('../../../static/assets/loading.gif');
+    const loading = require('../../assets/loading.gif');
     const display = show ? 'block':'none';
     const styles = require('./Loading.scss');
     return (

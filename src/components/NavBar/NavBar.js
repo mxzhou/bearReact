@@ -7,10 +7,6 @@ export default class NavBar extends Component {
 
   render() {
     const {list} = this.props; // eslint-disable-line no-shadow
-    const tap1 = require('../../../static/assets/ic_tap1.png');
-    const tap2 = require('../../../static/assets/ic_tap2.png');
-    const tap3 = require('../../../static/assets/ic_tap3.png');
-
     const styles = require('./NavBar.scss');
     return (
       <ul className={styles.navBar}>

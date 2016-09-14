@@ -13,8 +13,8 @@ export default class Mine extends Component {
   };
   render() {
     const styles = require('./Mine.scss');
-    const wallet = require('../../../static/assets/ic_wallet.png')
-    const msg = require('../../../static/assets/ic_msg.png')
+    const wallet = require('../../assets/ic_wallet.png')
+    const msg = require('../../assets/ic_msg.png')
     const {user,consume,message} = this.props;
     return (
       <div>

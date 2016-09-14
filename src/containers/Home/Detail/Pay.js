@@ -7,8 +7,8 @@ import { paySubmit } from '../../../redux/modules/pay';
 import { loading,unloading } from '../../../redux/modules/loading';
 import ApiClient from '../../../helpers/ApiClient'
 
-import alipay from '../../../../static/assets/img_alipay.jpg'
-import wechat from '../../../../static/assets/img_wechatpay.jpg'
+import alipay from '../../../assets/img_alipay.jpg'
+import wechat from '../../../assets/img_wechatpay.jpg'
 
 @connect(
   state => ({result: state.consumeMoney.data}),
@@ -145,12 +145,12 @@ export default class Pay extends Component {
       }
     }
   }
-  
+
   componentWillUnmount(){
-    
+
   }
   updateMoney () {
-   
+
   }
   selectType(index){
     let consume = this.state.consumeMoney

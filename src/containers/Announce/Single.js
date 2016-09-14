@@ -124,7 +124,7 @@ export default class Single extends Component {
     const {item,index,servertime} = this.props;
     const {time,result,imgShow} = this.state;
     const styles = require('./Announce.scss');
-    const label = require('../../../static/assets/img_lable.png')
+    const label = require('../../assets/img_lable.png')
     return (
       <li className={styles.item + (index%2 != 0 ? (' '+styles.even):'')} onClick={this.detailFunc.bind(this,item)}>
         <div className={styles.left}>

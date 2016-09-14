@@ -5,9 +5,9 @@ import Close from './../Close';
 import { connect } from 'react-redux';
 import {load} from '../../../../redux/modules/mine/addressList'
 import { loading,unloading } from '../../../../redux/modules/loading';
-import edit from '../../../../../static/assets/img_edit.png'
-import marker from '../../../../../static/assets/btn_marker.png'
-import aMarker from '../../../../../static/assets/btn_marker_a.png'
+import edit from '../../../../assets/img_edit.png'
+import marker from '../../../../assets/btn_marker.png'
+import aMarker from '../../../../assets/btn_marker_a.png'
 import {slyFunc} from '../../../../utils/sly'
 @connect(
   state => ({list: state.addressList.data}),

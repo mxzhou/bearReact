@@ -22,7 +22,7 @@
 			display: block;
 			float: left;
 		}
-	}		
+	}
 }
 :global {
 	.point {
@@ -45,7 +45,7 @@
 			}
 		}
 	}
-	
+
 }
 .btnBack {
 	position: absolute;
@@ -149,7 +149,7 @@
 	margin: auto;
 	margin-bottom: 10px;
 	text-align: center;
-	background: url(../../../static/assets/bg_itemcounting.png) no-repeat;
+	background: url(../../assets/bg_itemcounting.png) no-repeat;
 	p {
 		font-size: 14px;
 		color: #FFF;
@@ -170,7 +170,7 @@
 	height: 172px;
 	margin: auto;
 	margin-top: 20px;
-	background: url(../../../static/assets/bg_bingoinfobg.png) no-repeat;
+	background: url(../../assets/bg_bingoinfobg.png) no-repeat;
 	.userPic {
 		position: absolute;
 		width: 72px;
@@ -190,7 +190,7 @@
 			bottom: 0;
 			position: absolute;
 			content: " ";
-			background: url(../../../static/assets/img_bingolable.png) center center no-repeat;
+			background: url(../../assets/img_bingolable.png) center center no-repeat;
 			background-size: 100% auto;
 		}
 	}
@@ -202,7 +202,7 @@
 		color: #333;
 		font-weight: normal;
 		line-height: 18px;
-		font-size: 12px;			
+		font-size: 12px;
 	}
 	.winnerName {
 		color: #5393E0;
@@ -249,7 +249,7 @@
 		text-align: center;
 		color: #0066AC;
 		margin-left: 3px;
-		background: url(../../../static/assets/bg_segment.png) center top no-repeat;
+		background: url(../../assets/bg_segment.png) center top no-repeat;
 		&:before {
 			display: block;
 			content: ' ';
@@ -258,7 +258,7 @@
 			top: 0;
 			width: 15px;
 			height: 24px;
-			background: url(../../../static/assets/bg_segment.png) left top no-repeat;
+			background: url(../../assets/bg_segment.png) left top no-repeat;
 		}
 		&:after {
 			display: block;
@@ -268,17 +268,17 @@
 			top: 0;
 			width: 15px;
 			height: 24px;
-			background: url(../../../static/assets/bg_segment.png) right top no-repeat;
+			background: url(../../assets/bg_segment.png) right top no-repeat;
 		}
 		&.active {
 			color: #FFF;
 			height: 30px;
-			background: url(../../../static/assets/bg_segment_a.png) center top no-repeat;
+			background: url(../../assets/bg_segment_a.png) center top no-repeat;
 			&:before {
-				background: url(../../../static/assets/bg_segment_a.png) left top no-repeat;
+				background: url(../../assets/bg_segment_a.png) left top no-repeat;
 			}
 			&:after {
-				background: url(../../../static/assets/bg_segment_a.png) right top no-repeat;
+				background: url(../../assets/bg_segment_a.png) right top no-repeat;
 			}
 		}
 	}
@@ -296,7 +296,7 @@
 	left: 50%;
 	margin-left: -55px;
 	background: rgba(255,255,255,0.9);
-	border-top: 1px solid #EEE;	
+	border-top: 1px solid #EEE;
 	.btn{
 		display: inline-block;
         transform: scale(1);

@@ -32,7 +32,7 @@ export default class Detail extends Component {
     const {result,resultUser} = this.props;
     const homeStyles = require('./Home.scss');
     const styles = require('./Detail.scss');
-    const iconBack = require('../../../static/assets/ic_backpage.png');
+    const iconBack = require('../../assets/ic_backpage.png');
     return (
       <div>
         <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionLeaveTimeout={300} transitionAppearTimeout={300} transitionEnterTimeout={300}>

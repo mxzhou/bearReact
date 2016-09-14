@@ -125,7 +125,7 @@ export default class Lucky extends Component {
     const {orderStatus} = this.props;
     const {result} = this.state;
     const styles = require('../Mine.scss');
-    const close = require('../../../../static/assets/ic_closepage.png')
+    const close = require('../../../assets/ic_closepage.png')
     return (
       <div className={styles.content}>
         <h3 className={styles.title + ' f-cb'}>

@@ -7,9 +7,9 @@ import {load} from '../../../../redux/modules/mine/addressList'
 import { load as loadMask,unload} from '../../../../redux/modules/mine/mask';
 
 import { loading,unloading } from '../../../../redux/modules/loading';
-import edit from '../../../../../static/assets/img_edit.png'
-import marker from '../../../../../static/assets/btn_marker.png'
-import aMarker from '../../../../../static/assets/btn_marker_a.png'
+import edit from '../../../../assets/img_edit.png'
+import marker from '../../../../assets/btn_marker.png'
+import aMarker from '../../../../assets/btn_marker_a.png'
 import ApiClient from '../../../../helpers/ApiClient'
 import {slyFunc} from '../../../../utils/sly'
 
@@ -66,7 +66,7 @@ export default class Select extends Component {
     const {index} = this.state;
     const id = this.props.params.id;
     const styles = require('../../Mine.scss')
-    const back = require('../../../../../static/assets/ic_backpage.png')
+    const back = require('../../../../assets/ic_backpage.png')
 
     return (
       <div className={styles.content}>
