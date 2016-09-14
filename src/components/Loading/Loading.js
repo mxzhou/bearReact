@@ -10,7 +10,7 @@ export default class Loading extends Component {
     text: PropTypes.string
   }
   static defaultProps ={
-    text: '加载中。。。'
+    text: '努力加载中。。。'
   }
   handlerFunc(){
     this.props.unloading()
