@@ -44,7 +44,8 @@ export default class Join extends Component {
       bAdd:false,
       type:0,
       lLeng:0,
-      pageNumber:1
+      pageNumber:1,
+      servertime:0
     }
   }
   changeType(index){
@@ -98,7 +99,8 @@ export default class Join extends Component {
       }
       _this.setState({
         result:list,
-        lLeng:lLeng
+        lLeng:lLeng,
+        servertime:data.servertime
       })
       if(data.data.buyLogList.length == 0){
         bLast = true
@@ -113,7 +115,7 @@ export default class Join extends Component {
   }
   render() {
     const {orderStatus,navList} = this.props;
-    const {result} = this.state;
+    const {result,servertime} = this.state;
     const styles = require('../Mine.scss');
     const type = this.props.params.id
     return (
@@ -134,7 +136,7 @@ export default class Join extends Component {
           <div id="frame" className={styles.frame}>
             <ul id="slidee" className="f-cb">
               {result.map((item,index) =>
-              <JoinItem key={index} item={item} type={type}></JoinItem>
+              <JoinItem key={index} item={item} type={type} servertime={servertime}></JoinItem>
               )}
             </ul>
             {result.length==0 &&
