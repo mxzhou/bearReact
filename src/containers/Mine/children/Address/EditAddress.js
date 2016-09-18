@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { IndexLink,Link } from 'react-router';
 import { load as loadMask,unload} from '../../../../redux/modules/mine/mask';
 import { loadToast,removeToast } from '../../../../redux/modules/toast';
+import { loadAlert,removeAlert } from '../../../../redux/modules/alert';
 import marker from '../../../../assets/btn_select.png'
 import aMarker from '../../../../assets/btn_select_a.png'
 import ApiClient from '../../../../helpers/ApiClient'
-
+import {Alert} from '../../../../components'
 @connect(
   state => ({}),
-  {loadMask,unload,loadToast})
+  {loadMask,unload,loadToast,loadAlert})
 export default class EditAddress extends Component {
   static propTypes = {
   };
@@ -202,6 +203,9 @@ export default class EditAddress extends Component {
     })
   }
   deleteFunc(){
+    this.props.loadAlert();
+  }
+  submitDelete(){
     const client = new ApiClient();
     const id = this.props.params.id;
     const userAddressId = this.state.userAddressId;
@@ -230,9 +234,10 @@ export default class EditAddress extends Component {
 
     const styles = require('../../Mine.scss')
     const back = require('../../../../assets/ic_backpage.png')
-
+    const text = <p style={{"font-size": "16px","color": "#333333","text-align": "center"}}>确定删除吗</p>
     return (
       <div className={styles.content}>
+        <Alert text={text} onClose={this.submitDelete.bind(this)}/>
         <h3 className={styles.title + ' f-cb'}>
           <a><img src={back} className={styles.close} onClick={this.closeHandler.bind(this)}/></a>
           修改收货地址

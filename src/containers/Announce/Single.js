@@ -2,10 +2,11 @@ import React, { Component,PropTypes } from 'react';
 import ApiClient from '../../helpers/ApiClient'
 import { load } from '../../redux/modules/history';
 import { connect } from 'react-redux';
+import { loadToast,removeToast } from '../../redux/modules/toast';
 
 @connect(
   state => ({}),
-  {load})
+  {load,loadToast})
 export default class Single extends Component {
   static propTypes = {
     item: PropTypes.object,
@@ -70,6 +71,10 @@ export default class Single extends Component {
         const _this = this;
         // 异步获取数据 promise
         client.post('/goods/win',{data:{id:item.id}}).then(function(data) {
+          if(data.errorCode!=0){
+            _this.props.loadToast(data.errorMessage)
+            return;
+          }
           _this.setState({imgShow:!_this.state.imgShow});
           _this.setState({result:data});
           // success

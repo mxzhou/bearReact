@@ -22,12 +22,10 @@ export default class List extends Component {
     pageSize: 10,
   };
   componentWillMount(){
-    console.log('componentWillMount')
   }
   render() {
     const {result,pageSize} = this.props;
     const styles = require('./Home.scss');
-    console.log('listRender');
 
     return (
       <div className={styles.home}>
@@ -64,13 +62,11 @@ export default class List extends Component {
     this.props.load({type:0,pageSize:this.props.pageSize,pageNumber:nums});
   }
   componentDidMount(){
-    console.log('componentDidMount')
     this.props.loading()
     this.loadPaging(1);
   }
   componentWillUpdate(){
     this.props.unloading()
-    console.log('componentWillUpdate')
 
   }
   componentDidUpdate() {
@@ -80,7 +76,6 @@ export default class List extends Component {
     }
   }
   componentWillUnmount(){
-    console.log('componentWillUnmount')
 
   }
 }

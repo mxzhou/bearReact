@@ -5,12 +5,13 @@ import { load } from '../../../redux/modules/mine/join';
 import Close from './Close';
 import { loading,unloading } from '../../../redux/modules/loading';
 import { loadToast,removeToast } from '../../../redux/modules/toast';
+import { loadMessageNum } from '../../../redux/modules/mine/user';
 import { Link } from 'react-router';
 import {slyFunc} from '../../../utils/sly'
 import ApiClient from '../../../helpers/ApiClient'
 @connect(
   state => ({result:state.join.data}),
-  {load,loading,unloading})
+  {load,loading,unloading,loadMessageNum})
 export default class Msg extends Component {
 
   static propTypes = {
@@ -74,6 +75,7 @@ export default class Msg extends Component {
         _this.props.loadToast(data.errorMessage)
         return;
       }
+      _this.props.loadMessageNum()
       var list,lLeng,bLast;
       if(_this.state.bAdd){
         list = _this.state.result.concat(data.data.messageList);

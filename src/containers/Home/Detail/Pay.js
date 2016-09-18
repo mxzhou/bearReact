@@ -97,7 +97,6 @@ export default class Pay extends Component {
         $('#btnBottomArea').animate({top: 452,opacity:1},300)
       }
     }, function(value) {
-      console.log(value)
     });
   }
   selectConsume () {
