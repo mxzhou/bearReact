@@ -12,6 +12,7 @@ import navlist from './navlist';
 import home from './home';
 import loading from './loading';
 import toast from './toast';
+import alert from './alert';
 import announce from './announce';
 import detail from './detail/detail';
 import detailUser from './detail/detail.user';
@@ -45,6 +46,7 @@ export default combineReducers({
   home,
   loading,
   toast,
+  alert,
   announce,
   detail,
   detailJoiner,

@@ -65,7 +65,7 @@ export default class List extends Component {
             </ul>
             }
             {list && list.data && (list.data == null || list.data.length == 0) &&
-            <div className={"errorMsg "+styles.payRecordMsg}>暂时还未有数据哦！</div>
+            <div className={"errorMsg "+styles.payRecordMsg}>请添加收货地址！</div>
             }
           </div>
           <div className={"scrollbar " +styles.scroll} id="scrollbar">
