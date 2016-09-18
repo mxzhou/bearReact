@@ -5,6 +5,7 @@ import Close from './../Close';
 import { connect } from 'react-redux';
 import {load} from '../../../../redux/modules/mine/addressList'
 import { load as loadMask,unload} from '../../../../redux/modules/mine/mask';
+import { loadToast,removeToast } from '../../../../redux/modules/toast';
 
 import { loading,unloading } from '../../../../redux/modules/loading';
 import edit from '../../../../assets/img_edit.png'
@@ -15,7 +16,7 @@ import {slyFunc} from '../../../../utils/sly'
 
 @connect(
   state => ({list: state.addressList.data}),
-  {load, loading, unloading,loadMask})
+  {load, loading, unloading,loadMask,loadToast})
 export default class Select extends Component {
   static propTypes = {
     list: PropTypes.object
@@ -49,15 +50,18 @@ export default class Select extends Component {
       userAddressId: list.data[this.state.index].id,
       id: this.props.params.id
     }
-    console.log(data)
+    alert(0)
+    let _this = this
     //异步获取数据 promise
     client.post('/user/win/setAddress', {
       data: data
     }).then(function (data) {
-      if (data.errorCode == 0) {
-        location.href = "#/mine/lucky"
+      if(data.errorCode!=0){
+        _this.props.loadToast(data.errorMessage)
+        return;
       }
-      console.log(data)
+      _this.props.loadToast('保存成功')
+      location.href = "#/mine/lucky"
     })
   }
 
