@@ -6,6 +6,7 @@ import { loadDetailUser } from '../../redux/modules/detail/detail.user';
 import { loading,unloading } from '../../redux/modules/loading';
 import { Link } from 'react-router';
 import Pay from './Detail/Pay';
+import CountDown from './Detail/CountDown';
 import {slyFunc} from '../../utils/sly'
 
 @connect(
@@ -17,6 +18,7 @@ export default class Detail extends Component {
     result: PropTypes.object,
     num: PropTypes.number,
     children: PropTypes.object.isRequired,
+    time: PropTypes.string
   }
   static defaultProps = {
     num: 1
@@ -25,10 +27,11 @@ export default class Detail extends Component {
     super(props, context);
     this.state = {
       num: props.num,
+      time: props.time,
     }
   }
   render() {
-    const num = this.state.num
+    const {num, time} = this.state;
     const {result,resultUser} = this.props;
     const homeStyles = require('./Home.scss');
     const styles = require('./Detail.scss');
@@ -69,15 +72,12 @@ export default class Detail extends Component {
                 </div>
                 {/* 奖品状态 */}
                 { result.data.status == 3 &&
-                  <div className={styles.countdown}>
-                    <p>期号：{result.data.id}</p>
-                    <h3>揭晓倒计时 00:08:13</h3>
-                  </div>
+                  <CountDown result={result}></CountDown>
                 }
                 { result.data.status == 5 &&
                   <div className={styles.winner}>
                     <div className={styles.userPic}>
-                       <img src={result.data.coverImgUrl}/>
+                       <img src={result.data.winner.avatarUrl}/>
                     </div>
                     <h4>获奖者：<span className={styles.winnerName}>{result.data.winner.nickname}</span></h4>
                     <p style={{color:'#AAA'}}>（{result.data.winner.address} IP：{result.data.winner.ip}）</p>
@@ -234,7 +234,8 @@ export default class Detail extends Component {
     }
   }
   componentDidMount(){
-    console.log('componentDidMount')
+    this.times = 0
+    window.cancelAnimationFrame(this.reqAni);
     this.loadData()
   }
   loadData () {
@@ -247,6 +248,7 @@ export default class Detail extends Component {
       this.props.loadDetailUser({id:robId,goodsId:goodsId})
     }
   }
+  
   componentWillUpdate () {
     this.props.unloading()
   }
@@ -255,7 +257,7 @@ export default class Detail extends Component {
     let goodsId = this.props.location.query.goodsId
     if(robId==0 && this.props.result){
       location.href = '#/home/detail/goods?id='+this.props.result.data.id+'&goodsId='+goodsId
-    }
+    }    
     this.swiperInit()
     if($('em.hideCodeItem').length==1){
       $('em.hideCodeItem').css('display','')
