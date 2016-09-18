@@ -18,7 +18,6 @@ export default class Single extends Component {
   render() {
     const {item,index} = this.props;
     const styles = require('./Home.scss');
-    console.log('listRender');
 
     return (
       <li className={styles.item + (index%2 != 0 ? (' '+styles.even):'')}>

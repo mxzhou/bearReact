@@ -92,13 +92,11 @@ export default class Announce extends Component {
   }
 
   componentWillMount(){
-    console.log('componentWillMount')
   }
 
   render() {
     const {result,servertime} = this.state;
     const styles = require('./Announce.scss');
-    console.log('listRender');
 
     return (
       <div className={styles.section}>

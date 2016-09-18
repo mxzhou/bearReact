@@ -120,7 +120,6 @@ export default class JoinItem extends Component {
   }
 
   detailFunc(item,e){
-    console.log(e)
     const type = this.props.type;
     this.props.loadHistory('mine/join/'+type)
     location.href = '#/mine/detail/goods?id='+item.id+'&goodsId='+item.goodsId

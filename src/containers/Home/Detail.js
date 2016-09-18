@@ -234,7 +234,6 @@ export default class Detail extends Component {
     }
   }
   componentDidMount(){
-    console.log('componentDidMount')
     this.loadData()
   }
   loadData () {
