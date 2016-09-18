@@ -51,7 +51,8 @@ export default class Join extends Component {
   changeType(index){
     const {navList} =this.props;
     this.setState({
-      bAdd:false
+      bAdd:false,
+      pageNumber:1
     })
     location.href="#/mine/join/"+navList[index].type
     this.fetchData({pageNumber:1,pageSize:10,type:navList[index].type})
