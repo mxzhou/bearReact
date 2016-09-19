@@ -31,7 +31,7 @@ export default class ApiClient {
           }
 
           if (data) {
-            Object.assign(data,{"kgUid":1209148809,"otherUserId":915197939,"sessionId":"16894AD6D6D682876030ED0C682BD57","token":"f7ca2336-0bc3-4aa9-81ea-8a79d4d863b5"});
+            Object.assign(data,{"kgUid":1209148809,"otherUserId":915197939,"sessionId":"16894AD6D6D682876030ED0C682BD572","token":"f7ca2336-0bc3-4aa9-81ea-8a79d4d863b5"});
             request.send(data);
           }
 
