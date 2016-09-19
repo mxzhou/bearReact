@@ -85,7 +85,7 @@ export default class Intro extends Component {
         </h3>
         <div className={"f-pr "+styles.mHelp}>
           <div id="frame" className={styles.frame}>
-            <ul className={11} id="slidee">
+            <ul className={styles.introUl} id="slidee">
               <li className="">
                 <div href="javascript:" className={styles.helpTitle + ' j-title'}>1.怎样参加胖熊1元买？</div>
                 <div className={styles.helpContent + ' j-content'}>

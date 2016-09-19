@@ -17,7 +17,7 @@ export default class Alert extends Component {
     btn2:'取消'
   }
   handlerFunc(){
-    this.props.removeAlert()
+    //this.props.removeAlert()
   }
   sureFunc(){
     this.props.removeAlert();
