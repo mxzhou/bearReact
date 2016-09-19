@@ -29,12 +29,12 @@
     height: 52px;
     display: block;
     color: #0066AC;
-    border-top:solid 1px #cdcdcd\9;
+    border-top:solid #cdcdcd 1px\9;
     border-radius: 3px 0 0 3px;
     box-shadow: inset 0px 1px 0px 0px #CDCDCD,inset 0px 2px 0px 0px #FFF;
   }
   .last{
-    border-bottom:solid 1px #cdcdcd\9;
+    border-bottom:solid #cdcdcd 1px\9;
     box-shadow: inset 0px 1px 0px 0px #CDCDCD,inset 0px 2px 0px 0px #FFF,inset 0px -1px 0px 0px #fff,inset 0px -2px 0px 0px #cdcdcd;
   }
   @media screen and (min-width:0\0) {

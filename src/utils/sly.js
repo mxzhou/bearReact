@@ -19,7 +19,6 @@ function slyFunc(
       $wrap = $frame.parent(), // wrap
       h1 = $frame.height(), // frame height
       h2 = $slidee.height(); // slidee height
-      console.log(h1+' '+h2)
     if( h2 > h1){
       $('#scrollbar').show();
     }else{
@@ -49,6 +48,7 @@ function slyFunc(
     $('#frame').sly('on', 'move', function(e){
       if(!bLast){
         var pos = this.pos;
+        console.log(pos.end - pos.cur)
         if(pos.end - pos.cur <= 30){
           console.log('LoadMore')
           loadMore()
