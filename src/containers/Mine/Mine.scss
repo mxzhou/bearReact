@@ -258,8 +258,11 @@
       font-size: 14px;
       color: #999999;
       margin-bottom: 5px;
+      line-height: 20px;
       .name{
+        display: inline-block;
         color: #333333;
+        width: 230px;
       }
     }
 
@@ -505,13 +508,16 @@
         }
         .input{
           width: 88px;
-          height: 26px;
+          height: 20px;
           padding: 4px;
           background: #F9FAFB;
           border: 0;
+          display: inline-block;
+          vertical-align: middle;
           color: #999999;
           border-radius: 4px;
           text-align: center;
+          margin: 0;
         }
       }
       .item.type{
@@ -519,8 +525,8 @@
       }
       .item img{
         width: 116px;
-        margin: 0 auto;
-        height: 34px;
+        display: inline-block;
+        height: 32px;
         vertical-align: middle;
       }
       .item.active{
@@ -796,5 +802,8 @@
       }
     }
 
+  }
+  .introUl{
+    width: 500px;
   }
 }
