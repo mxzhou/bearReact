@@ -33,6 +33,8 @@ export default class Recharge extends Component {
     money:10,
     payObject:{},
     bSuccess:true,
+    interval:10,
+    bPay:false,
   }
   // 构造器
   constructor(props, context) {
@@ -46,6 +48,8 @@ export default class Recharge extends Component {
       payObject:props.payObject,
       money:props.money,
       bSuccess:props.bSuccess,
+      interval:props.interval,
+      bPay:props.bPay
     }
   }
   selectNum(index){
@@ -78,13 +82,17 @@ export default class Recharge extends Component {
       payType:type,
       money:val
     }
-    if(val.trim() == ''){
+    if(val == ''){
       this.props.loadToast('金额不能为空！')
       return;
     }
     let reg = /^\d+(\.\d+)?$/g
-    if(!reg.test(val)|| val == 0){
-      this.props.loadToast('金额须是大于零的数字！')
+    if(!reg.test(val)){
+      this.props.loadToast('请输入数字！')
+      return;
+    }
+    if(val<1){
+      this.props.loadToast('最少充值1元！')
       return;
     }
     this.setState({money:val})
@@ -97,7 +105,8 @@ export default class Recharge extends Component {
       }
       // 支付宝地址
       if(data.data && data.data.wapalipay != null){
-        location.href = data.data.wapalipay
+        _this.setState({bWechat:true,payObject:data.data})
+        window.open(data.data.wapalipay);
       }
       // 微信二维码
       if(data.data && data.data.weChat != null){
@@ -107,12 +116,10 @@ export default class Recharge extends Component {
     }, function(value) {
       // failure
     });
-    //alert(val+':'+type)
-    //location.href="#/mine/payEnd"
   }
   render() {
     const {numPayList,typePayList} = this.props
-    const {numIndex,typeIndex,bWechat,payObject,money,bSuccess} = this.state;
+    const {numIndex,typeIndex,bWechat,payObject,money,bSuccess,interval,bPay} = this.state;
     const styles = require('../Mine.scss')
     return (
       <div className={styles.content}>
@@ -159,21 +166,44 @@ export default class Recharge extends Component {
                 <Alert text={this.successContent()} btn1={'继续充值'} btn2={'查看充值记录'} onClose={this.onSuccessClose.bind(this)} onCancel={this.onSuccessCancel.bind(this)}/>
               }
               { !bSuccess &&
-              <Alert text={this.failContent()} onClose={this.onFailClose.bind(this)} onCancel={this.onFailCancel.bind(this)}/>
+              <Alert text={this.failContent()} btn1={'支付成功'} btn2={'支付失败'} onClose={this.onFailClose.bind(this)} onCancel={this.onFailCancel.bind(this)}/>
               }
+              { payObject.weChat !=null &&
+                <div className={styles.payContent}>
+                  <p className={styles.payTitle}>微信支付</p>
+                  <p className={styles.payDesc}>请使用微信扫码完成付款</p>
+                  <img  className={styles.payQrcode} src={payObject.weChat}/>
+                  <p className={styles.payMoney}>
+                    <em>{money}</em>元
+                  </p>
+                </div>
+              }
+              { payObject.weChat ==null &&
               <div className={styles.payContent}>
-                <p className={styles.payTitle}>微信支付</p>
-                <p className={styles.payDesc}>请使用微信扫码完成付款</p>
-                <img  className={styles.payQrcode} src={payObject.weChat}/>
+                <p className={styles.payTitle}>支付宝支付</p>
+                <p className={styles.payDesc}>请使用支付宝完成付款</p>
                 <p className={styles.payMoney}>
                   <em>{money}</em>元
                 </p>
               </div>
+              }
               <div className={styles.payFoot}>
-                <a  className={styles.button+' '+styles.single} onClick={this.paySuccess.bind(this)}>支付成功</a>
-                <a  className={styles.button}  onClick={this.payFailure.bind(this)}>支付失败</a>
+                <a className={styles.button+' '+styles.single} onClick={this.paySuccess.bind(this)}>支付完成</a>
+                <a className={styles.button}  onClick={this.payFailure.bind(this)}>取消</a>
               </div>
             </div>
+        }
+        {
+          bPay &&
+          <div className={styles.rechargeLast}>
+            <div className={styles.mask}></div>
+            <div className={styles.lastContent}>
+              <div className={styles.content}>
+                支付正在处理中...<br/>
+                {interval}秒后确认支付结果
+              </div>
+            </div>
+          </div>
         }
       </div>
     );
@@ -209,23 +239,49 @@ export default class Recharge extends Component {
       bWechat:false,
       payObject:{},
       money:`0`,
-      bSuccess:true,
+      bSuccess:true
     })
   }
   onFailClose(){
-
+    this.paySuccess()
   }
   onSuccessCancel(){
     location.href = "#/mine/payRecord"
   }
   onFailCancel(){
-
+    this.payFailure()
   }
   paySuccess(){
-    this.setState({bSuccess:true});
-    this.props.loadConsumeMoney();
-    this.props.loadAlert();
+    this.setState({interval:10,bPay:true});
+    var _this = this;
+    this.countDown = setInterval(()=>{
+      if(_this.state.interval < 0 ){
+        clearInterval(_this.countDown)
+        return;
+      }
+      _this.getResult();
+      _this.setState({interval:_this.state.interval - 1})
+    },1000)
+  }
+  getResult(){
+    const {payObject} = this.state;
+    const client = new ApiClient();
+    const _this = this;
+    client.post('/pay/result/get',{data:{payOrderNo:payObject.payOrderNo}}).then(function(data) {
+      if(data.data.payStatus == 1){
+        _this.setState({bSuccess:true,bPay:false});
+        clearInterval(this.countDown)
+        _this.props.loadAlert();
+        return;
+      }
+      if(_this.state.interval == 0){
+        _this.setState({bSuccess:false,bPay:false});
+        clearInterval(_this.countDown)
+        _this.props.loadAlert();
+      }
+    },function(){
 
+    })
   }
   payFailure(){
     this.setState({
@@ -233,11 +289,9 @@ export default class Recharge extends Component {
       typeIndex:0,
       bWechat:false,
       payObject:{},
-      money:`0`,
+      money:0,
       bSuccess:true,
+      bPay:false
     })
-    //this.setState({bSuccess:false});
-    //this.props.loadAlert();
-
   }
 }
