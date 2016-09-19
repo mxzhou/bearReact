@@ -106,7 +106,7 @@ export default class Recharge extends Component {
       // 支付宝地址
       if(data.data && data.data.wapalipay != null){
         _this.setState({bWechat:true,payObject:data.data})
-        window.open(data.data.wapalipay);
+        window.open(encodeURI(data.data.wapalipay));
       }
       // 微信二维码
       if(data.data && data.data.weChat != null){
