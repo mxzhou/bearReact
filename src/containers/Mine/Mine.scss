@@ -671,4 +671,88 @@
       }
     }
   }
+  .payContent{
+    padding: 20px;
+    border-bottom: solid 1px #ebebeb;
+    text-align: center;
+    .payTitle{
+      font-size: 14px;
+      color: #333333;
+      line-height: 20px;
+    }
+    .payDesc{
+      font-size: 12px;
+      color: #999999;
+      line-height: 20px;
+    }
+    .payQrcode{
+      width: 160px;
+      height: 160px;
+      display: inline-block;
+      margin: 10px 0 15px;
+    }
+    .payMoney{
+      font-size: 14px;
+      color: #333333;
+      line-height: 28px;
+      em{
+        font-weight: normal;
+        font-size: 20px;
+        color: #F3200B;
+      }
+    }
+  }
+  .payFoot{
+    margin-top: 20px;
+    text-align: center;
+    .button{
+      width: 80px;
+      height: 26px;
+      display: inline-block;
+      *display:inline;
+      *zoom:1;
+      line-height: 26px;
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
+      background:#038FFF;
+      background-image: linear-gradient(-180deg, #0DB4FF 0%, #038FFF 100%);
+      border: 1px solid #B1BECA;
+      box-shadow: inset 0px -2px 6px 0px rgba(255,255,255,0.60);
+      border-radius: 4px;
+      transform: scale(1);
+      &:hover{
+        transform: scale(1.1);
+      }
+      &.single{
+        color: #FFF703;
+        margin-right: 18px;
+      }
+    }
+  }
+  .rechargeAlert{
+    text-align: center;
+    .successImg{
+      width: 64px;
+      height: 64px;
+      display: inline-block;
+      margin-top: 20px;
+    }
+    .failImg{
+      width: 64px;
+      height: 64px;
+      display: inline-block;
+    }
+    .alertDesc{
+      font-size: 16px;
+      color: #333333;
+      margin-top: 10px;
+      line-height: 22px;
+    }
+    .alertInro{
+      font-size: 12px;
+      color: #999999;
+      line-height: 14px;
+    }
+  }
 }

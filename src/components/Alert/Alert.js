@@ -6,12 +6,13 @@ import { loadAlert,removeAlert } from '../../redux/modules/alert';
   {loadAlert,removeAlert})
 export default class Alert extends Component {
   static propTypes = {
-    text: PropTypes.string,
-    onClose:PropTypes.func
+    onClose:PropTypes.func,
+    onCancel:PropTypes.func,
   }
   static defaultProps = {
     text:'',
     onClose(){},
+    onCancel(){},
     btn1:'确定',
     btn2:'取消'
   }
@@ -24,6 +25,7 @@ export default class Alert extends Component {
   }
   cancelFunc(){
     this.props.removeAlert()
+    this.props.onCancel()
   }
   render() {
     const {text,show,btn1,btn2} = this.props; // eslint-disable-line no-shadow
