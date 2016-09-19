@@ -65,7 +65,6 @@ export default class Detail extends Component {
                   <h3>{result.data.goodsName}</h3>
                   <p className={styles.desc}>{result.data.goodsDesc}</p>
                   <div className={styles.bar}>
-
                     <div className={styles.active} style={{width:((result.data.needNumber-result.data.surplusNumber)/result.data.needNumber)*100+'%'}}></div>
                   </div>
                   <p className={styles.number}><span className="f-fr">剩余: <em>{result.data.surplusNumber}</em></span><span className="f-fl">总需: {result.data.needNumber}</span></p>
@@ -97,7 +96,7 @@ export default class Detail extends Component {
                   </div>
                 }
                 {/* 是否参与 */}
-                { result.data.status == 0 && resultUser && resultUser.data.joinFlag &&
+                { resultUser && resultUser.data.joinFlag &&
                   <div className={styles.codes}>
                     <p><span className={styles.title}>你参与了：</span><i>{resultUser.data.joinNumber}</i>人次</p>
                     <p><span className={styles.title}>夺宝号码：</span>

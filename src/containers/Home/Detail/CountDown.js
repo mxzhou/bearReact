@@ -54,10 +54,10 @@ export default class Pay extends Component {
     this.reqAni = window.requestAnimationFrame(this.begin.bind(this));
   }
   componentDidMount(){
-    if(this.props.result && this.props.result.data.status==3){
-      window.cancelAnimationFrame(this.reqAni);
-      this.countDownFunc()
+    if(this.props.result.data.status!=3){
+      return;
     }
+    this.countDownFunc()
   }
   componentWillMount () {
 

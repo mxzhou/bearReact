@@ -109,9 +109,69 @@
 			background: url(../../../assets/btn_select_a.png) no-repeat;
 		}
 	}
+	.paySelect {
+	}
+	.payCode {
+		display: none;
+		.btnBack {
+			position: absolute;
+			left: 10px;
+			top: 10px;
+			font-size: 12px;
+			color: #0299CD;
+			z-index: 101;
+		}
+		.qtitle,p {
+			text-align: center;
+			width: 100%;
+			line-height: 20px;
+		}
+		.desc {
+			color: #999;
+			margin-bottom: 10px;
+		}
+		.qtitle {
+			line-height: 20px;
+			margin-top: 10px;
+		}
+		img {
+			width: 120px;
+			height: 120px;
+			display: none;
+		}
+		.codeImg {
+			width: 100%;
+			height: 130px;
+			text-align: center;
+		}
+		.payNum {
+			text-align: center;
+			font-size: 14px;
+			color: #333;
+			em {
+				font-size: 20px;
+				color: #F3200B;
+				margin-right: 5px;
+			}
+		}
+		.btnBottom {
+			width: 90%;
+			margin-top: 10px;
+			padding-top: 6px;
+			margin-left: 5%;
+			border-top: 1px solid #ccc;
+		}
+		.btn {
+			width: 80px;
+			margin-left: 15px;
+			margin-right: 15px;
+		}
+	}
 }
+
 .btnBottom {
 	text-align: center;
+	margin-top: 20px;
 	a {
 		color: #0299CD;
 	}
@@ -134,5 +194,89 @@
 	    &:hover {
 	    	color: #FFF703;
 	    }
+	    &.normal {
+	    	color: #FFF;
+	    }
 	}
+}
+.mask{
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+  -moz-opacity: 0.6;
+  background: #000;
+}
+.content{
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  .result {
+    position: absolute;
+    left: 50%;
+    top:50%;
+    margin-top: -120px;
+    margin-left: -100px;
+    width: 240px;
+    height: 240px;
+    background: #FFF;
+    border-radius: 10px;
+    text-align: center;
+    h3 {
+    	font-size: 16px;
+    	color: #333;
+    	margin-top: 10px;
+    	line-height: 30px;
+    }
+    p {
+    	margin: 0;
+    	font-size: 12px;
+    	line-height: 20px;
+    	color: #999;
+    }
+    .btn {
+    	width: 90px;
+    	margin: 0 10px;
+    }
+  }
+  .imgResult {
+  	position: relative;
+  	margin: auto;
+  	margin-top: 40px;
+  	width: 64px;
+  	height: 64px;
+  	background: url(../../../assets/img_joinsuccessed.png);
+  }
+  .imgResultFail {
+  	position: relative;
+  	margin: auto;
+  	margin-top: 40px;
+  	width: 64px;
+  	height: 64px;
+  	background: url(../../../assets/img_joinfail.png);
+  }
+  .img{
+    width: 40px;
+    height: 40px;
+    display: block;
+    margin: 0 auto;
+  }
+  .p{
+    font-size: 16px;
+    color: #fff;
+    line-height: 80px;
+    text-align: center;
+  }
 }

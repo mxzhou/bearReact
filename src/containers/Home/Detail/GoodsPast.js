@@ -53,7 +53,7 @@ export default class GoodsPast extends Component {
   }
   componentDidMount() {
     this.props.loading()
-    this.props.loadDetailPast()
+    this.props.loadDetailPast({id:this.props.location.query.id,lastId:0,pageSize:10})
   }
   componentWillUpdate(){
     this.props.unloading()

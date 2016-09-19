@@ -41,6 +41,6 @@ export function isLoaded(globalState) {
 export function loadDetailPast(option) {
   return {
     types: [LOAD_DETAIL_PAST, LOAD_DETAIL_PAST_SUCCESS, LOAD_DETAIL_PAST_FAIL],
-    promise: (client) => client.get('/goods/past',{data:option}) 
+    promise: (client) => client.post('/goods/past',{data:option}) 
   };
 }
