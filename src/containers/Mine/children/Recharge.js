@@ -272,6 +272,7 @@ export default class Recharge extends Component {
         _this.setState({bSuccess:true,bPay:false});
         clearInterval(this.countDown)
         _this.props.loadAlert();
+        _this.props.loadConsumeMoney();
         return;
       }
       if(_this.state.interval == 0){
