@@ -30,9 +30,6 @@ export default class Single extends Component {
       imgShow:props.imgShow
     }
   }
-  static propTypes = {
-    item: PropTypes.object,
-  };
   count(){
     this.timeTemp = parseInt(this.times/10);
     this.remain_ssec = this.timeTemp % 10;
