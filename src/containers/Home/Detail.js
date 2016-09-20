@@ -40,7 +40,7 @@ export default class Detail extends Component {
     return (
       <div>
         <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionLeaveTimeout={300} transitionAppearTimeout={300} transitionEnterTimeout={300}>
-          { result && result.data && 
+          { result && result.data &&
           <div className={homeStyles.homeDetail +' f-cb'}>
             <div className={homeStyles.left}>
               <div className={styles.swiper}>
@@ -114,13 +114,13 @@ export default class Detail extends Component {
                   </div>
                 }
                 <div className={styles.tabNav}>
-                  <Link to={{pathname:'/detail/goods',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
+                  <Link to={{pathname:'/home/detail/goods',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
                     <span>图文详情</span>
                   </Link>
-                  <Link to={{pathname:'/detail/join',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
+                  <Link to={{pathname:'/home/detail/join',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
                     <span>夺宝参与记录</span>
                   </Link>
-                  <Link to={{pathname:'/detail/past',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
+                  <Link to={{pathname:'/home/detail/past',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
                     <span>往期揭晓</span>
                   </Link>
                 </div>
@@ -186,7 +186,7 @@ export default class Detail extends Component {
   goNew (params) {
     const {link} = this.props;
     let goodsId = this.props.location.query.goodsId
-    location.href = '#/'+link+'/detail/goods?id=0&goodsId='+goodsId
+    location.href = '#/'+link+'/home/detail/goods?id=0&goodsId='+goodsId
     this.props.loading()
     this.props.loadDetailUser({id:0,goodsId:goodsId})
   }
@@ -253,7 +253,7 @@ export default class Detail extends Component {
     }, function(value) {
     });
   }
-  
+
   componentWillUpdate () {
     this.props.unloading()
   }
@@ -261,8 +261,8 @@ export default class Detail extends Component {
     let robId = this.props.location.query.id
     let goodsId = this.props.location.query.goodsId
     if(robId==0 && this.state.result.data){
-      location.href = '#/detail/goods?id='+this.state.result.data.id+'&goodsId='+goodsId
-    }    
+      location.href = '#/home/detail/goods?id='+this.state.result.data.id+'&goodsId='+goodsId
+    }
     this.swiperInit()
     if($('em.hideCodeItem').length==1){
       $('em.hideCodeItem').css('display','')
