@@ -2,7 +2,7 @@ const LOAD = 'redux-example/history/LOAD';
 const UNLOAD = 'redux-example/toast/UNLOAD';
 
 const initialState = {
-  link: 'home'
+  link: ''
 };
 
 export default function reducer(state = initialState, action = {}) {
