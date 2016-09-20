@@ -29,12 +29,16 @@ export default class Pay extends Component {
   }
   begin () {
     let minus = Date.now() - this.timetag;
+    let _this = this
     if (minus >= 10) {
       this.times = this.times - minus;
       if (this.times<=0) {
         this.remain_minute = this.remain_sec = this.remain_hour = 0;
         this.setState({time: -1});
-        this.props.loadData()
+        _this.props.loadData()
+        setTimeout(function(){
+          _this.props.loadData()
+        },1000)
         return;
       }
       this.timetag = Date.now();

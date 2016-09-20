@@ -6,6 +6,7 @@ import { loading,unloading } from '../../redux/modules/loading';
 import { Link } from 'react-router';
 import Pay from './Detail/Pay';
 import CountDown from './Detail/CountDown';
+import Caculation from './Detail/Caculation';
 import {slyFunc} from '../../utils/sly'
 import ApiClient from '../../helpers/ApiClient'
 
@@ -88,7 +89,7 @@ export default class Detail extends Component {
                     <p>本期期号: {result.data.id}</p>
                     <p>揭晓时间: {this.formateDate(result.data.winner.openTime)}</p>
                     <div className={styles.luckyNum}>
-                        <a className="f-fr">计算详情&gt;</a>
+                        <a className="f-fr" onClick={this.showCaculation.bind(this)}>计算详情&gt;</a>
                         幸运号码：{result.data.winner.joinCode}
                     </div>
                   </div>
@@ -132,7 +133,9 @@ export default class Detail extends Component {
                 <div style={{height:'50px',clear:'both'}}></div>
               </div>
             </div>
-
+            { result.data.status == 5 &&
+              <Caculation></Caculation>
+            }
             <div id="btnBottomArea" className={styles.btnBottomArea}>
               { result.data.status == -1 &&
                 <div>
@@ -176,6 +179,9 @@ export default class Detail extends Component {
         </ReactCSSTransitionGroup>
       </div>
     );
+  }
+  showCaculation () {
+    $('#caculationBlock').show();
   }
   backFunc(){
     location.href="#/"+this.state.link;
@@ -246,6 +252,7 @@ export default class Detail extends Component {
     const client = new ApiClient();
     const _this = this;
     client.post('/goods/detail',{data:{id:robId,goodsId:goodsId}}).then(function(data) {
+      console.log(data)
       _this.setState({result:data});
     }, function(value) {
     });
