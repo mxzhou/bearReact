@@ -3,6 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 export default class Pay extends Component {
   static propTypes = {
+    loadData: PropTypes.func,
     result: PropTypes.object,
     time: PropTypes.number
   }
@@ -33,7 +34,7 @@ export default class Pay extends Component {
       if (this.times<=0) {
         this.remain_minute = this.remain_sec = this.remain_hour = 0;
         this.setState({time: -1});
-        this.loadData()
+        this.props.loadData()
         return;
       }
       this.timetag = Date.now();
