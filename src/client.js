@@ -55,7 +55,10 @@ const component = (
     {getRoutes(store)}
   </Router>
 );
-
+// 默认hash
+if(location.hash == ''){
+  location.href = location+'#/home'
+}
 ReactDOM.render(
   <Provider store={store} key="provider">
     {component}
