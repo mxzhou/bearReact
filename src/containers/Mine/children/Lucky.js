@@ -144,10 +144,10 @@ export default class Lucky extends Component {
                     <p className={styles.goodsName}>{item.goodsName}</p>
                     <div className={styles.goodsDesc}>
                       <p className={styles.id+' f-ib'}>
-                        期号: 31273474577
+                        期号: {item.id}
                       </p>
                       <p className={styles.joinNumber+' f-ib'}>
-                        本期参与: 2人次
+                        本期参与: {item.joinNumber}人次
                       </p>
                       <Link to={'/mine/joinDetail/'+item.id} className={styles.textBlue+' f-ib'} onClick={this.stopPropagation}>查看夺宝号></Link>
                     </div>
