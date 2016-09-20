@@ -42,7 +42,7 @@ export default class List extends Component {
           <Link className={'f-fr ' +styles.goodsBtn} to="/mine/addAddress">添加收货地址</Link>
         </h3>
         <div className="f-pr">
-          <div id="frame" className={styles.frame}>
+          <div id="frame" className={styles.frame+' scroll'}>
             {list && list.data.length > 0 &&
             <ul className={styles.addressList+' f-cb '+styles.alist} id="slidee">
               {list && list.data.map((item, index)=>
@@ -67,11 +67,6 @@ export default class List extends Component {
             {list && list.data && (list.data == null || list.data.length == 0) &&
             <div className={"errorMsg "+styles.payRecordMsg}>请添加收货地址！</div>
             }
-          </div>
-          <div className={"scrollbar " +styles.scroll} id="scrollbar">
-            <div className="handle">
-              <div className="mousearea"></div>
-            </div>
           </div>
         </div>
       </div>

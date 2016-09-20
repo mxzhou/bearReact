@@ -80,7 +80,7 @@ export default class Select extends Component {
           <Link className={'f-fr ' +styles.goodsBtn} to={"/mine/addAddress/"+id}>添加收货地址</Link>
         </h3>
         <div className="f-pr">
-          <div id="frame" className={styles.addressList+' '+styles.selectAddress}>
+          <div id="frame" className={styles.addressList+' '+' scroll'}>
             {list && list.data.length > 0 &&
             <ul className={'f-cb'} id="slidee">
               {list && list.data.map((item, i)=>
@@ -108,11 +108,6 @@ export default class Select extends Component {
             {list && list.data && (list.data == null || list.data.length == 0) &&
             <div className={"errorMsg "+styles.payRecordMsg}>请添加收货地址！</div>
             }
-          </div>
-          <div className={"scrollbar " +styles.selectAddressBar} id="scrollbar">
-            <div className="handle">
-              <div className="mousearea"></div>
-            </div>
           </div>
         </div>
         <div className={styles.blockBtn+' '+styles.selectAddressBtn}>

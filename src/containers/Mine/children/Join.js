@@ -134,7 +134,7 @@ export default class Join extends Component {
           </ul>
         </h3>
         <div className="f-pr">
-          <div id="frame" className={styles.frame}>
+          <div id="frame" className={styles.frame+' scroll'}>
             <ul id="slidee" className="f-cb">
               {result.map((item,index) =>
               <JoinItem key={index} item={item} type={type} servertime={servertime}></JoinItem>
@@ -144,11 +144,14 @@ export default class Join extends Component {
             <div className={"errorMsg "+styles.payRecordMsg}>暂时还未有数据哦！</div>
             }
           </div>
-          <div className={"scrollbar " +styles.scroll} id="scrollbar">
-            <div className="handle">
-              <div className="mousearea"></div>
-            </div>
-          </div>
+          {
+            /*          <div className={"scrollbar " +styles.scroll} id="scrollbar">
+             <div className="handle">
+             <div className="mousearea"></div>
+             </div>
+             </div>
+             * */
+          }
         </div>
       </div>
     );

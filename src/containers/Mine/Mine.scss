@@ -252,7 +252,9 @@
     }
     .frame{
       height:418px;
-      overflow:hidden
+      width: 510px;
+      overflow-y:auto;
+      overflow-x: hidden;
     }
     .logic{
       font-size: 14px;
@@ -357,7 +359,8 @@
     }
     .addressList{
       height: 340px;
-      overflow: hidden;
+      overflow-y: auto;
+      overflow-x: hidden;
       .item{
         padding: 10px 0;
         font-size: 14px;
@@ -389,7 +392,7 @@
           }
         }
         .aLeft{
-          width: 415px;
+          width: 405px;
           float: left;
           margin-right: 5px;
         }

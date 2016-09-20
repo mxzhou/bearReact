@@ -12,7 +12,7 @@
     position: relative;
     .frame{
       height: 430px;
-      overflow: hidden;
+      overflow-y: auto;
     }
     .list{
       width: 100%;

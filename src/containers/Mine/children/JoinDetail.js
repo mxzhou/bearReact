@@ -85,7 +85,7 @@ export default class JoinDetail extends Component {
           查看夺宝号
         </h3>
         <div className=" f-pr">
-          <div className={styles.frame} id="frame">
+          <div className={styles.frame+' scroll'} id="frame">
               <ul className={styles.secondContent +' f-cb'}  id="slidee">
                 {data && data.data != null && data.data.joinCodeList != null && data.data.joinCodeList.map((item, i)=>
                   <li key={i} className={styles.item}>
@@ -96,11 +96,6 @@ export default class JoinDetail extends Component {
               {data && data.data != null && data.data.joinNumber == 0 &&
               <div className="errorMsg">暂时还未有数据哦！</div>
               }
-            <div className={"scrollbar " +styles.scroll} id="scrollbar">
-              <div className="handle">
-                <div className="mousearea"></div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

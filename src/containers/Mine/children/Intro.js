@@ -84,7 +84,7 @@ export default class Intro extends Component {
           夺宝说明
         </h3>
         <div className={"f-pr "+styles.mHelp}>
-          <div id="frame" className={styles.frame}>
+          <div id="frame" className={styles.frame+' scroll'}>
             <ul className={styles.introUl} id="slidee">
               <li className="">
                 <div href="javascript:" className={styles.helpTitle + ' j-title'}>1.怎样参加胖熊1元买？</div>
@@ -212,11 +212,6 @@ export default class Intro extends Component {
                </li>*/
               }
             </ul>
-          </div>
-          <div className={"scrollbar " +styles.scroll} id="scrollbar">
-            <div className="handle">
-              <div className="mousearea"></div>
-            </div>
           </div>
         </div>
       </div>

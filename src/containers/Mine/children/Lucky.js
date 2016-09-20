@@ -133,7 +133,7 @@ export default class Lucky extends Component {
            幸运记录
         </h3>
         <div className="f-pr">
-          <div id="frame" className={styles.frame}>
+          <div id="frame" className={styles.frame+' scroll'}>
             <ul id="slidee" className="f-cb">
               {result && result.map((item,index) =>
                 <li key={index} className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}>
@@ -163,11 +163,6 @@ export default class Lucky extends Component {
             {result.length==0 &&
               <div className={"errorMsg "+styles.payRecordMsg}>暂时还未有数据哦！</div>
             }
-          </div>
-          <div className={"scrollbar " +styles.scroll} id="scrollbar">
-            <div className="handle">
-              <div className="mousearea"></div>
-            </div>
           </div>
         </div>
       </div>

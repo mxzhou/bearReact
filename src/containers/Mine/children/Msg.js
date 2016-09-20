@@ -118,7 +118,7 @@ export default class Msg extends Component {
           </ul>
         </h3>
         <div className="f-pr">
-          <div id="frame" className={styles.frame}>
+          <div id="frame" className={styles.frame+' scroll'}>
             <ul id="slidee" className="f-cb">
               {result && result.map((item,index) =>
               {return activeIndex == 0 ?
@@ -187,11 +187,6 @@ export default class Msg extends Component {
               }
               )}
             </ul>
-          </div>
-          <div className={"scrollbar " +styles.scroll} id="scrollbar">
-            <div className="handle">
-              <div className="mousearea"></div>
-            </div>
           </div>
         </div>
       </div>

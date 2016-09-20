@@ -33,7 +33,7 @@ export default class List extends Component {
           <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionAppearTimeout={500}>
               <div className={styles.content}>
                 <div className={styles.homeList}>
-                  <div className={styles.frame} id="frame">
+                  <div className={styles.frame +' scroll'} id="frame">
                     <ul className={styles.list+' f-cb'} id="slidee">
                       {
                         result && result.data && result.data.goodsList.map((item,index) =>
@@ -45,11 +45,6 @@ export default class List extends Component {
                   { result &&
                     <Paging total={result.data.total} pageSize={pageSize} onLoadPaging={this.loadPaging.bind(this)} ></Paging>
                   }
-                  <div className="scrollbar" id="scrollbar">
-                    <div className="handle">
-                      <div className="mousearea"></div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </ReactCSSTransitionGroup>

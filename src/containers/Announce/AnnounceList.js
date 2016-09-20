@@ -103,7 +103,7 @@ export default class Announce extends Component {
         <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionAppearTimeout={500}>
           <div className={styles.content}>
             <div className={styles.homeList}>
-              <div className={styles.frame} id="frame">
+              <div className={styles.frame+' scroll'}>
                 <ul className={styles.list+' f-cb'} id="slidee">
                   {
                     result && result.map((item,index) =>
@@ -111,11 +111,6 @@ export default class Announce extends Component {
                     )
                   }
                 </ul>
-              </div>
-              <div className="scrollbar" id="scrollbar">
-                <div className="handle">
-                  <div className="mousearea"></div>
-                </div>
               </div>
             </div>
           </div>

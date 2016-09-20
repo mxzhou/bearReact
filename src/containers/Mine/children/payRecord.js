@@ -55,7 +55,7 @@ export default class PayRecord extends Component {
           充值记录
         </h3>
         <div className="f-pr">
-          <div id="frame" className={styles.frame}>
+          <div id="frame" className={styles.frame+' scroll'}>
             {result && result.data &&
               <ul id="slidee" className="f-cb">
                 {result.data.payLogList.map((item,index) =>
@@ -78,11 +78,6 @@ export default class PayRecord extends Component {
             {result && result.data &&result.data.payLogList.length ==0 &&
               <div className={"errorMsg " + styles.payRecordMsg} >暂时还未有数据哦！</div>
             }
-          </div>
-          <div className={"scrollbar " +styles.scroll}>
-            <div className="handle">
-              <div className="mousearea"></div>
-            </div>
           </div>
         </div>
       </div>
