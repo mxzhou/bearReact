@@ -39,7 +39,7 @@ export default class Select extends Component {
   }
 
   editFunc(obj) {
-    addressObject = obj;
+    sessionStorage.setItem('addressObject',JSON.stringify(obj))
     location.href = "#/mine/editAddress/" + this.props.params.id;
   }
 

@@ -106,6 +106,8 @@ export default class EditAddress extends Component {
     })
   }
   getProvince(type,addressType){
+    let addressObject = JSON.parse(sessionStorage.getItem('addressObject'))
+
     var promise = this.getAreaData(addressType);
     var _this = this;
     promise.then(function(data){
@@ -117,6 +119,8 @@ export default class EditAddress extends Component {
     })
   }
   getCity(type,addressType,state){
+    let addressObject = JSON.parse(sessionStorage.getItem('addressObject'))
+
     var promise = this.getAreaData(addressType,state);
     var _this = this;
     promise.then(function(data){
@@ -128,6 +132,8 @@ export default class EditAddress extends Component {
     })
   }
   getArea(type,addressType,state){
+    let addressObject = JSON.parse(sessionStorage.getItem('addressObject'))
+
     var promise = this.getAreaData(addressType,state);
     var _this = this;
     promise.then(function(data){
@@ -234,7 +240,7 @@ export default class EditAddress extends Component {
 
     const styles = require('../../Mine.scss')
     const back = require('../../../../assets/ic_backpage.png')
-    const text = <p style={{"font-size": "16px","color": "#333333","text-align": "center"}}>确定删除吗</p>
+    const text = <p style={{"fontSize": "16px","color": "#333333",textAlign: "center"}}>确定删除吗</p>
     return (
       <div className={styles.content}>
         <Alert text={text} onClose={this.submitDelete.bind(this)}/>
@@ -298,6 +304,8 @@ export default class EditAddress extends Component {
     );
   }
   componentDidMount(){
+    let addressObject = JSON.parse(sessionStorage.getItem('addressObject'))
+
     this.setState({
       userAddressId:addressObject.id,
       defaultFlag:addressObject.ifDefault,

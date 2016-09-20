@@ -26,7 +26,7 @@ export default class List extends Component {
   }
 
   editFunc(obj) {
-    addressObject = obj;
+    sessionStorage.setItem('addressObject',JSON.stringify(obj))
     location.href = "#/mine/editAddress";
   }
 
