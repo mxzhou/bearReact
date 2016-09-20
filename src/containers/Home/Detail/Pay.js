@@ -96,7 +96,7 @@ export default class Pay extends Component {
             <div className={styles.btnBottom}>
                 <a className={styles.btn} onClick={this.goPayCodeSuccess.bind(this)}>支付成功</a>
                 <a className={styles.btn + ' ' +styles.normal} onClick={this.goPayCodeFail.bind(this)}>支付失败</a>
-            </div>  
+            </div>
           </div>
       	</div>
         <div style={{display:showPayResult?"block":"none"}}>
@@ -110,7 +110,7 @@ export default class Pay extends Component {
                 <div className={styles.btnBottom}>
                   <a className={styles.btn} onClick={this.goHome.bind(this)}>继续夺宝</a>
                   <a className={styles.btn + ' ' +styles.normal} onClick={this.cancelPay.bind(this)}>查看夺宝详情</a>
-                </div> 
+                </div>
               </div>
               <div style={{display:checkResult==3?"block":"none"}}>
                 <div className={styles.imgResultFail} style={{marginTop:'10px'}}></div>
@@ -119,7 +119,7 @@ export default class Pay extends Component {
                 <div className={styles.btnBottom}>
                   <a className={styles.btn} onClick={this.goPayCodeSuccess.bind(this)}>支付成功</a>
                   <a className={styles.btn + ' ' +styles.normal} onClick={this.backPay.bind(this)}>支付失败</a>
-                </div> 
+                </div>
               </div>
               <div style={{display:checkResult==2?"block":"none"}}>
                 <div className={styles.imgResultFail}></div>
@@ -128,14 +128,14 @@ export default class Pay extends Component {
                 <div className={styles.btnBottom}>
                   <a className={styles.btn} onClick={this.goHome.bind(this)}>继续夺宝</a>
                   <a className={styles.btn + ' ' +styles.normal} onClick={this.backPay.bind(this)}>返回</a>
-                </div> 
+                </div>
               </div>
               <div style={{display:checkResult==0?"block":"none",marginTop:'90px'}}>
                 <p style={{paddingBottom:'55px'}}>查询支付结果中...</p>
                 <div className={styles.btnBottom}>
                   <a className={styles.btn} onClick={this.goHome.bind(this)}>继续夺宝</a>
                   <a className={styles.btn + ' ' +styles.normal} onClick={this.backPay.bind(this)}>返回</a>
-                </div> 
+                </div>
               </div>
             </div>
           </div>
@@ -144,7 +144,7 @@ export default class Pay extends Component {
     );
   }
   goHome () {
-    location.href = '#/home';
+    location.href = '#/';
   }
   backPay () {
     this.setState({showPayResult:false})
@@ -162,7 +162,7 @@ export default class Pay extends Component {
         }else{
           _this.setState({checkResult:2});
         }
-        
+
       }
     }, function(value) {
         _this.setState({checkResult:2});

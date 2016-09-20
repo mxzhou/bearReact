@@ -113,13 +113,13 @@ export default class Detail extends Component {
                   </div>
                 }
                 <div className={styles.tabNav}>
-                  <Link to={{pathname:'/home/detail/goods',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
+                  <Link to={{pathname:'/detail/goods',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
                     <span>图文详情</span>
                   </Link>
-                  <Link to={{pathname:'/home/detail/join',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
+                  <Link to={{pathname:'/detail/join',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
                     <span>夺宝参与记录</span>
                   </Link>
-                  <Link to={{pathname:'/home/detail/past',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
+                  <Link to={{pathname:'/detail/past',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
                     <span>往期揭晓</span>
                   </Link>
                 </div>
@@ -184,7 +184,7 @@ export default class Detail extends Component {
   }
   goNew (params) {
     let goodsId = this.props.location.query.goodsId
-    location.href = '#/home/detail/goods?id=0&goodsId='+goodsId
+    location.href = '#/detail/goods?id=0&goodsId='+goodsId
     this.props.loading()
     this.props.loadDetail({id:0,goodsId:goodsId})
     this.props.loadDetailUser({id:0,goodsId:goodsId})
@@ -247,7 +247,7 @@ export default class Detail extends Component {
       this.props.loadDetailUser({id:robId,goodsId:goodsId})
     }
   }
-  
+
   componentWillUpdate () {
     this.props.unloading()
   }
@@ -255,8 +255,8 @@ export default class Detail extends Component {
     let robId = this.props.location.query.id
     let goodsId = this.props.location.query.goodsId
     if(robId==0 && this.props.result){
-      location.href = '#/home/detail/goods?id='+this.props.result.data.id+'&goodsId='+goodsId
-    }    
+      location.href = '#/detail/goods?id='+this.props.result.data.id+'&goodsId='+goodsId
+    }
     this.swiperInit()
     if($('em.hideCodeItem').length==1){
       $('em.hideCodeItem').css('display','')

@@ -13,7 +13,7 @@ export default class Single extends Component {
   };
   detailFunc(item){
     this.props.load('home')
-    location.href = '#/home/detail/goods?id='+item.id+'&goodsId='+item.goodsId
+    location.href = '#/detail/goods?id='+item.id+'&goodsId='+item.goodsId
   }
   render() {
     const {item,index} = this.props;
