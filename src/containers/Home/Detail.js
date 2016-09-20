@@ -1,45 +1,46 @@
 import React, { Component,PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { connect } from 'react-redux';
-import { loadDetail } from '../../redux/modules/detail/detail';
 import { loadDetailUser } from '../../redux/modules/detail/detail.user';
 import { loading,unloading } from '../../redux/modules/loading';
 import { Link } from 'react-router';
 import Pay from './Detail/Pay';
 import CountDown from './Detail/CountDown';
 import {slyFunc} from '../../utils/sly'
+import ApiClient from '../../helpers/ApiClient'
 
 @connect(
-  state => ({result: state.detail.data,resultUser: state.detailUser.data,link:state.history.link}),
-  {loadDetail, loadDetailUser, loading, unloading})
+  state => ({resultUser: state.detailUser.data,link:state.history.link}),
+  { loadDetailUser, loading, unloading})
 export default class Detail extends Component {
 
   static propTypes = {
-    result: PropTypes.object,
     num: PropTypes.number,
     children: PropTypes.object.isRequired,
     time: PropTypes.string
   }
   static defaultProps = {
-    num: 1
+    num: 1,
+    result: null,
   }
   constructor(props, context) {
     super(props, context);
     this.state = {
       num: props.num,
       time: props.time,
+      result: PropTypes.object,
     }
   }
   render() {
-    const {num, time} = this.state;
-    const {result,resultUser} = this.props;
+    const {num, result, time} = this.state;
+    const {resultUser,link} = this.props;
     const homeStyles = require('./Home.scss');
     const styles = require('./Detail.scss');
     const iconBack = require('../../assets/ic_backpage.png');
     return (
       <div>
         <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionLeaveTimeout={300} transitionAppearTimeout={300} transitionEnterTimeout={300}>
-          { result &&
+          { result && result.data && 
           <div className={homeStyles.homeDetail +' f-cb'}>
             <div className={homeStyles.left}>
               <div className={styles.swiper}>
@@ -183,15 +184,15 @@ export default class Detail extends Component {
     location.href="#/"+link;
   }
   goNew (params) {
+    const {link} = this.props;
     let goodsId = this.props.location.query.goodsId
-    location.href = '#/detail/goods?id=0&goodsId='+goodsId
+    location.href = '#/'+link+'/detail/goods?id=0&goodsId='+goodsId
     this.props.loading()
-    this.props.loadDetail({id:0,goodsId:goodsId})
     this.props.loadDetailUser({id:0,goodsId:goodsId})
   }
   plus (e) {
     e.preventDefault()
-    let needNumber = this.props.result.data.needNumber
+    let needNumber = this.state.result.data.needNumber
     let num = this.state.num
     if(num<needNumber){
       this.setState({num: num-1+2});
@@ -206,13 +207,13 @@ export default class Detail extends Component {
   }
   changeNum (e) {
     let val = e.target.value
-    let needNumber = this.props.result.data.needNumber
+    let needNumber = this.state.result.data.needNumber
     if(val>0 && val < needNumber){
      this.setState({num: parseInt(e.target.value)});
     }
   }
   addAll (e) {
-    let surplusNumber = this.props.result.data.surplusNumber
+    let surplusNumber = this.state.result.data.surplusNumber
     this.setState({num: surplusNumber});
   }
   showPay (e) {
@@ -242,21 +243,26 @@ export default class Detail extends Component {
     let robId = this.props.location.query.id
     let goodsId = this.props.location.query.goodsId
     this.props.loading()
-    this.props.loadDetail({id:robId,goodsId:goodsId})
     if(robId!=0){
       this.props.loadDetailUser({id:robId,goodsId:goodsId})
     }
+    const client = new ApiClient();
+    const _this = this;
+    client.post('/goods/detail',{data:{id:robId,goodsId:goodsId}}).then(function(data) {
+      _this.setState({result:data});
+    }, function(value) {
+    });
   }
-
+  
   componentWillUpdate () {
     this.props.unloading()
   }
   componentDidUpdate () {
     let robId = this.props.location.query.id
     let goodsId = this.props.location.query.goodsId
-    if(robId==0 && this.props.result){
-      location.href = '#/detail/goods?id='+this.props.result.data.id+'&goodsId='+goodsId
-    }
+    if(robId==0 && this.state.result.data){
+      location.href = '#/detail/goods?id='+this.state.result.data.id+'&goodsId='+goodsId
+    }    
     this.swiperInit()
     if($('em.hideCodeItem').length==1){
       $('em.hideCodeItem').css('display','')
