@@ -178,6 +178,9 @@ export default class Pay extends Component {
     $('#codeImg').hide();
   }
   goPay () {
+    if(this.loading){ return }
+    this.loading = true
+
     let money = this.props.money
     let typeIndex = this.state.typeIndex
     let data = {
@@ -193,6 +196,7 @@ export default class Pay extends Component {
     $('#payCode p').eq(0).html('请求中...');
     $('#codeImg').hide();
     client.post('/cart/submit',{data:data}).then(function(data) {
+      _this.loading = false
       if(data.status==1){
         _this.setState({orderNo:data.data.orderNo});
         if(typeIndex==-1){
@@ -210,7 +214,7 @@ export default class Pay extends Component {
         }
       }
     }, function(value) {
-
+      _this.loading = false
     });
     if(typeIndex==0){
       $('#paySelect').hide();

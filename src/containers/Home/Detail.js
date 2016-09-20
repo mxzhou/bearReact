@@ -22,6 +22,7 @@ export default class Detail extends Component {
   static defaultProps = {
     num: 1,
     result: null,
+    link: 'home',
   }
   constructor(props, context) {
     super(props, context);
@@ -29,11 +30,12 @@ export default class Detail extends Component {
       num: props.num,
       time: props.time,
       result: PropTypes.object,
+      link: props.link
     }
   }
   render() {
-    const {num, result, time} = this.state;
-    const {resultUser,link} = this.props;
+    const {num, result, time, link} = this.state;
+    const {resultUser} = this.props;
     const homeStyles = require('./Home.scss');
     const styles = require('./Detail.scss');
     const iconBack = require('../../assets/ic_backpage.png');
@@ -60,7 +62,7 @@ export default class Detail extends Component {
                 }
               </ul>
             </div>
-            <div className={homeStyles.right} id="frame">
+            <div className={homeStyles.right + " scroll"}>
               <div id="slidee">
                 <div className={styles.title}>
                   <h3>{result.data.goodsName}</h3>
@@ -72,7 +74,7 @@ export default class Detail extends Component {
                 </div>
                 {/* 奖品状态 */}
                 { result.data.status == 3 &&
-                  <CountDown result={result}></CountDown>
+                  <CountDown loadData={this.loadData.bind(this)} result={result}></CountDown>
                 }
                 { result.data.status == 5 &&
                   <div className={styles.winner}>
@@ -114,19 +116,20 @@ export default class Detail extends Component {
                   </div>
                 }
                 <div className={styles.tabNav}>
-                  <Link to={{pathname:'/home/detail/goods',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
+                  <Link to={{pathname:'/'+link+'/detail/goods',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
                     <span>图文详情</span>
                   </Link>
-                  <Link to={{pathname:'/home/detail/join',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
+                  <Link to={{pathname:'/'+link+'/detail/join',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
                     <span>夺宝参与记录</span>
                   </Link>
-                  <Link to={{pathname:'/home/detail/past',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
+                  <Link to={{pathname:'/'+link+'/detail/past',query:{id:this.props.location.query.id,goodsId:result.data.goodsId}}} activeClassName={styles.active}>
                     <span>往期揭晓</span>
                   </Link>
                 </div>
                 <div className={styles.detail}>
                  {this.props.children}
                 </div>
+                <div style={{height:'50px',clear:'both'}}></div>
               </div>
             </div>
 
@@ -167,11 +170,6 @@ export default class Detail extends Component {
               }
             </div>
             <Pay money={num} loadData={this.loadData.bind(this)} ref="pay" robId={result.data.id} goodsId={result.data.goodsId}></Pay>
-            <div className="scrollbar" id="scrollbar">
-              <div className="handle">
-                <div className="mousearea"></div>
-              </div>
-            </div>
             <a className={styles.btnBack} onClick={this.backFunc.bind(this)}><img src={iconBack}/></a>
           </div>
           }
@@ -180,13 +178,11 @@ export default class Detail extends Component {
     );
   }
   backFunc(){
-    const {link} = this.props;
-    location.href="#/"+link;
+    location.href="#/"+this.state.link;
   }
   goNew (params) {
-    const {link} = this.props;
     let goodsId = this.props.location.query.goodsId
-    location.href = '#/'+link+'/home/detail/goods?id=0&goodsId='+goodsId
+    location.href = '#/'+this.state.link+'/detail/goods?id=0&goodsId='+goodsId
     this.props.loading()
     this.props.loadDetailUser({id:0,goodsId:goodsId})
   }
@@ -235,6 +231,7 @@ export default class Detail extends Component {
   }
   componentDidMount(){
     this.times = 0
+    this.setState({link:location.href.split('#/')[1].split('/')[0]});
     window.cancelAnimationFrame(this.reqAni);
     this.loadData()
   }
@@ -261,13 +258,12 @@ export default class Detail extends Component {
     let robId = this.props.location.query.id
     let goodsId = this.props.location.query.goodsId
     if(robId==0 && this.state.result.data){
-      location.href = '#/home/detail/goods?id='+this.state.result.data.id+'&goodsId='+goodsId
+      location.href = '#/'+this.state.link+'/detail/goods?id='+this.state.result.data.id+'&goodsId='+goodsId
     }
     this.swiperInit()
     if($('em.hideCodeItem').length==1){
       $('em.hideCodeItem').css('display','')
     }
-    slyFunc({bLoadMore : false})
   }
   componentWillUnmount () {
     clearInterval(this.timer)

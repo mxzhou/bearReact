@@ -106,7 +106,7 @@
 	clear: both;
 	p {
 		position: relative;
-		width: 100%;
+		width: 420px;
 		padding-left: 65px;
 		font-size: 12px;
 		color: #333;
@@ -129,7 +129,7 @@
 		em {
 			display: inline-block;
 			word-wrap:break-word;
-			margin-right: 6px;
+			margin-right: 8px;
 			font-weight: normal;
 		}
 	}
@@ -286,11 +286,11 @@
 .detail {
 	position: relative;
 	width: 100%;
-	margin-top: -5px;
+	margin-top: 0;
 }
 .btnBottomArea {
 	position: fixed;
-	width: 476px;
+	width: 490px;
 	height: 44px;
 	top: 452px;
 	left: 50%;

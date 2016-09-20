@@ -49,7 +49,7 @@ export default class Pay extends Component {
       window.cancelAnimationFrame(this.reqAni);
     }
   }
-  countDownFunc(){
+  countDownFunc () {
     this.times = this.props.result.data.startTime+3*60*1000-this.props.result.servertime;
     this.timetag = Date.now(); // 上一帧的时间
     this.reqAni = window.requestAnimationFrame(this.begin.bind(this));
