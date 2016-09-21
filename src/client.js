@@ -44,6 +44,9 @@ import {Provider} from 'react-redux';
 import { Router, hashHistory } from 'react-router';
 import getRoutes from './routes';
 import jquery from 'jquery'
+// 用户信息
+const userStorage = {"kgUid":1209148809,"otherUserId":915197939,"sessionId":"16894AD6D6D682876030ED0C682BD572","token":"f7ca2336-0bc3-4aa9-81ea-8a79d4d863b5"};
+sessionStorage.setItem('userStorage',JSON.stringify(userStorage))
 
 const client = new ApiClient();
 const dest = document.getElementById('content');
