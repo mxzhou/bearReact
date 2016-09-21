@@ -20,6 +20,7 @@ export default class Pay extends Component {
     goodsId: PropTypes.number,
     robId: PropTypes.number,
     loadData: PropTypes.func,
+    updateComponent: PropTypes.func,
   };
   // porps 的默认值
   static defaultProps = {
@@ -195,8 +196,11 @@ export default class Pay extends Component {
 
     $('#payCode p').eq(0).html('请求中...');
     $('#codeImg').hide();
+    this.props.loading()
     client.post('/cart/submit',{data:data}).then(function(data) {
       _this.loading = false
+      _this.props.unloading()
+      _this.props.updateComponent()
       if(data.status==1){
         _this.setState({orderNo:data.data.orderNo});
         if(typeIndex==-1){
@@ -214,6 +218,7 @@ export default class Pay extends Component {
         }
       }
     }, function(value) {
+      _this.props.unloading()
       _this.loading = false
     });
     if(typeIndex==0){

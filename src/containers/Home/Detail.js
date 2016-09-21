@@ -174,7 +174,7 @@ export default class Detail extends Component {
                 </div>
               }
             </div>
-            <Pay money={num} loadData={this.loadData.bind(this)} ref="pay" robId={result.data.id} goodsId={result.data.goodsId}></Pay>
+            <Pay money={num} updateComponent={this.updateComponent.bind(this)} loadData={this.loadData.bind(this)} ref="pay" robId={result.data.id} goodsId={result.data.goodsId}></Pay>
             <a className={styles.btnBack} onClick={this.backFunc.bind(this)}><img src={iconBack}/></a>
           </div>
           }
@@ -192,7 +192,8 @@ export default class Detail extends Component {
     let goodsId = this.props.location.query.goodsId
     location.href = '#/'+this.state.link+'/detail/goods?id=0&goodsId='+goodsId
     this.props.loading()
-    this.props.loadDetailUser({id:0,goodsId:goodsId})
+    this.getNew = true
+    this.loadData(0)
   }
   plus (e) {
     e.preventDefault()
@@ -243,13 +244,19 @@ export default class Detail extends Component {
     window.cancelAnimationFrame(this.reqAni);
     this.loadData()
   }
-  loadData () {
+  updateComponent () {
+    
+  }
+  loadData (id) {
     this.setState({num:1})
     let robId = this.props.location.query.id
     let goodsId = this.props.location.query.goodsId
     this.props.loading()
     const _this = this;
     const client = new ApiClient();
+    if(id==0){
+      robId = 0;
+    }
     if(robId!=0){
       let time = 3000
       if(typeof _this.state.resultUser == 'function'){
@@ -260,13 +267,26 @@ export default class Detail extends Component {
       setTimeout(function(){
         client.post('/goods/user',{data:{id:robId,goodsId:goodsId}}).then(function(data) {
           _this.setState({resultUser:data});
+          if($('em.hideCodeItem').eq(0).css('display')!='none'){
+            $('em.hideCodeItem').css('display','');
+          }
         }, function(value) {
         });
       },time)
     }
     client.post('/goods/detail',{data:{id:robId,goodsId:goodsId}}).then(function(data) {
       _this.setState({result:data});
+      if(id==0){
+        client.post('/goods/user',{data:{id:robId,goodsId:goodsId}}).then(function(data) {
+          _this.setState({resultUser:data});
+        }, function(value) {
+        });
+        setTimeout(function(){
+          location.href = '#/'+_this.state.link+'/detail/goods?id='+data.data.id+'&goodsId='+goodsId
+        },200)
+      }
     }, function(value) {
+     
     });
   }
 
@@ -279,6 +299,7 @@ export default class Detail extends Component {
     if(robId==0 && this.state.result.data){
       location.href = '#/'+this.state.link+'/detail/goods?id='+this.state.result.data.id+'&goodsId='+goodsId
     }
+    
     this.swiperInit()
     if($('em.hideCodeItem').length==1){
       $('em.hideCodeItem').css('display','')
