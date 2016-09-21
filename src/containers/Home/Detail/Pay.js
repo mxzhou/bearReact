@@ -6,13 +6,14 @@ import { loadConsumeMoney } from '../../../redux/modules/consume';
 import { paySubmit } from '../../../redux/modules/pay';
 import { loading,unloading } from '../../../redux/modules/loading';
 import ApiClient from '../../../helpers/ApiClient'
+import { loadToast,removeToast } from '../../../redux/modules/toast';
 
 import alipay from '../../../assets/img_alipay.jpg'
 import wechat from '../../../assets/img_wechatpay.jpg'
 
 @connect(
   state => ({result: state.consumeMoney.data}),
-  {loadConsumeMoney, paySubmit, loading, unloading})
+  {loadConsumeMoney, paySubmit, loading, unloading,loadToast})
 export default class Pay extends Component {
   static propTypes = {
     consumeMoney: PropTypes.number,
@@ -163,7 +164,8 @@ export default class Pay extends Component {
         }else{
           _this.setState({checkResult:2});
         }
-
+      }else{
+        _this.props.loadToast('收货人不能为空！')
       }
     }, function(value) {
         _this.setState({checkResult:2});

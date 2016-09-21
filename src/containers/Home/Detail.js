@@ -197,9 +197,9 @@ export default class Detail extends Component {
   }
   plus (e) {
     e.preventDefault()
-    let needNumber = this.state.result.data.needNumber
+    let surplusNumber = this.state.result.data.surplusNumber
     let num = this.state.num
-    if(num<needNumber){
+    if(num<surplusNumber){
       this.setState({num: num-1+2});
     }
   }
@@ -212,8 +212,8 @@ export default class Detail extends Component {
   }
   changeNum (e) {
     let val = e.target.value
-    let needNumber = this.state.result.data.needNumber
-    if(val>0 && val < needNumber){
+    let surplusNumber = this.state.result.data.surplusNumber
+    if(val>0 && val < surplusNumber){
      this.setState({num: parseInt(e.target.value)});
     }
   }
@@ -277,7 +277,7 @@ export default class Detail extends Component {
     client.post('/goods/detail',{data:{id:robId,goodsId:goodsId}}).then(function(data) {
       _this.setState({result:data});
       if(id==0){
-        client.post('/goods/user',{data:{id:robId,goodsId:goodsId}}).then(function(data) {
+        client.post('/goods/user',{data:{id:data.data.id,goodsId:goodsId}}).then(function(data) {
           _this.setState({resultUser:data});
         }, function(value) {
         });

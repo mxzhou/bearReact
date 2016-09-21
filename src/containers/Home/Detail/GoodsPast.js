@@ -1,24 +1,34 @@
 import React, { Component,PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import { connect } from 'react-redux';
-import { loadDetailPast } from '../../../redux/modules/detail/detail.past';
 import { loading,unloading } from '../../../redux/modules/loading';
 import { Link } from 'react-router';
+import ApiClient from '../../../helpers/ApiClient'
+import { connect } from 'react-redux';
 
 @connect(
-  state => ({result:state.detailPast.data}),
-  {loadDetailPast,loading,unloading})
+  state => ({}),
+  {loading,unloading})
 export default class GoodsPast extends Component {
 
   static propTypes = {
     result: PropTypes.object
   };
+  static defaultProps = {
+    result: null,
+  }
+  // 构造器
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      result: props.result,
+    }
+  }
   render() {
-    const {result} = this.props;
+    const {result} = this.state;
     const styles = require('./GoodsPast.scss');
     return (
       <div>
-        { result &&
+        { result && result.data && 
           <div style={{paddingTop:15}}> 
             {
               result.data.goodsList.map((item,index) =>
@@ -52,11 +62,29 @@ export default class GoodsPast extends Component {
     return num < 10 ? '0'+num:num
   }
   componentDidMount() {
-    this.props.loading()
-    this.props.loadDetailPast({id:this.props.location.query.id,lastId:0,pageSize:10})
+    this.loadData()
   }
-  componentWillUpdate(){
-    this.props.unloading()
+  loadData () {
+    const client = new ApiClient();
+    const _this = this;
+    let result = _this.state.result
+    let data = {
+      goodsId: this.props.location.query.goodsId,
+    }
+    this.props.loading()
+    client.post('/goods/past',{data:data}).then(function(data) {
+      _this.props.unloading()
+      _this.setState({
+        result: data
+      })
+    }, function(value) {
+      _this.props.unloading()
+    });
+  }
+  componentDidUpdate() {
+   
+  }
+  componentWillUnmount () {
   }
   componentDidUpdate() {
     

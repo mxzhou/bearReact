@@ -1,9 +1,7 @@
 import React, { Component,PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import { loadDetailJoiner } from '../../../redux/modules/detail/detail.joiner';
 import { loading,unloading } from '../../../redux/modules/loading';
 import { Link } from 'react-router';
-import {slyFunc} from '../../../utils/sly'
 import ApiClient from '../../../helpers/ApiClient'
 import { connect } from 'react-redux';
 
@@ -126,6 +124,6 @@ export default class GoodsJoiner extends Component {
     })
   }
   componentWillUnmount () {
-    $('#scrollBlock').unbind('scroll');
+    $('#scrollBlock').unbind('scroll')
   }
 }
