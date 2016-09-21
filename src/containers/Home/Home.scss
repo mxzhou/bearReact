@@ -11,8 +11,9 @@
     padding: 10px 0 0 10px;
     position: relative;
     .frame{
-      height: 430px;
+      height: 420px;
       overflow-y: auto;
+      margin-bottom: 2px;
     }
     .list{
       width: 100%;
@@ -23,7 +24,7 @@
         box-shadow: inset 0px 0px 0px 2px rgba(255, 255, 255, 0.25);
         border-radius: 8px;
         width: 330px;
-        height: 120px;
+        height: 115px;
         margin: 0 3px 3px 0;
         padding: 10px;
         .left{

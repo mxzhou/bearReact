@@ -11,18 +11,20 @@ import {slyFunc} from '../../utils/sly'
 import ApiClient from '../../helpers/ApiClient'
 
 @connect(
-  state => ({resultUser: state.detailUser.data,link:state.history.link}),
-  { loadDetailUser, loading, unloading})
+  state => ({link:state.history.link}),
+  { loading, unloading})
 export default class Detail extends Component {
 
   static propTypes = {
     num: PropTypes.number,
     children: PropTypes.object.isRequired,
-    time: PropTypes.string
+    time: PropTypes.string,
+    resultUser: PropTypes.object,
   }
   static defaultProps = {
     num: 1,
     result: null,
+    resultUser: null,
     link: 'home',
   }
   constructor(props, context) {
@@ -31,12 +33,12 @@ export default class Detail extends Component {
       num: props.num,
       time: props.time,
       result: PropTypes.object,
+      resultUser: PropTypes.object,
       link: props.link
     }
   }
   render() {
-    const {num, result, time, link} = this.state;
-    const {resultUser} = this.props;
+    const {num, result,resultUser, time, link} = this.state;
     const homeStyles = require('./Home.scss');
     const styles = require('./Detail.scss');
     const iconBack = require('../../assets/ic_backpage.png');
@@ -63,7 +65,7 @@ export default class Detail extends Component {
                 }
               </ul>
             </div>
-            <div className={homeStyles.right + " scroll"}>
+            <div className={homeStyles.right + " scroll"} id="scrollBlock">
               <div id="slidee">
                 <div className={styles.title}>
                   <h3>{result.data.goodsName}</h3>
@@ -100,7 +102,7 @@ export default class Detail extends Component {
                   </div>
                 }
                 {/* 是否参与 */}
-                { resultUser && resultUser.data.joinFlag &&
+                { resultUser && resultUser.data && resultUser.data.joinFlag &&
                   <div className={styles.codes}>
                     <p><span className={styles.title}>你参与了：</span><i>{resultUser.data.joinNumber}</i>人次</p>
                     <p><span className={styles.title}>夺宝号码：</span>
@@ -246,13 +248,23 @@ export default class Detail extends Component {
     let robId = this.props.location.query.id
     let goodsId = this.props.location.query.goodsId
     this.props.loading()
-    if(robId!=0){
-      this.props.loadDetailUser({id:robId,goodsId:goodsId})
-    }
-    const client = new ApiClient();
     const _this = this;
+    const client = new ApiClient();
+    if(robId!=0){
+      let time = 3000
+      if(typeof _this.state.resultUser == 'function'){
+        time = 0
+      }else{
+        time = 3000
+      }
+      setTimeout(function(){
+        client.post('/goods/user',{data:{id:robId,goodsId:goodsId}}).then(function(data) {
+          _this.setState({resultUser:data});
+        }, function(value) {
+        });
+      },time)
+    }
     client.post('/goods/detail',{data:{id:robId,goodsId:goodsId}}).then(function(data) {
-      console.log(data)
       _this.setState({result:data});
     }, function(value) {
     });
@@ -283,9 +295,9 @@ export default class Detail extends Component {
     return num < 10 ? '0'+num:num
   }
   swiperInit() {
-    if(this.timer==null) {
-      let $swiperList = $('#swiperList')
-      let $swiperPage = $('#swiperPage')
+    let $swiperList = $('#swiperList')
+    let $swiperPage = $('#swiperPage')
+    if(this.timer==null && $swiperList.find('li').length !=0) {
       let len = $swiperList.find('li').length
       let idx = 0
       this.timer = setInterval(autoMove,3000)
