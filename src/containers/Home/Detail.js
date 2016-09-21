@@ -20,11 +20,14 @@ export default class Detail extends Component {
     children: PropTypes.object.isRequired,
     time: PropTypes.string,
     resultUser: PropTypes.object,
+    caculationResult: PropTypes.object,
   }
   static defaultProps = {
     num: 1,
     result: null,
+    caculationResult: null,
     resultUser: null,
+    result: null,
     link: 'home',
   }
   constructor(props, context) {
@@ -34,11 +37,13 @@ export default class Detail extends Component {
       time: props.time,
       result: PropTypes.object,
       resultUser: PropTypes.object,
+      caculationResult: props.caculationResult,
+      result: PropTypes.object,
       link: props.link
     }
   }
   render() {
-    const {num, result,resultUser, time, link} = this.state;
+    const {num, result,resultUser,caculationResult, time, link} = this.state;
     const homeStyles = require('./Home.scss');
     const styles = require('./Detail.scss');
     const iconBack = require('../../assets/ic_backpage.png');
@@ -70,10 +75,14 @@ export default class Detail extends Component {
                 <div className={styles.title}>
                   <h3>{result.data.goodsName}</h3>
                   <p className={styles.desc}>{result.data.goodsDesc}</p>
-                  <div className={styles.bar}>
-                    <div className={styles.active} style={{width:((result.data.needNumber-result.data.surplusNumber)/result.data.needNumber)*100+'%'}}></div>
-                  </div>
-                  <p className={styles.number}><span className="f-fr">剩余: <em>{result.data.surplusNumber}</em></span><span className="f-fl">总需: {result.data.needNumber}</span></p>
+                  { result.data.status != 3 && result.data.status != 5 &&
+                      <div>
+                        <div className={styles.bar}>
+                          <div className={styles.active} style={{width:((result.data.needNumber-result.data.surplusNumber)/result.data.needNumber)*100+'%'}}></div>
+                        </div>
+                        <p className={styles.number}><span className="f-fr">剩余: <em>{result.data.surplusNumber}</em></span><span className="f-fl">总需: {result.data.needNumber}</span></p>
+                      </div>
+                  }
                 </div>
                 {/* 奖品状态 */}
                 { result.data.status == 3 &&
@@ -136,7 +145,7 @@ export default class Detail extends Component {
               </div>
             </div>
             { result.data.status == 5 &&
-              <Caculation></Caculation>
+              <Caculation result={caculationResult}></Caculation>
             }
             <div id="btnBottomArea" className={styles.btnBottomArea}>
               { result.data.status == -1 &&
@@ -183,6 +192,16 @@ export default class Detail extends Component {
     );
   }
   showCaculation () {
+    let robId = this.props.location.query.id
+    const _this = this;
+    const client = new ApiClient();
+    _this.props.loading()
+    client.get('/goods/'+robId+'/complete',{data:{id:robId}}).then(function(data) {
+      _this.setState({caculationResult:data});
+      _this.props.unloading()
+    }, function(value) {
+      _this.props.unloading()
+    });
     $('#caculationBlock').show();
   }
   backFunc(){
