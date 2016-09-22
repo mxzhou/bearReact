@@ -22,10 +22,10 @@ export default class Single extends Component {
     return (
       <li className={styles.item + (index%2 != 0 ? (' '+styles.even):'')}>
         <div className={styles.left}>
-          <img src={item.coverImgUrl} className={styles.coverImg}/>
+          <img src={item.coverImgUrl} className={styles.coverImg}  onClick={this.detailFunc.bind(this,item)}/>
         </div>
         <div className={styles.right}>
-          <p title={item.goodsName} className={styles.name + ' f-pre'}>{item.goodsName}</p>
+          <p title={item.goodsName}  onClick={this.detailFunc.bind(this,item)} className={styles.name + ' f-pre'}>{item.goodsName}</p>
           <div className={styles.bar}>
             <div className={styles.active} style={{width:(item.needNumber-item.surplusNumber)/item.needNumber*100+'%'}}></div>
           </div>

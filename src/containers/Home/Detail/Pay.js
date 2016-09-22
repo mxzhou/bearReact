@@ -84,7 +84,7 @@ export default class Pay extends Component {
     		            )}
     		        </ul>
     		        <div className={styles.btnBottom}>
-                    	<a className={styles.btn} onClick={this.goPay.bind(this)}>立即支付</a>
+                    	<a className={styles.btn} id="btnGoPay" onClick={this.goPay.bind(this)}>立即支付</a>
                     	<a onClick={this.cancelPay.bind(this)}>取消支付</a>
     		        </div>
     	    	</div>
@@ -96,7 +96,7 @@ export default class Pay extends Component {
             <div className={styles.codeImg}><img id="codeImg"/></div>
             <div className={styles.payNum}><em>{otherPayMoney}</em>元</div>
             <div className={styles.btnBottom}>
-                <a className={styles.btn} onClick={this.goPayCodeSuccess.bind(this)}>支付成功</a>
+                <a className={styles.btn} onClick={this.goPayCodeSuccess.bind(this,event)}>支付成功</a>
                 <a className={styles.btn + ' ' +styles.normal} onClick={this.goPayCodeFail.bind(this)}>支付失败</a>
             </div>
           </div>
@@ -135,7 +135,7 @@ export default class Pay extends Component {
               <div style={{display:checkResult==0?"block":"none",marginTop:'90px'}}>
                 <p style={{paddingBottom:'55px'}}>查询支付结果中...</p>
                 <div className={styles.btnBottom}>
-                  <a className={styles.btn} onClick={this.goHome.bind(this)}>继续夺宝</a>
+                  <a className={styles.btn} href="http://www.baidu.com" target="_blank" onClick={this.goHome.bind(this)}>继续夺宝</a>
                   <a className={styles.btn + ' ' +styles.normal} onClick={this.backPay.bind(this)}>返回</a>
                 </div>
               </div>
@@ -180,12 +180,16 @@ export default class Pay extends Component {
     $('#payCode').hide();
     $('#codeImg').hide();
   }
-  goPay () {
+  goPay (e) {
+    console.log(e)
     if(this.loading){ return }
     this.loading = true
 
     let money = this.props.money
     let typeIndex = this.state.typeIndex
+    if(typeIndex==1){
+      return;
+    }
     let data = {
       consumeCost: this.state.useConsumeMoney,
       otherPayType: typeIndex+1,
@@ -196,7 +200,6 @@ export default class Pay extends Component {
     const client = new ApiClient();
     const _this = this;
 
-    $('#payCode p').eq(0).html('请求中...');
     $('#codeImg').hide();
     this.props.loading()
     client.post('/cart/submit',{data:data}).then(function(data) {
@@ -211,12 +214,15 @@ export default class Pay extends Component {
           $('#btnBottomArea').animate({top: 452,opacity:1},300)
         }
         if(typeIndex==0){
-          $('#payCode p').eq(0).html('请使用微信扫码完成付款');
           $('#codeImg').attr('src',data.data.twoUrl).show();
         }
         if(typeIndex==1){
           _this.setState({showPayResult:true,checkResult:3});
-          window.open(data.data.twoUrl)
+          $('#btnGoPay').attr({'href':encodeURI(data.data.twoUrl),'target':'_blank'})
+          setTimeout(function(){
+            $('#btnGoPay').click()
+          },200)
+          //window.open(encodeURI(data.data.twoUrl))
         }
       }
     }, function(value) {
@@ -278,7 +284,7 @@ export default class Pay extends Component {
   }
 
   componentWillUnmount(){
-
+    $('#btnGoPay').removeAttr('href target');
   }
   updateMoney () {
 
@@ -307,6 +313,32 @@ export default class Pay extends Component {
           this.setState({typeIndex:index,useConsumeMoney:0,useConsume:false,otherPayMoney:money})
         }
       }
+    }
+    if(index == 1 && index != typeIndex){
+      let data = {
+        consumeCost: consume,
+        otherPayType: 2,
+        redEnvelopeId: 0,
+        source: 'kugou_live',
+        goodsList: [{goodsId:this.props.goodsId,total:money,robId:this.props.robId}]
+      }
+      const client = new ApiClient();
+      const _this = this;
+      this.props.loading()
+      client.post('/cart/submit',{data:data}).then(function(data) {
+        _this.loading = false
+        _this.props.unloading()
+        _this.props.updateComponent()
+        if(data.status==1){
+          _this.setState({orderNo:data.data.orderNo});
+          $('#btnGoPay').attr({'href':encodeURI(data.data.twoUrl),'target':'_blank'})
+        }
+      }, function(value) {
+        _this.props.unloading()
+        _this.loading = false
+      });
+    }else{
+      $('#btnGoPay').removeAttr('href target');
     }
   }
 }

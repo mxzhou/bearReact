@@ -44,39 +44,71 @@ import {Provider} from 'react-redux';
 import { Router, hashHistory } from 'react-router';
 import getRoutes from './routes';
 import jquery from 'jquery'
-// 用户信息
-const userStorage = {"kgUid":1209148809,"otherUserId":915197939,"sessionId":"16894AD6D6D682876030ED0C682BD572","token":"f7ca2336-0bc3-4aa9-81ea-8a79d4d863b5"};
-sessionStorage.setItem('userStorage',JSON.stringify(userStorage))
-
 const client = new ApiClient();
-const dest = document.getElementById('content');
-
-const store = createStore(client);
-const component = (
-  <Router history={hashHistory}>
-    {getRoutes(store)}
-  </Router>
-);
-// 默认hash
-if(location.hash == ''){
-  location.href = location+'#/home'
+// 用户信息
+let userStorage = sessionStorage.getItem('userStorage')
+if(userStorage==null || JSON.parse(userStorage).otherUserId==null){
+  if(getQueryString('otherUserId')!=null){
+    let data = {
+      otherUserId:getQueryString('otherUserId'),
+      sessionId:getQueryString('sessionId'),
+      nickname:getQueryString('nickname'),
+    }
+    client.post('/user/check',{data:data}).then(function(data) {
+      const userStorage = {    
+        "otherUserId":getQueryString('otherUserId'),
+        "sessionId":getQueryString('sessionId'),
+        "kgUid":data.data.kgUid,
+        "token":data.data.token,
+      };
+      sessionStorage.setItem('userStorage',JSON.stringify(userStorage))
+      init()
+    }, function(value) {
+    });
+  }else{
+    init()
+  }
+  //?otherUserId=915197939&sessionId=16894AD6D6D682876030ED0C682BD572&nickname=hello
+}else{
+  init()
 }
-ReactDOM.render(
-  <Provider store={store} key="provider">
-    {component}
-  </Provider>,
-  dest
-);
+function getQueryString(name) {
+  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+  if(window.location.href.split('?')[1]){
+    var r = window.location.href.split('?')[1].match(reg);
+    if (r != null) return r[2]; return null;
+  }
+}
 
-if (__DEVTOOLS__ && !window.devToolsExtension) {
-  const DevTools = require('./containers/DevTools/DevTools');
+function init(){
+  const dest = document.getElementById('content');
+  const store = createStore(client);
+  const component = (
+    <Router history={hashHistory}>
+      {getRoutes(store)}
+    </Router>
+  );
+  // 默认hash
+  if(location.hash == ''){
+    location.href = location+'#/home'
+  }
   ReactDOM.render(
     <Provider store={store} key="provider">
-      <div>
-        {component}
-        <DevTools />
-      </div>
+      {component}
     </Provider>,
     dest
   );
+
+  if (__DEVTOOLS__ && !window.devToolsExtension) {
+    const DevTools = require('./containers/DevTools/DevTools');
+    ReactDOM.render(
+      <Provider store={store} key="provider">
+        <div>
+          {component}
+          <DevTools />
+        </div>
+      </Provider>,
+      dest
+    );
+  }
 }

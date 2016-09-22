@@ -75,7 +75,7 @@ export default class Detail extends Component {
                 <div className={styles.title}>
                   <h3>{result.data.goodsName}</h3>
                   <p className={styles.desc}>{result.data.goodsDesc}</p>
-                  { result.data.status != 3 && result.data.status != 5 &&
+                  { result.data.status == 0 &&
                       <div>
                         <div className={styles.bar}>
                           <div className={styles.active} style={{width:((result.data.needNumber-result.data.surplusNumber)/result.data.needNumber)*100+'%'}}></div>
@@ -176,7 +176,7 @@ export default class Detail extends Component {
                   <div className="f-fl">
                   <span className="f-fl">参与人数</span>
                     <a className={styles.btn+' '+styles.left} onClick={this.minus.bind(this)}>-</a>
-                    <input id="money" type="text" ref="money" value={num} onChange={this.changeNum.bind(this)} />
+                    <input id="money" type="text" onBlur={this.changeNum.bind(this)} />
                     <a className={styles.btn+' '+styles.right} onClick={this.plus.bind(this)}>+</a>
                     <a className={styles.btn+' '+styles.all} onClick={this.addAll.bind(this)}>包尾</a>
                   </div>
@@ -219,7 +219,8 @@ export default class Detail extends Component {
     let surplusNumber = this.state.result.data.surplusNumber
     let num = this.state.num
     if(num<surplusNumber){
-      this.setState({num: num-1+2});
+      $('#money').val(num-1+2)
+      this.setState({num: num-1+2})
     }
   }
   minus (e) {
@@ -227,18 +228,31 @@ export default class Detail extends Component {
     let num = this.state.num
     if(num>1){
       this.setState({num: this.state.num-1});
+      $('#money').val(num-1)
     }
   }
   changeNum (e) {
     let val = e.target.value
     let surplusNumber = this.state.result.data.surplusNumber
-    if(val>0 && val < surplusNumber){
-     this.setState({num: parseInt(e.target.value)});
+    if(val>0 && val <= surplusNumber){
+     $('#money').val(parseInt(e.target.value))
+    }else{
+      if(val > surplusNumber){
+       $('#money').val(surplusNumber)
+      }else{
+       $('#money').val(1)
+      }
     }
-  }
+    this.setState({num: $('#money').val()});
+  } 
   addAll (e) {
     let surplusNumber = this.state.result.data.surplusNumber
-    this.setState({num: surplusNumber});
+    if(this.state.num == surplusNumber){
+      $('#money').val(1)
+    }else{
+      $('#money').val(surplusNumber)
+    }
+    this.setState({num: $('#money').val()});
   }
   showPay (e) {
     $('#payBlock').animate({top:215,opacity:1},300)
@@ -289,12 +303,14 @@ export default class Detail extends Component {
           if($('em.hideCodeItem').eq(0).css('display')!='none'){
             $('em.hideCodeItem').css('display','');
           }
+          _this.props.unloading()
         }, function(value) {
         });
       },time)
     }
     client.post('/goods/detail',{data:{id:robId,goodsId:goodsId}}).then(function(data) {
       _this.setState({result:data});
+      _this.props.unloading()
       if(id==0){
         client.post('/goods/user',{data:{id:data.data.id,goodsId:goodsId}}).then(function(data) {
           _this.setState({resultUser:data});
@@ -315,10 +331,14 @@ export default class Detail extends Component {
   componentDidUpdate () {
     let robId = this.props.location.query.id
     let goodsId = this.props.location.query.goodsId
-    if(robId==0 && this.state.result.data){
+    if(robId==0 && this.state.result.data && this.state.result.data.status != -1){
       location.href = '#/'+this.state.link+'/detail/goods?id='+this.state.result.data.id+'&goodsId='+goodsId
     }
-    
+    if($('#money').val()==undefined){
+      setTimeout(function(){
+        $('#money').attr("value",1)
+      },200)
+    }
     this.swiperInit()
     if($('em.hideCodeItem').length==1){
       $('em.hideCodeItem').css('display','')
