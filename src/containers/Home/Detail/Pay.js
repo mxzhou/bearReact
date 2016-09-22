@@ -288,30 +288,37 @@ export default class Pay extends Component {
     let consume = this.state.consumeMoney
     let money = this.props.money
     let typeIndex = this.state.typeIndex
+    let useConsumeMoney = 0
     if(index == typeIndex){
       if(consume>=this.props.money){
+        useConsumeMoney = money
         this.setState({typeIndex:-1,useConsumeMoney:money,useConsume:true,otherPayMoney:0})
       }else{
         if(consume!=0){
+          useConsumeMoney = money
           this.setState({typeIndex:typeIndex,useConsumeMoney:money,useConsume:true,otherPayMoney:(money-consume)})
         }else{
+          useConsumeMoney = 0
           this.setState({typeIndex:typeIndex,useConsumeMoney:0,useConsume:false,otherPayMoney:money})
         }
       }
     }else{
       if(consume>=this.props.money){
+        useConsumeMoney = 0
         this.setState({typeIndex:index,useConsumeMoney:0,useConsume:false,otherPayMoney:money})
       }else{
         if(consume!=0){
+          useConsumeMoney = money
           this.setState({typeIndex:index,useConsumeMoney:money,useConsume:true,otherPayMoney:(money-consume)})
         }else{
+          useConsumeMoney = 0
           this.setState({typeIndex:index,useConsumeMoney:0,useConsume:false,otherPayMoney:money})
         }
       }
     }
     if(index == 1 && index != typeIndex){
       let data = {
-        consumeCost: consume,
+        consumeCost: useConsumeMoney,
         otherPayType: 2,
         redEnvelopeId: 0,
         source: 'kugou_live',

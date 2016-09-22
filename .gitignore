@@ -5,4 +5,3 @@ webpack-assets.json
 webpack-stats.json
 npm-debug.log
 node_modules.zip
-static/dist/
