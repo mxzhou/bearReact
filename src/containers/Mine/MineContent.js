@@ -36,7 +36,7 @@ export default class Mine extends Component {
     );
   }
   closeHandler () {
-    history.back()
+    location.href = '#mine'
   }
   componentWillUpdate(){
 
