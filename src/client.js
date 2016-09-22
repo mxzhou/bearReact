@@ -49,15 +49,15 @@ const client = new ApiClient();
 let userStorage = sessionStorage.getItem('userStorage')
 if(userStorage==null || JSON.parse(userStorage).otherUserId==null){
   if(getQueryString('otherUserId')!=null){
-    let data = {
+    let options = {
       otherUserId:getQueryString('otherUserId'),
       sessionId:getQueryString('sessionId'),
       nickname:getQueryString('nickname'),
     }
-    client.post('/user/check',{data:data}).then(function(data) {
+    client.post('/user/check',{data:options}).then(function(data) {
       const userStorage = {    
-        "otherUserId":getQueryString('otherUserId'),
-        "sessionId":getQueryString('sessionId'),
+        "otherUserId":options.otherUserId,
+        "sessionId":options.sessionId,
         "kgUid":data.data.kgUid,
         "token":data.data.token,
       };
