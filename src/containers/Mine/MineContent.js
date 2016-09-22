@@ -24,7 +24,7 @@ export default class Mine extends Component {
       <div className={styles.mine + ' f-cb'}>
         <ReactCSSTransitionGroup transitionName="example"  transitionAppear={true} transitionAppearTimeout={500}>
           <div className={styles.left}>
-            <div className={styles.mask} style={{display:show ? 'block':'none'}}></div>
+            <div className={styles.mask} style={{display:show ? 'block':'none'}}  onClick={this.closeHandler.bind(this)}></div>
             <Left></Left>
           </div>
           <div className={styles.shadow}></div>
@@ -34,6 +34,9 @@ export default class Mine extends Component {
         </ReactCSSTransitionGroup>
       </div>
     );
+  }
+  closeHandler () {
+    history.back()
   }
   componentWillUpdate(){
 

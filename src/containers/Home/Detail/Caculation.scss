@@ -38,7 +38,7 @@
     width: 521px;
     height: 100%;
     position: relative;
-    overflow: auto;
+    overflow: hidden;
     .btnClose {
       position: absolute;
       left: 10px;
@@ -49,6 +49,12 @@
 }
 .forCalculation {
   font-size: 14px; 
+  .caculationList {
+    height: 410px;
+    position: relative;
+    width: 100%;
+    overflow: auto;
+  }
   .title {
     line-height: 45px;
     font-size: 16px;

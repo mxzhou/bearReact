@@ -181,10 +181,7 @@ export default class Pay extends Component {
     $('#codeImg').hide();
   }
   goPay (e) {
-    console.log(e)
     if(this.loading){ return }
-    this.loading = true
-
     let money = this.props.money
     let typeIndex = this.state.typeIndex
     if(typeIndex==1){
@@ -202,6 +199,7 @@ export default class Pay extends Component {
 
     $('#codeImg').hide();
     this.props.loading()
+    this.loading = true
     client.post('/cart/submit',{data:data}).then(function(data) {
       _this.loading = false
       _this.props.unloading()
@@ -214,14 +212,13 @@ export default class Pay extends Component {
           $('#btnBottomArea').animate({top: 452,opacity:1},300)
         }
         if(typeIndex==0){
+          $('#paySelect').hide();
+          $('#payCode').show();
           $('#codeImg').attr('src',data.data.twoUrl).show();
         }
         if(typeIndex==1){
           _this.setState({showPayResult:true,checkResult:3});
-          $('#btnGoPay').attr({'href':encodeURI(data.data.twoUrl),'target':'_blank'})
-          setTimeout(function(){
-            $('#btnGoPay').click()
-          },200)
+          $('#btnGoPay').attr({'href':encodeURI(data.data.twoUrl),'target':'_blank'})        
           //window.open(encodeURI(data.data.twoUrl))
         }
       }
@@ -229,10 +226,7 @@ export default class Pay extends Component {
       _this.props.unloading()
       _this.loading = false
     });
-    if(typeIndex==0){
-      $('#paySelect').hide();
-      $('#payCode').show();
-    }
+    
   }
   selectConsume () {
     let consume = this.state.consumeMoney
@@ -252,6 +246,7 @@ export default class Pay extends Component {
     }
   }
   cancelPay () {
+    $('#btnGoPay').removeAttr('href target');
     $('#codeImg').hide();
   	$('#payBlock').animate({top:600,opacity:0},300)
   	$('#btnBottomArea').animate({top: 452,opacity:1},300)
@@ -325,6 +320,7 @@ export default class Pay extends Component {
       const client = new ApiClient();
       const _this = this;
       this.props.loading()
+      _this.loading = true
       client.post('/cart/submit',{data:data}).then(function(data) {
         _this.loading = false
         _this.props.unloading()

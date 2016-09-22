@@ -49,6 +49,11 @@ export default class GoodsPast extends Component {
                 </div>
               )
             }
+            { result.data.goodsList.length == 0 &&
+              <div style={{textAlign:'center',clear:'both',lineHeight:'50px'}}>
+                暂无往期揭晓记录
+              </div>
+            }
           </div>
         }
       </div>
