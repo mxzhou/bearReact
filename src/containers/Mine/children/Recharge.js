@@ -65,6 +65,7 @@ export default class Recharge extends Component {
     this.setState({numIndex:this.props.numPayList.length+1})
   }
   submitFunc(){
+    $('#btnGoPay').removeAttr('href target');
     const client = new ApiClient();
     const _this = this;
     // 异步获取数据 promise
@@ -106,10 +107,12 @@ export default class Recharge extends Component {
       // 支付宝地址
       if(data.data && data.data.wapalipay != null){
         _this.setState({bWechat:true,payObject:data.data})
+        $('#btnGoPay').attr({'href':encodeURI(data.data.twoUrl),'target':'_blank'})
         window.open(encodeURI(data.data.wapalipay));
       }
       // 微信二维码
       if(data.data && data.data.weChat != null){
+        $('#btnGoPay').removeAttr('href target');
         _this.setState({bWechat:true,payObject:data.data})
       }
       // success
@@ -155,7 +158,7 @@ export default class Recharge extends Component {
 
             </ul>
             <div className={styles.blockBtn}>
-              <a className={styles.btn+' '+styles.pay} onClick={this.submitFunc.bind(this)}>确认充值</a>
+              <a className={styles.btn+' '+styles.pay}  id="btnGoPay" onClick={this.submitFunc.bind(this)}>确认充值</a>
             </div>
           </div>
         }
