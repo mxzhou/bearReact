@@ -46,7 +46,7 @@ export default class ApiClient {
               reject(body || err)
             }else{
               // 验证信息
-              if(body.errorCode != 0){
+              if(body.errorCode != 0 && body.errorCode != 420005){
                 $("#ToastMsg").text(body.errorMessage)
                 $("#Toast").show();
                 setTimeout(()=>{
