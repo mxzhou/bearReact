@@ -110,9 +110,12 @@ export default class Select extends Component {
             }
           </div>
         </div>
+        {list && list.data && list.data != null && list.data.length > 0 &&
         <div className={styles.blockBtn+' '+styles.selectAddressBtn}>
           <a className={styles.btn + ' '+styles.addressBtn} onClick={this.submitFunc.bind(this)}>保存</a>
         </div>
+        }
+
       </div>
     );
   }
