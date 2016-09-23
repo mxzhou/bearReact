@@ -165,8 +165,7 @@ export default class Pay extends Component {
             _this.props.loadData()
             _this.setState({checkResult:1});
           }else{
-            $("#ToastMsg").text('剩余购买数不足，钱已充至余额');
-            $("#Toast").show();
+            _this.props.loadToast('剩余购买数不足，钱已充至余额')
             _this.setState({showPayResult:false});
           }
         }else if(payStatus==2){
@@ -228,8 +227,7 @@ export default class Pay extends Component {
           _this.props.loadData()
           $('#payBlock').animate({top:570,opacity:0},300)
           $('#btnBottomArea').animate({top: 422,opacity:1},300)
-          $("#ToastMsg").text('购买成功');
-          $("#Toast").show();
+          _this.props.loadToast('购买成功')
         }
         if(typeIndex==0){
           $('#paySelect').hide();
