@@ -28,9 +28,6 @@ export default class App extends Component {
     require('./animate.css');
     return (
       <div className={styles.app}>
-        <div className={styles.appTitle}>
-
-        </div>
         <div className={styles.appContent+' f-cb'}>
           <div className={styles.appNav}>
             <NavBar list={nav}/>
