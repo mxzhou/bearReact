@@ -208,8 +208,8 @@ export default class Pay extends Component {
         _this.setState({orderNo:data.data.orderNo});
         if(typeIndex==-1){
           _this.props.loadData()
-          $('#payBlock').animate({top:600,opacity:0},300)
-          $('#btnBottomArea').animate({top: 452,opacity:1},300)
+          $('#payBlock').animate({top:570,opacity:0},300)
+          $('#btnBottomArea').animate({top: 422,opacity:1},300)
         }
         if(typeIndex==0){
           $('#paySelect').hide();
@@ -248,8 +248,8 @@ export default class Pay extends Component {
   cancelPay () {
     $('#btnGoPay').removeAttr('href target');
     $('#codeImg').hide();
-  	$('#payBlock').animate({top:600,opacity:0},300)
-  	$('#btnBottomArea').animate({top: 452,opacity:1},300)
+  	$('#payBlock').animate({top:570,opacity:0},300)
+  	$('#btnBottomArea').animate({top: 422,opacity:1},300)
     this.setState({typeIndex:-1,money:0,otherPayMoney:0,showPayResult:false})
   }
   componentDidMount(){

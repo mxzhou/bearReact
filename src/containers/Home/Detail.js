@@ -255,8 +255,8 @@ export default class Detail extends Component {
     this.setState({num: $('#money').val()});
   }
   showPay (e) {
-    $('#payBlock').animate({top:215,opacity:1},300)
-    $('#btnBottomArea').animate({top: 500,opacity:0},300)
+    $('#payBlock').animate({top:185,opacity:1},300)
+    $('#btnBottomArea').animate({top: 470,opacity:0},300)
   }
   showAllCodes (e) {
     let $this = $(e.target)
