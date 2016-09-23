@@ -96,7 +96,7 @@ export default class Pay extends Component {
             <div className={styles.codeImg}><img id="codeImg"/></div>
             <div className={styles.payNum}><em>{otherPayMoney}</em>元</div>
             <div className={styles.btnBottom}>
-                <a className={styles.btn} onClick={this.goPayCodeSuccess.bind(this,event)}>支付成功</a>
+                <a className={styles.btn} onClick={this.goPayCodeSuccess.bind(this)}>支付成功</a>
                 <a className={styles.btn + ' ' +styles.normal} onClick={this.goPayCodeFail.bind(this)}>支付失败</a>
             </div>
           </div>

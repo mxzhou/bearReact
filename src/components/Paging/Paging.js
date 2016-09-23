@@ -35,6 +35,9 @@ export default class Paging extends Component {
     if(total%pageSize!=0){
       totalPage++
     }
+    if(total==pageSize){
+      totalPage=1
+    }
     this.setState({
       totalPage: totalPage,
       pageNumber: 1
