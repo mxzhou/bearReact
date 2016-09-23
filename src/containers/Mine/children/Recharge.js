@@ -203,7 +203,7 @@ export default class Recharge extends Component {
                 <Alert text={this.successContent()} btn1={'继续充值'} btn2={'查看充值记录'} onClose={this.onSuccessClose.bind(this)} onCancel={this.onSuccessCancel.bind(this)}/>
               }
               { !bSuccess &&
-              <Alert text={this.failContent()} btn1={'支付成功'} btn2={'支付失败'} onClose={this.onFailClose.bind(this)} onCancel={this.onFailCancel.bind(this)}/>
+              <Alert text={this.failContent()} btn1={'支付完成'} btn2={'取消'} onClose={this.onFailClose.bind(this)} onCancel={this.onFailCancel.bind(this)}/>
               }
               { payObject.weChat !=null &&
                 <div className={styles.payContent}>
@@ -336,5 +336,9 @@ export default class Recharge extends Component {
       bSuccess:true,
       bPay:false
     })
+  }
+  componentWillUnmount(){
+    // 解除倒计时
+    clearInterval(this.countDown)
   }
 }
