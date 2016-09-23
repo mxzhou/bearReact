@@ -312,7 +312,7 @@ export default class Recharge extends Component {
     client.post('/pay/result/get',{data:{payOrderNo:payObject.payOrderNo}}).then(function(data) {
       if(data.data.payStatus == 1){
         _this.setState({bSuccess:true,bPay:false});
-        clearInterval(this.countDown)
+        clearInterval(_this.countDown)
         _this.props.loadAlert();
         _this.props.loadConsumeMoney();
         return;
