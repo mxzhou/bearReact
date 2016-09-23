@@ -47,32 +47,28 @@ import jquery from 'jquery'
 const client = new ApiClient();
 // 用户信息
 sessionStorage.removeItem('userStorage');
-let userStorage = sessionStorage.getItem('userStorage')
-if(userStorage==null || JSON.parse(userStorage).otherUserId==null){
-  if(getQueryString('otherUserId')!=null){
-    let options = {
-      otherUserId:getQueryString('otherUserId'),
-      sessionId:getQueryString('sessionId'),
-      nickname:getQueryString('nickname'),
-    }
-    client.post('/user/check',{data:options}).then(function(data) {
-      const userStorage = {
-        "otherUserId":options.otherUserId,
-        "sessionId":options.sessionId,
-        "kgUid":data.data.kgUid,
-        "token":data.data.token,
-      };
-      sessionStorage.setItem('userStorage',JSON.stringify(userStorage))
-      init()
-    }, function(value) {
-    });
-  }else{
-    init()
+if(getQueryString('otherUserId')!=null){
+  let options = {
+    otherUserId: getQueryString('otherUserId'),
+    sessionId: getQueryString('sessionId'),
+    nickname: getQueryString('nickname'),
   }
-  //?otherUserId=915197939&sessionId=16894AD6D6D682876030ED0C682BD572&nickname=hello
+  client.post('/user/check',{data:options}).then(function(data) {
+    const userStorage = {
+      "otherUserId": options.otherUserId,
+      "sessionId": options.sessionId,
+      "kgUid": data.data.kgUid,
+      "token": data.data.token,
+    };
+    sessionStorage.setItem('userStorage',JSON.stringify(userStorage))
+    init()
+  }, function(value) {
+  });
 }else{
   init()
 }
+//?otherUserId=915197939&sessionId=16894AD6D6D682876030ED0C682BD572&nickname=hello
+
 function getQueryString(name) {
   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
   if(window.location.href.split('?')[1]){

@@ -155,17 +155,34 @@ export default class Pay extends Component {
     const client = new ApiClient();
     const _this = this;
     this.setState({showPayResult:true,checkResult:0});
+    _this.getPayCount++    
     client.post('/cart/pay',{data:{payOrderNo:this.state.orderNo}}).then(function(data) {
       if(data.status==1){
         let payStatus = data.data.payStatus
         if(payStatus==1){
-          _this.props.loadData()
-          _this.setState({checkResult:1});
+          //支付成功但是剩余购买数不足，钱充到余额
+          if(data.data.successList.length!=0){            
+            _this.props.loadData()
+            _this.setState({checkResult:1});
+          }else{
+            $("#ToastMsg").text('剩余购买数不足，钱已充至余额');
+            $("#Toast").show();
+            _this.setState({showPayResult:false});
+          }
+        }else if(payStatus==2){
+          _this.setState({checkResult:2});          
+        }else if(payStatus==-1){
+          _this.setState({checkResult:2});          
         }else{
-          _this.setState({checkResult:2});
+          if(_this.state.showPayResult && _this.getPayCount<=5){
+            setTimeout(function(){
+              _this.goPayCodeSuccess()
+            },1000)
+          }else {
+            _this.setState({checkResult:2});   
+          }
         }
       }else{
-        _this.props.loadToast('收货人不能为空！')
       }
     }, function(value) {
         _this.setState({checkResult:2});
@@ -180,13 +197,14 @@ export default class Pay extends Component {
     $('#payCode').hide();
     $('#codeImg').hide();
   }
-  goPay (e) {
+  goPay (e) {    
     if(this.loading){ return }
     let money = this.props.money
     let typeIndex = this.state.typeIndex
     if(typeIndex==1){
       return;
     }
+    this.getPayCount = 0
     let data = {
       consumeCost: this.state.useConsumeMoney,
       otherPayType: typeIndex+1,
@@ -210,6 +228,8 @@ export default class Pay extends Component {
           _this.props.loadData()
           $('#payBlock').animate({top:570,opacity:0},300)
           $('#btnBottomArea').animate({top: 422,opacity:1},300)
+          $("#ToastMsg").text('购买成功');
+          $("#Toast").show();
         }
         if(typeIndex==0){
           $('#paySelect').hide();
@@ -279,6 +299,7 @@ export default class Pay extends Component {
   }
 
   componentWillUnmount(){
+    this.setState({showPayResult:false})
     $('#btnGoPay').removeAttr('href target');
   }
   updateMoney () {
