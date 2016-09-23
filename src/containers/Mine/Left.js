@@ -34,7 +34,7 @@ export default class Mine extends Component {
           <li className={styles.li2}>
             <Link to="/mine/msg" className={styles.linkClass}>
               <img src={msg} className={styles.iconList + ' f-ib'}/>消息
-              {message && message.data !=null && message.data !=0 &&
+              {message && message.data !=null && message.data !=0 && (message.data.sysNum + message.data.logisticsNum != 0) &&
                 <em className={styles.em + ' f-ib'}>{message.data.sysNum + message.data.logisticsNum}</em>
               }
             </Link>
