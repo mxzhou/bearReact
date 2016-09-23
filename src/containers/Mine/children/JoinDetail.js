@@ -81,7 +81,7 @@ export default class JoinDetail extends Component {
     return (
       <div className={styles.content}>
         <h3 className={styles.title + ' f-cb'}>
-          <Link to="/mine"><img src={back} className={styles.close} onClick={this.closeHandler.bind(this)}/></Link>
+          <a onClick={this.closeHandler.bind(this)}><img src={back} className={styles.close}/></a>
           查看夺宝号
         </h3>
         <div className=" f-pr">
