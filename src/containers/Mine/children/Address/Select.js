@@ -134,6 +134,11 @@ export default class Select extends Component {
     const {list} = this.props
     if (list && list.data && list.data.length > 0) {
       slyFunc({bLoadMore: false})
+      for(var i= 0,l=list.data.length;i<l;i++){
+        if(list.data[i].ifDefault){
+          this.setState({index: i})
+        }
+      }
     }
   }
 }
