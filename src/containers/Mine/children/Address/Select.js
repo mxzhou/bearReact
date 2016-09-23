@@ -50,7 +50,6 @@ export default class Select extends Component {
       userAddressId: list.data[this.state.index].id,
       id: this.props.params.id
     }
-    alert(0)
     let _this = this
     //异步获取数据 promise
     client.post('/user/win/setAddress', {
