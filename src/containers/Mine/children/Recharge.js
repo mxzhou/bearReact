@@ -33,7 +33,7 @@ export default class Recharge extends Component {
     money:10,
     payObject:{},
     bSuccess:true,
-    interval:10,
+    interval:5,
     bPay:false,
   }
   // 构造器
@@ -56,22 +56,63 @@ export default class Recharge extends Component {
     this.setState({numIndex:index})
   }
   selectType(index){
+    $('#btnGoPay').attr({'href':'javascript:;','target':''});
     this.setState({typeIndex:index})
+    // index = 1 支付宝
+    if(index == 1){
+      const client = new ApiClient();
+      const _this = this;
+      // 异步获取数据 promise
 
+      let val,type;
+      const {numIndex} = this.state;
+      const {numPayList,typePayList} = this.props;
+      if(numIndex == this.props.numPayList.length+1){
+        val = $(".j-input").val()
+      }else{
+        val = numPayList[numIndex];
+      }
+      type = typePayList[index].type;
+      const data = {
+        payType:type,
+        money:val
+      }
+      this.setState({money:val})
+      //this.props.loading()
+      client.post('/pay/submit',{data:data}).then(function(data) {
+        //_this.props.unloading()
+        if(data.errorCode!=0){
+          //_this.props.loadToast(data.errorMessage)
+          return;
+        }
+        // 支付宝地址
+        if(data.data && data.data.wapalipay != null){
+          $('#btnGoPay').attr({'href':encodeURI(data.data.wapalipay),'target':'_blank'})
+          _this.setState({payObject:data.data})
+        }
+        // success
+      }, function(value) {
+        // failure
+      });
+    }
   }
   inputFunc(){
   }
-  focusFunc(){
+  focusFunc(e){
+    e.target.value = 1;
     this.setState({numIndex:this.props.numPayList.length+1})
   }
   submitFunc(){
-    $('#btnGoPay').removeAttr('href target');
+    const {numIndex,typeIndex} = this.state;
+    if(typeIndex == 1) {
+      this.setState({bWechat:true})
+      return;
+    }
     const client = new ApiClient();
     const _this = this;
     // 异步获取数据 promise
 
     let val,type;
-    const {numIndex,typeIndex} = this.state;
     const {numPayList,typePayList} = this.props;
     if(numIndex == this.props.numPayList.length+1){
       val = $(".j-input").val()
@@ -104,15 +145,8 @@ export default class Recharge extends Component {
         //_this.props.loadToast(data.errorMessage)
         return;
       }
-      // 支付宝地址
-      if(data.data && data.data.wapalipay != null){
-        _this.setState({bWechat:true,payObject:data.data})
-        $('#btnGoPay').attr({'href':encodeURI(data.data.twoUrl),'target':'_blank'})
-        window.open(encodeURI(data.data.wapalipay));
-      }
       // 微信二维码
       if(data.data && data.data.weChat != null){
-        $('#btnGoPay').removeAttr('href target');
         _this.setState({bWechat:true,payObject:data.data})
       }
       // success
@@ -141,7 +175,7 @@ export default class Recharge extends Component {
                 </li>
               )}
               <li className={styles.item+(numIndex == (numPayList.length+1) ? ' '+styles.active:'')}>
-                <input className={styles.input+' j-input'} onFocus ={this.focusFunc.bind(this)} onChange={this.changeFunc.bind(this)}/>
+                <input className={styles.input+' j-input'} onFocus ={this.focusFunc.bind(this)} onBlur={this.blurFunc.bind(this)}/>
               </li>
 
             </ul>
@@ -211,9 +245,14 @@ export default class Recharge extends Component {
       </div>
     );
   }
-  changeFunc(e){
+  blurFunc(e){
     let val = e.target.value
+    let reg = /^\d+(\.\d+)?$/g
+    if(!reg.test(val)){
+      e.target.value = 1
+    }
   }
+
   successContent(){
     const styles = require('../Mine.scss')
     return (
@@ -255,7 +294,7 @@ export default class Recharge extends Component {
     this.payFailure()
   }
   paySuccess(){
-    this.setState({interval:10,bPay:true});
+    this.setState({interval:5,bPay:true});
     var _this = this;
     this.countDown = setInterval(()=>{
       if(_this.state.interval < 0 ){
