@@ -54,6 +54,7 @@ export default class Recharge extends Component {
   }
   selectNum(index){
     this.setState({numIndex:index})
+    this.selectType(this.state.typeIndex)
   }
   selectType(index){
     $('#btnGoPay').attr({'href':'javascript:;','target':''});
@@ -251,6 +252,7 @@ export default class Recharge extends Component {
     if(!reg.test(val)){
       e.target.value = 1
     }
+    this.selectType(this.state.typeIndex)
   }
 
   successContent(){
