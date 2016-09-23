@@ -46,6 +46,7 @@ import getRoutes from './routes';
 import jquery from 'jquery'
 const client = new ApiClient();
 // 用户信息
+sessionStorage.removeItem('userStorage');
 let userStorage = sessionStorage.getItem('userStorage')
 if(userStorage==null || JSON.parse(userStorage).otherUserId==null){
   if(getQueryString('otherUserId')!=null){
@@ -55,7 +56,7 @@ if(userStorage==null || JSON.parse(userStorage).otherUserId==null){
       nickname:getQueryString('nickname'),
     }
     client.post('/user/check',{data:options}).then(function(data) {
-      const userStorage = {    
+      const userStorage = {
         "otherUserId":options.otherUserId,
         "sessionId":options.sessionId,
         "kgUid":data.data.kgUid,
