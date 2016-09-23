@@ -68,11 +68,11 @@ export default class Msg extends Component {
     const client = new ApiClient();
     const _this = this;
     // 异步获取数据 promise
-    this.props.loading()
+    //this.props.loading()
     client.post(url,{data:data}).then(function(data) {
-      _this.props.unloading()
+      //_this.props.unloading()
       if(data.errorCode!=0){
-        _this.props.loadToast(data.errorMessage)
+        //_this.props.loadToast(data.errorMessage)
         return;
       }
       _this.props.loadMessageNum()

@@ -64,7 +64,7 @@ export default class JoinDetail extends Component {
       data: {id: id}
     }).then(function (data) {
       if (data.errorCode != 0) {
-        _this.props.loadToast(data.errorMessage)
+        //_this.props.loadToast(data.errorMessage)
         return;
       }
       _this.setState({

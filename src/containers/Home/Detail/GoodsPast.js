@@ -28,8 +28,8 @@ export default class GoodsPast extends Component {
     const styles = require('./GoodsPast.scss');
     return (
       <div>
-        { result && result.data && 
-          <div style={{paddingTop:15}}> 
+        { result && result.data &&
+          <div style={{paddingTop:15}}>
             {
               result.data.goodsList.map((item,index) =>
                 <div className={styles.item} key={'joiner-item'+index}>
@@ -76,22 +76,22 @@ export default class GoodsPast extends Component {
     let data = {
       goodsId: this.props.location.query.goodsId,
     }
-    this.props.loading()
+    //this.props.loading()
     client.post('/goods/past',{data:data}).then(function(data) {
-      _this.props.unloading()
+      //_this.props.unloading()
       _this.setState({
         result: data
       })
     }, function(value) {
-      _this.props.unloading()
+      //_this.props.unloading()
     });
   }
   componentDidUpdate() {
-   
+
   }
   componentWillUnmount () {
   }
   componentDidUpdate() {
-    
+
   }
 }

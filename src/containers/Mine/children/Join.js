@@ -83,11 +83,11 @@ export default class Join extends Component {
     const client = new ApiClient();
     const _this = this;
     // 异步获取数据 promise
-    this.props.loading()
+    //this.props.loading()
     client.post('/user/buyLog/list',{data:data}).then(function(data) {
-      _this.props.unloading()
+      //_this.props.unloading()
       if(data.errorCode!=0){
-        _this.props.loadToast(data.errorMessage)
+        //_this.props.loadToast(data.errorMessage)
         return;
       }
       var list,lLeng,bLast;

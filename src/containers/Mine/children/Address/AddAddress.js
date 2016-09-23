@@ -180,7 +180,7 @@ export default class EditAddress extends Component {
       data:data
     }).then(function(data){
       if(data.errorCode!=0){
-        _this.props.loadToast(data.errorMessage)
+        //_this.props.loadToast(data.errorMessage)
         return;
       }
       _this.props.loadToast('保存成功！')

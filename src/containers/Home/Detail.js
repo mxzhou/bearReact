@@ -195,12 +195,12 @@ export default class Detail extends Component {
     let robId = this.props.location.query.id
     const _this = this;
     const client = new ApiClient();
-    _this.props.loading()
+    //_this.props.loading()
     client.get('/goods/'+robId+'/complete',{data:{id:robId}}).then(function(data) {
       _this.setState({caculationResult:data});
-      _this.props.unloading()
+      //_this.props.unloading()
     }, function(value) {
-      _this.props.unloading()
+      //_this.props.unloading()
     });
     $('#caculationBlock').show();
   }
@@ -210,7 +210,7 @@ export default class Detail extends Component {
   goNew (params) {
     let goodsId = this.props.location.query.goodsId
     location.href = '#/'+this.state.link+'/detail/goods?id=0&goodsId='+goodsId
-    this.props.loading()
+    //this.props.loading()
     this.getNew = true
     this.loadData(0)
   }
@@ -244,7 +244,7 @@ export default class Detail extends Component {
       }
     }
     this.setState({num: $('#money').val()});
-  } 
+  }
   addAll (e) {
     let surplusNumber = this.state.result.data.surplusNumber
     if(this.state.num == surplusNumber){
@@ -278,13 +278,13 @@ export default class Detail extends Component {
     this.loadData()
   }
   updateComponent () {
-    
+
   }
   loadData (id) {
     this.setState({num:1})
     let robId = this.props.location.query.id
     let goodsId = this.props.location.query.goodsId
-    this.props.loading()
+    //this.props.loading()
     const _this = this;
     const client = new ApiClient();
     if(id==0){
@@ -303,14 +303,14 @@ export default class Detail extends Component {
           if($('em.hideCodeItem').eq(0).css('display')!='none'){
             $('em.hideCodeItem').css('display','');
           }
-          _this.props.unloading()
+          //_this.props.unloading()
         }, function(value) {
         });
       },time)
     }
     client.post('/goods/detail',{data:{id:robId,goodsId:goodsId}}).then(function(data) {
       _this.setState({result:data});
-      _this.props.unloading()
+      //_this.props.unloading()
       if(id==0){
         client.post('/goods/user',{data:{id:data.data.id,goodsId:goodsId}}).then(function(data) {
           _this.setState({resultUser:data});
@@ -321,12 +321,12 @@ export default class Detail extends Component {
         },200)
       }
     }, function(value) {
-     
+
     });
   }
 
   componentWillUpdate () {
-    this.props.unloading()
+    //this.props.unloading()
   }
   componentDidUpdate () {
     let robId = this.props.location.query.id

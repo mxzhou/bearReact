@@ -74,12 +74,12 @@ export default class List extends Component {
   }
 
   componentDidMount() {
-    this.props.loading()
+    //this.props.loading()
     this.props.load();
   }
 
   componentWillUpdate() {
-    this.props.unloading()
+    //this.props.unloading()
   }
 
   componentDidUpdate() {

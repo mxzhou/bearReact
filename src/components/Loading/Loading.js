@@ -21,7 +21,7 @@ export default class Loading extends Component {
     const display = show ? 'block':'none';
     const styles = require('./Loading.scss');
     return (
-      <div style={{'display':display}} onClick={this.handlerFunc.bind(this)}>
+      <div style={{'display':display}} onClick={this.handlerFunc.bind(this)} id="Loading">
         <div className={styles.mask}></div>
         <div className={styles.content}>
           <div className={styles.loading}>
