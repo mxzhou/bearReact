@@ -53,6 +53,9 @@ export default class PayRecord extends Component {
         <h3 className={styles.title + ' f-cb'}>
           <Close></Close>
           充值记录
+          {result && result.data && result.data.payLogList.length == 0 &&
+            <Link className={'f-fr ' +styles.goodsBtn} to="/mine/recharge">去充值</Link>
+          }
         </h3>
         <div className="f-pr">
           <div id="frame" className={styles.frame+' scroll'}>
