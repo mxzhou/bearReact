@@ -62,13 +62,16 @@ export default class JoinItem extends Component {
       //   当时间结束后倒计时停止
       if ((this.remain_minute <= 0) && (this.remain_sec <= 0) && (this.remain_hour <= 0)) {
         this.remain_minute = this.remain_sec = this.remain_hour = 0;
-        this.setState({time: '正在开奖'});
+        this.setState({time: '正在揭晓'});
         const client = new ApiClient();
         const _this = this;
         // 异步获取数据 promise
         client.post('/goods/win',{data:{id:item.id}}).then(function(data) {
           if(data.errorCode!=0){
             //_this.props.loadToast(data.errorMessage)
+            return;
+          }
+          if(data.data&&data.data.status != 5){
             return;
           }
           _this.setState({imgShow:!_this.state.imgShow});
