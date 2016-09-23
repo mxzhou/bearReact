@@ -29,11 +29,11 @@ export default class Toast extends Component {
       this.timeOut()
     }
     return (
-      <div style={{'display':display}} onClick={this.handlerFunc.bind(this)}>
+      <div style={{'display':display}} onClick={this.handlerFunc.bind(this)} id="Toast">
         <div className={styles.mask}></div>
         <div className={styles.content}>
           <div className={styles.toast}>
-            <p className={styles.p}>{text}</p>
+            <p className={styles.p} id="ToastMsg">{text}</p>
           </div>
         </div>
       </div>

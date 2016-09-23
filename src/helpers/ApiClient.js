@@ -1,6 +1,7 @@
+import React, { Component,PropTypes } from 'react';
 import superagent from 'superagent';
 import config from '../config';
-import {loading} from '../redux/modules/loading'
+import createStore from '../redux/create';
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 
 function formatUrl(path) {
@@ -15,6 +16,7 @@ function formatUrl(path) {
 
 export default class ApiClient {
   constructor(req) {
+    const store = createStore();
     methods.forEach((method) =>
       this[method] = (path, { params, data } = {}) =>
       {
@@ -35,12 +37,24 @@ export default class ApiClient {
             Object.assign(data,userStorage);
             request.send(data);
           }
-
+          $("#Loading").show();
           request.end((err, { body } = {}) => {
+            $("#Toast").hide();
+            $("#Loading").hide();
             if(err){
+              location.href = "#/notFound"
               reject(body || err)
             }else{
-              //console.log(body)
+              // 验证信息
+              if(body.errorCode != 0){
+                $("#ToastMsg").text(body.errorMessage)
+                $("#Toast").show();
+                setTimeout(()=>{
+                  $("#Toast").hide();
+                },2000)
+                reject(body || err)
+                return;
+              }
               resolve(body)
             }
           });

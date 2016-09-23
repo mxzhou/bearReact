@@ -19,7 +19,7 @@ export default class PayRecord extends Component {
     return (
       <div>
         { result &&
-          <div> 
+          <div>
             {
               result.data.map((item,index) =>
                 <img className={styles.img} key={'detail-item'+index} src={item}/>
@@ -31,13 +31,13 @@ export default class PayRecord extends Component {
     );
   }
   componentDidMount() {
-    this.props.loading()
+    //this.props.loading()
     this.props.loadDetailGoods({id:this.props.location.query.goodsId})
   }
   componentWillUpdate(){
-    this.props.unloading()
+    //this.props.unloading()
   }
   componentDidUpdate() {
-    
+
   }
 }

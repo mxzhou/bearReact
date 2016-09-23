@@ -198,11 +198,11 @@ export default class Pay extends Component {
     const _this = this;
 
     $('#codeImg').hide();
-    this.props.loading()
+    //this.props.loading()
     this.loading = true
     client.post('/cart/submit',{data:data}).then(function(data) {
       _this.loading = false
-      _this.props.unloading()
+      //_this.props.unloading()
       _this.props.updateComponent()
       if(data.status==1){
         _this.setState({orderNo:data.data.orderNo});
@@ -218,15 +218,15 @@ export default class Pay extends Component {
         }
         if(typeIndex==1){
           _this.setState({showPayResult:true,checkResult:3});
-          $('#btnGoPay').attr({'href':encodeURI(data.data.twoUrl),'target':'_blank'})        
+          $('#btnGoPay').attr({'href':encodeURI(data.data.twoUrl),'target':'_blank'})
           //window.open(encodeURI(data.data.twoUrl))
         }
       }
     }, function(value) {
-      _this.props.unloading()
+      //_this.props.unloading()
       _this.loading = false
     });
-    
+
   }
   selectConsume () {
     let consume = this.state.consumeMoney
@@ -253,7 +253,7 @@ export default class Pay extends Component {
     this.setState({typeIndex:-1,money:0,otherPayMoney:0,showPayResult:false})
   }
   componentDidMount(){
-    this.props.loading()
+    //this.props.loading()
     this.props.loadConsumeMoney({id:1})
     $('#payBlock').css({opacity:0})
     this.setState({typeIndex:-1,money:0})
@@ -326,18 +326,18 @@ export default class Pay extends Component {
       }
       const client = new ApiClient();
       const _this = this;
-      this.props.loading()
+      //this.props.loading()
       _this.loading = true
       client.post('/cart/submit',{data:data}).then(function(data) {
         _this.loading = false
-        _this.props.unloading()
+        //_this.props.unloading()
         _this.props.updateComponent()
         if(data.status==1){
           _this.setState({orderNo:data.data.orderNo});
           $('#btnGoPay').attr({'href':encodeURI(data.data.twoUrl),'target':'_blank'})
         }
       }, function(value) {
-        _this.props.unloading()
+        //_this.props.unloading()
         _this.loading = false
       });
     }else{

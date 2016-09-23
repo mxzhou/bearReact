@@ -69,7 +69,7 @@ export default class Single extends Component {
         // 异步获取数据 promise
         client.post('/goods/win',{data:{id:item.id}}).then(function(data) {
           if(data.errorCode!=0){
-            _this.props.loadToast(data.errorMessage)
+            //_this.props.loadToast(data.errorMessage)
             return;
           }
           _this.setState({imgShow:!_this.state.imgShow});

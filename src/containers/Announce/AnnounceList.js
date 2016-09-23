@@ -58,13 +58,13 @@ export default class Announce extends Component {
     const client = new ApiClient();
     const _this = this;
     // 异步获取数据 promise
-    this.props.loading()
+    //this.props.loading()
     client.post('/goods/open',{data:data}).then(function(data) {
-      _this.props.unloading()
-      if(data.errorCode!=0){
-        _this.props.loadToast(data.errorMessage)
-        return;
-      }
+      //_this.props.unloading()
+      //if(data.errorCode!=0){
+      //  _this.props.loadToast(data.errorMessage)
+      //  return;
+      //}
       var list,lLeng,bLast;
       if(_this.state.bAdd){
         list = _this.state.result.concat(data.data.goodsList);

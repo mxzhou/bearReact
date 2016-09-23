@@ -57,7 +57,7 @@ export default class Select extends Component {
       data: data
     }).then(function (data) {
       if(data.errorCode!=0){
-        _this.props.loadToast(data.errorMessage)
+        //_this.props.loadToast(data.errorMessage)
         return;
       }
       _this.props.loadToast('保存成功')
@@ -122,13 +122,13 @@ export default class Select extends Component {
 
   componentDidMount() {
     this.props.loadMask()
-    this.props.loading()
+    //this.props.loading()
     this.props.load();
 
   }
 
   componentWillUpdate() {
-    this.props.unloading()
+    //this.props.unloading()
   }
 
   componentDidUpdate() {

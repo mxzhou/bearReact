@@ -21,7 +21,7 @@ export default function reducer(state = initialState, action = {}) {
       return state;
   }
 }
-// 加载loading
+// 加载Toast
 export function loadToast(text,time = 2000) {
   return {
     text:text,
@@ -29,7 +29,7 @@ export function loadToast(text,time = 2000) {
     type: LOAD
   };
 }
-// 移除loading
+// 移除Toast
 export function removeToast() {
   return {
     type: UNLOAD

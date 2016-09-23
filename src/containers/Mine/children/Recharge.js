@@ -97,11 +97,11 @@ export default class Recharge extends Component {
       return;
     }
     this.setState({money:val})
-    this.props.loading()
+    //this.props.loading()
     client.post('/pay/submit',{data:data}).then(function(data) {
-      _this.props.unloading()
+      //_this.props.unloading()
       if(data.errorCode!=0){
-        _this.props.loadToast(data.errorMessage)
+        //_this.props.loadToast(data.errorMessage)
         return;
       }
       // 支付宝地址

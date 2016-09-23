@@ -68,7 +68,7 @@ export default class Intro extends Component {
 
   changeType(index) {
     this.setState({activeIndex: index})
-    this.props.loading()
+    //this.props.loading()
     this.props.load()
   }
 

@@ -220,7 +220,7 @@ export default class EditAddress extends Component {
       data:{userAddressId:userAddressId}
     }).then(function(data){
       if(data.errorCode!=0){
-        _this.props.loadToast(data.errorMessage)
+        //_this.props.loadToast(data.errorMessage)
         return;
       }
       _this.props.loadToast('删除成功！')

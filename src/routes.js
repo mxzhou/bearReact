@@ -136,6 +136,7 @@ export default (store) => {
       <Route path="widgets" component={Widgets}/>
       */}
       { /* Catch all route */ }
+      <Route path="notFound" component={NotFound} status={404} />
       <Route path="*" component={NotFound} status={404} />
     </Route>
   );

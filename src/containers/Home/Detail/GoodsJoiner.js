@@ -30,8 +30,8 @@ export default class GoodsJoiner extends Component {
     const styles = require('./GoodsJoiner.scss');
     return (
       <div>
-        { result && result.data && 
-          <div> 
+        { result && result.data &&
+          <div>
             {
               result.data.userList.map((item,index) =>
                 <div className={styles.item} key={'joiner-item'+index}>
@@ -47,7 +47,7 @@ export default class GoodsJoiner extends Component {
             }
           </div>
         }
-        { !result && 
+        { !result &&
           <div style={{textAlign:'center',clear:'both',lineHeight:'50px'}}>
             暂无夺宝参与记录
           </div>
@@ -79,10 +79,10 @@ export default class GoodsJoiner extends Component {
       id: this.props.location.query.id,
     }
     this.loading = true;
-    this.props.loading()
+    //this.props.loading()
     client.post('/goods/joiner/list',{data:data}).then(function(data) {
       _this.loading = false
-      _this.props.unloading()
+      //_this.props.unloading()
       let list = data.data.userList
       if(list.length!=0){
         if( result != null){
@@ -104,12 +104,12 @@ export default class GoodsJoiner extends Component {
         _this.hasMore = true
       }
     }, function(value) {
-      _this.props.unloading()
+      //_this.props.unloading()
       this.loading = false
     });
   }
   componentWillUpdate(){
-    
+
   }
   componentDidUpdate() {
     const _this = this

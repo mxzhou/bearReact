@@ -84,11 +84,11 @@ export default class PayRecord extends Component {
     );
   }
   componentDidMount() {
-    this.props.loading()
+    //this.props.loading()
     this.props.load({lastId:0,pageSize:10})
   }
   componentWillUpdate(){
-    this.props.unloading()
+    //this.props.unloading()
   }
   componentDidUpdate() {
     const {result,payType,payStatus} = this.props;
