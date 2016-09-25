@@ -22,7 +22,8 @@ export default class Select extends Component {
     list: PropTypes.object
   };
   static defaultProps = {
-    index: 0
+    index: 0,
+    list:{}
   }
   // 构造器
   constructor(props, context) {
@@ -42,9 +43,28 @@ export default class Select extends Component {
     sessionStorage.setItem('addressObject',JSON.stringify(obj))
     location.href = "#/mine/editAddress/" + this.props.params.id;
   }
-
+  fetchData(){
+    const client = new ApiClient();
+    var data = {};
+    let _this = this
+    //异步获取数据 promise
+    client.post('/user/address/list', {
+      data: data
+    }).then((data)=> {
+      console.log(data)
+      this.setState({list: data})
+      if (data && data.data && data.data.length > 0) {
+        for(var i= 0,l=data.data.length;i<l;i++){
+          if(data.data[i].ifDefault){
+            this.setState({index: i})
+          }
+        }
+        slyFunc({bLoadMore: false})
+      }
+    })
+  }
   submitFunc() {
-    const {list} = this.props
+    const {list} = this.state
     const client = new ApiClient();
     var data = {
       userAddressId: list.data[this.state.index].id,
@@ -65,8 +85,7 @@ export default class Select extends Component {
   }
 
   render() {
-    const {list} = this.props
-    const {index} = this.state;
+    const {list,index} = this.state
     const id = this.props.params.id;
     const styles = require('../../Mine.scss')
     const back = require('../../../../assets/ic_backpage.png')
@@ -122,23 +141,6 @@ export default class Select extends Component {
   componentDidMount() {
     this.props.loadMask()
     //this.props.loading()
-    this.props.load();
-
-  }
-
-  componentWillUpdate() {
-    //this.props.unloading()
-  }
-
-  componentDidUpdate() {
-    const {list} = this.props
-    if (list && list.data && list.data.length > 0) {
-      slyFunc({bLoadMore: false})
-      for(var i= 0,l=list.data.length;i<l;i++){
-        if(list.data[i].ifDefault){
-          this.setState({index: i})
-        }
-      }
-    }
+    this.fetchData();
   }
 }
