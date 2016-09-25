@@ -46,8 +46,8 @@ import getRoutes from './routes';
 import jquery from 'jquery'
 const client = new ApiClient();
 // 用户信息
-sessionStorage.removeItem('userStorage');
 if(getQueryString('otherUserId')!=null){
+  sessionStorage.removeItem('userStorage');
   let options = {
     otherUserId: getQueryString('otherUserId'),
     sessionId: getQueryString('sessionId'),

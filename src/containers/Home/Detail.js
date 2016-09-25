@@ -273,7 +273,6 @@ export default class Detail extends Component {
   }
   componentDidMount(){
     this.times = 0
-    this.setState({link:location.href.split('#/')[1].split('/')[0]});
     window.cancelAnimationFrame(this.reqAni);
     this.loadData()
   }
