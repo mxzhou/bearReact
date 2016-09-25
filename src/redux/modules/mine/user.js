@@ -79,7 +79,7 @@ export function load() {
   const userStorage = JSON.parse(sessionStorage.getItem('userStorage'));
   return {
     types: [LOAD_USER, LOAD_USER_SUCCESS, LOAD_USER_FAIL],
-    promise: (client) => client.post('/user/detail',{data:{targetKgUid:userStorage.kgUid||''}}) // params not used, just shown as demonstration
+    promise: (client) => client.post('/user/detail',{data:{targetKgUid:userStorage ? userStorage.kgUid:''}}) // params not used, just shown as demonstration
   };
 }
 
