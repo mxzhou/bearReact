@@ -182,6 +182,7 @@ export default class Pay extends Component {
           }
         }
       }else{
+        _this.props.loadToast(data.errorMessage)
       }
     }, function(value) {
         _this.setState({checkResult:2});
