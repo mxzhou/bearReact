@@ -62,11 +62,6 @@ export default class Pay extends Component {
                           <th>会员</th>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>2016-02-15 12:32:32.033</td>
-                            <td><span className={styles.red}>12353234</span></td>
-                            <td>用户名称</td>
-                          </tr>
                           { result.data && result.data.buyList.length!=0 && 
                             <div> 
                               {
