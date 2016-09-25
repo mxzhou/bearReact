@@ -200,10 +200,11 @@ export default class Pay extends Component {
     if(this.loading){ return }
     let money = this.props.money
     let typeIndex = this.state.typeIndex
+    this.getPayCount = 0
     if(typeIndex==1){
+      this.setState({showPayResult:true,checkResult:3});
       return;
     }
-    this.getPayCount = 0
     let data = {
       consumeCost: this.state.useConsumeMoney,
       otherPayType: typeIndex+1,
@@ -249,18 +250,31 @@ export default class Pay extends Component {
   selectConsume () {
     let consume = this.state.consumeMoney
     let money = this.props.money
+    let useConsumeMoney = 0
     if(this.state.useConsume){
-        this.setState({useConsume:false,useConsumeMoney:0,otherPayMoney:money,typeIndex:0})
+      this.setState({useConsume:false,useConsumeMoney:0,otherPayMoney:money,typeIndex:0})
     }else{
       if(consume==0){
         this.setState({useConsume:false,useConsumeMoney:0})
       }else{
         if(consume>=money){
+          useConsumeMoney = money
           this.setState({useConsume:true,useConsumeMoney:money,otherPayMoney:0,typeIndex:-1})
         }else{
+          useConsumeMoney = consume
           this.setState({useConsume:true,useConsumeMoney:consume,otherPayMoney:(money-consume),typeIndex:0})
         }
       }
+    }
+    if(this.state.typeIndex==1){
+      let data = {
+        consumeCost: useConsumeMoney,
+        otherPayType: 2,
+        redEnvelopeId: 0,
+        source: 'kugou_live',
+        goodsList: [{goodsId:this.props.goodsId,total:money,robId:this.props.robId}]
+      }
+      this.getPayUrl(data)
     }
   }
   cancelPay () {
@@ -317,20 +331,17 @@ export default class Pay extends Component {
           useConsumeMoney = money
           this.setState({typeIndex:typeIndex,useConsumeMoney:money,useConsume:true,otherPayMoney:(money-consume)})
         }else{
-          useConsumeMoney = 0
           this.setState({typeIndex:typeIndex,useConsumeMoney:0,useConsume:false,otherPayMoney:money})
         }
       }
     }else{
       if(consume>=this.props.money){
-        useConsumeMoney = 0
         this.setState({typeIndex:index,useConsumeMoney:0,useConsume:false,otherPayMoney:money})
       }else{
         if(consume!=0){
           useConsumeMoney = money
           this.setState({typeIndex:index,useConsumeMoney:money,useConsume:true,otherPayMoney:(money-consume)})
         }else{
-          useConsumeMoney = 0
           this.setState({typeIndex:index,useConsumeMoney:0,useConsume:false,otherPayMoney:money})
         }
       }
@@ -343,24 +354,25 @@ export default class Pay extends Component {
         source: 'kugou_live',
         goodsList: [{goodsId:this.props.goodsId,total:money,robId:this.props.robId}]
       }
-      const client = new ApiClient();
-      const _this = this;
-      //this.props.loading()
-      _this.loading = true
-      client.post('/cart/submit',{data:data}).then(function(data) {
-        _this.loading = false
-        //_this.props.unloading()
-        _this.props.updateComponent()
-        if(data.status==1){
-          _this.setState({orderNo:data.data.orderNo});
-          $('#btnGoPay').attr({'href':encodeURI(data.data.twoUrl),'target':'_blank'})
-        }
-      }, function(value) {
-        //_this.props.unloading()
-        _this.loading = false
-      });
+      this.getPayUrl(data)
     }else{
       $('#btnGoPay').removeAttr('href target');
     }
+  }
+  getPayUrl (data) {
+    const client = new ApiClient();
+    const _this = this;
+    _this.loading = true
+    client.post('/cart/submit',{data:data}).then(function(data) {
+      _this.loading = false
+      _this.props.updateComponent()
+      if(data.status==1){
+        _this.setState({orderNo:data.data.orderNo});
+        $('#btnGoPay').attr({'href':encodeURI(data.data.twoUrl),'target':'_blank'})
+      }
+    }, function(value) {
+      //_this.props.unloading()
+      _this.loading = false
+    });
   }
 }

@@ -111,7 +111,7 @@ export default class Detail extends Component {
                   </div>
                 }
                 {/* 是否参与 */}
-                { resultUser && resultUser.data && resultUser.data.joinFlag &&
+                { resultUser && resultUser.data && resultUser.data.joinFlag && result.data.status != -1 &&
                   <div className={styles.codes}>
                     <p><span className={styles.title}>你参与了：</span><i>{resultUser.data.joinNumber}</i>人次</p>
                     <p><span className={styles.title}>夺宝号码：</span>
