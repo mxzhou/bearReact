@@ -75,6 +75,7 @@ export default class Detail extends Component {
                 <div className={styles.title}>
                   <h3>{result.data.goodsName}</h3>
                   <p className={styles.desc}>{result.data.goodsDesc}</p>
+                  <p className={styles.number}>期号：{result.data.id}</p>
                   { result.data.status == 0 &&
                       <div>
                         <div className={styles.bar}>
