@@ -180,7 +180,7 @@ export default class Recharge extends Component {
                 </li>
               )}
               <li className={styles.item+(numIndex == (numPayList.length+1) ? ' '+styles.active:'')}>
-                <input className={styles.input+' j-input'} onFocus ={this.focusFunc.bind(this)} onBlur={this.blurFunc.bind(this)}/>
+                <input className={styles.input+' j-input'} maxlength="8" onFocus ={this.focusFunc.bind(this)} onBlur={this.blurFunc.bind(this)}/>
               </li>
 
             </ul>
