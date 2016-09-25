@@ -11,7 +11,7 @@ import {slyFunc} from '../../utils/sly'
 import ApiClient from '../../helpers/ApiClient'
 
 @connect(
-  state => ({link:state.history.link}),
+  state => ({link2:state.history.link}),
   { loading, unloading})
 export default class Detail extends Component {
 
@@ -206,7 +206,8 @@ export default class Detail extends Component {
     $('#caculationBlock').show();
   }
   backFunc(){
-    location.href="#/"+this.state.link;
+    const {link2} = this.props
+    location.href="#/"+link2;
   }
   goNew (params) {
     let goodsId = this.props.location.query.goodsId
@@ -274,6 +275,7 @@ export default class Detail extends Component {
   }
   componentDidMount(){
     this.times = 0
+    this.setState({link:location.href.split('#/')[1].split('/')[0]});
     window.cancelAnimationFrame(this.reqAni);
     this.loadData()
   }

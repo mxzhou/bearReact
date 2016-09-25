@@ -22,9 +22,10 @@ export default class Lucky extends Component {
     orderStatus:{
       '0':'恭喜您获得商品',
       '1':'等待奖品派发',
-      '2':'奖品已派发',
-      '3':'已发货',
-      '5':'已晒单'
+      '2':'等待商品派发',
+      '3':'商品已发货',
+      '5':'已晒单',
+      '6':'已兑换'
     },
     result:[]
   }
@@ -154,7 +155,7 @@ export default class Lucky extends Component {
                     <div className={styles.goodsStatus + ' f-cb'}>
                       {orderStatus[item.orderStatus]}
                       {item.orderStatus == 0 && <Link to={'/mine/selectAddress/'+item.id} className={styles.goodsBtn+' f-fr'} onClick={this.stopPropagation}>设置收货地址</Link>}
-                      {item.orderStatus == 3 && <Link to={'/mine/msg'} className={styles.goodsBtn+' f-fr'} onClick={this.stopPropagation}>查看物流</Link>}
+                      {/*item.orderStatus == 3 && <Link to={'/mine/msg'} className={styles.goodsBtn+' f-fr'} onClick={this.stopPropagation}>查看物流</Link>*/}
                     </div>
                   </div>
                 </li>
