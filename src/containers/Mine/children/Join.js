@@ -52,6 +52,7 @@ export default class Join extends Component {
     const {navList} =this.props;
     this.setState({
       bAdd:false,
+      result:[],
       pageNumber:1
     })
     location.href="#/mine/join/"+navList[index].type

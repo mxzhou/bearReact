@@ -165,7 +165,7 @@ export default class Single extends Component {
                     result.data &&　<p className={styles.p}>
                       <span className={styles.blue}>{result.data.nickname}</span> 获得该奖品<br/>
                       幸运号码：{result.data.id}<br/>
-                      本期参与：{result.data.winnerJoinNumber}<br/>
+                      本期参与：{result.data.joinNumber}<br/>
                       揭晓时间：{this.formatDate(result.servertime,result.data.openTime)}<br/>
                     </p>
                   }
