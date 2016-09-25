@@ -329,19 +329,19 @@ export default class Pay extends Component {
         this.setState({typeIndex:-1,useConsumeMoney:money,useConsume:true,otherPayMoney:0})
       }else{
         if(consume!=0){
-          useConsumeMoney = money
-          this.setState({typeIndex:typeIndex,useConsumeMoney:money,useConsume:true,otherPayMoney:(money-consume)})
+          useConsumeMoney = consume
+          this.setState({typeIndex:typeIndex,useConsumeMoney:consume,useConsume:true,otherPayMoney:(money-consume)})
         }else{
           this.setState({typeIndex:typeIndex,useConsumeMoney:0,useConsume:false,otherPayMoney:money})
         }
       }
     }else{
-      if(consume>=this.props.money){
+      if(consume>=money){
         this.setState({typeIndex:index,useConsumeMoney:0,useConsume:false,otherPayMoney:money})
       }else{
         if(consume!=0){
-          useConsumeMoney = money
-          this.setState({typeIndex:index,useConsumeMoney:money,useConsume:true,otherPayMoney:(money-consume)})
+          useConsumeMoney = consume
+          this.setState({typeIndex:index,useConsumeMoney:consume,useConsume:true,otherPayMoney:(money-consume)})
         }else{
           this.setState({typeIndex:index,useConsumeMoney:0,useConsume:false,otherPayMoney:money})
         }
