@@ -301,11 +301,12 @@ export default class Detail extends Component {
       }
       setTimeout(function(){
         client.post('/goods/user',{data:{id:robId,goodsId:goodsId}}).then(function(data) {
-          _this.setState({resultUser:data});
-          if($('em.hideCodeItem').eq(0).css('display')!='none'){
-            $('em.hideCodeItem').css('display','');
+          if(_this.props.location.query.id!=robId){
+            _this.setState({resultUser:data});
+            if($('em.hideCodeItem').eq(0).css('display')!='none'){
+              $('em.hideCodeItem').css('display','');
+            } 
           }
-          //_this.props.unloading()
         }, function(value) {
         });
       },time)

@@ -226,10 +226,15 @@ export default class Pay extends Component {
       if(data.status==1){
         _this.setState({orderNo:data.data.orderNo});
         if(typeIndex==-1){
-          _this.props.loadData()
-          $('#payBlock').animate({top:570,opacity:0},300)
-          $('#btnBottomArea').animate({top: 422,opacity:1},300)
-          _this.props.loadToast('购买成功')
+          if(data.data.successList.length!=0){
+            _this.props.loadData()
+            $('#payBlock').animate({top:570,opacity:0},300)
+            $('#btnBottomArea').animate({top: 422,opacity:1},300)
+            _this.props.loadToast('购买成功')
+          }else{
+            _this.props.loadToast(data.data.failList[0].msg)
+          }
+          
         }
         if(typeIndex==0){
           $('#paySelect').hide();
@@ -241,6 +246,8 @@ export default class Pay extends Component {
           $('#btnGoPay').attr({'href':encodeURI(data.data.twoUrl),'target':'_blank'})
           //window.open(encodeURI(data.data.twoUrl))
         }
+      }else{
+        _this.props.loadToast(data.errorMessage)
       }
     }, function(value) {
       //_this.props.unloading()
@@ -303,7 +310,7 @@ export default class Pay extends Component {
         this.setState({consumeMoney:consume,hasInitData:true,typeIndex:-1,useConsumeMoney:money,useConsume:true})
       }else{
         if(consume!=0){
-          this.setState({consumeMoney:consume,hasInitData:true,typeIndex:0,useConsumeMoney:money,useConsume:true,otherPayMoney:(money-consume)})
+          this.setState({consumeMoney:consume,hasInitData:true,typeIndex:0,useConsumeMoney:consume,useConsume:true,otherPayMoney:(money-consume)})
         }else{
           this.setState({consumeMoney:consume,hasInitData:true,typeIndex:0,useConsume:false,otherPayMoney:money})
         }
