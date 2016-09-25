@@ -100,7 +100,11 @@ export default class Recharge extends Component {
   inputFunc(){
   }
   focusFunc(e){
-    e.target.value = 1;
+    let val = e.target.value;
+    let reg = /^\d+(\.\d+)?$/g
+    if(!reg.test(val)){
+      e.target.value = 1
+    }
     this.setState({numIndex:this.props.numPayList.length+1})
   }
   submitFunc(){
