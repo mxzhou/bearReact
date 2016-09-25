@@ -210,6 +210,9 @@ export default class Detail extends Component {
     location.href="#/"+link2;
   }
   goNew (params) {
+    if(this.getUserJoinTimer){
+      clearTimeout(this.getUserJoinTimer)
+    }
     let goodsId = this.props.location.query.goodsId
     location.href = '#/'+this.state.link+'/detail/goods?id=0&goodsId='+goodsId
     //this.props.loading()
@@ -299,14 +302,12 @@ export default class Detail extends Component {
       }else{
         time = 3000
       }
-      setTimeout(function(){
+      this.getUserJoinTimer = setTimeout(function(){
         client.post('/goods/user',{data:{id:robId,goodsId:goodsId}}).then(function(data) {
-          if(_this.props.location.query.id!=robId){
             _this.setState({resultUser:data});
             if($('em.hideCodeItem').eq(0).css('display')!='none'){
               $('em.hideCodeItem').css('display','');
             } 
-          }
         }, function(value) {
         });
       },time)

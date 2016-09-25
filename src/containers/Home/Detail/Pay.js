@@ -205,6 +205,8 @@ export default class Pay extends Component {
     if(typeIndex==1){
       this.setState({showPayResult:true,checkResult:3});
       return;
+    }else{
+      e.preventDefault()
     }
     let data = {
       consumeCost: this.state.useConsumeMoney,
@@ -259,6 +261,7 @@ export default class Pay extends Component {
     let consume = this.state.consumeMoney
     let money = this.props.money
     let useConsumeMoney = 0
+    let typeIndex = 0
     if(this.state.useConsume){
       this.setState({useConsume:false,useConsumeMoney:0,otherPayMoney:money,typeIndex:0})
     }else{
@@ -267,6 +270,8 @@ export default class Pay extends Component {
       }else{
         if(consume>=money){
           useConsumeMoney = money
+          typeIndex = -1
+          $('#btnGoPay').removeAttr('href target');
           this.setState({useConsume:true,useConsumeMoney:money,otherPayMoney:0,typeIndex:-1})
         }else{
           useConsumeMoney = consume
@@ -274,7 +279,7 @@ export default class Pay extends Component {
         }
       }
     }
-    if(this.state.typeIndex==1){
+    if(this.state.typeIndex==1 && consume != 0){
       let data = {
         consumeCost: useConsumeMoney,
         otherPayType: 2,
