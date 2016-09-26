@@ -248,7 +248,7 @@ export default class Detail extends Component {
        $('#money').val(1)
       }
     }
-    this.setState({num: $('#money').val()});
+    this.setState({num: parseInt($('#money').val())});
   }
   addAll (e) {
     let surplusNumber = this.state.result.data.surplusNumber
@@ -257,7 +257,7 @@ export default class Detail extends Component {
     }else{
       $('#money').val(surplusNumber)
     }
-    this.setState({num: $('#money').val()});
+    this.setState({num: parseInt($('#money').val())});
   }
   showPay (e) {
     $('#payBlock').animate({top:185,opacity:1},300)

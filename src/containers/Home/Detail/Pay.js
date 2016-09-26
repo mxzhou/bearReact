@@ -2,7 +2,6 @@ import React, { Component,PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { loadConsumeMoney } from '../../../redux/modules/consume';
 import { paySubmit } from '../../../redux/modules/pay';
 import { loading,unloading } from '../../../redux/modules/loading';
 import ApiClient from '../../../helpers/ApiClient'
@@ -12,11 +11,10 @@ import alipay from '../../../assets/img_alipay.jpg'
 import wechat from '../../../assets/img_wechatpay.jpg'
 
 @connect(
-  state => ({result: state.consumeMoney.data}),
-  {loadConsumeMoney, paySubmit, loading, unloading,loadToast})
+  state => ({}),
+  { paySubmit, loading, unloading,loadToast})
 export default class Pay extends Component {
   static propTypes = {
-    consumeMoney: PropTypes.number,
     money: PropTypes.number,
     goodsId: PropTypes.number,
     robId: PropTypes.number,
@@ -30,6 +28,7 @@ export default class Pay extends Component {
     otherPayMoney: 0,
     useConsumeMoney: 0,
     orderNo: 0,
+    consumeMoney: 0,
     checkResult: 0,
     showPayResult: false,
     showPayProgress: false,
@@ -151,6 +150,14 @@ export default class Pay extends Component {
   backPay () {
     this.setState({showPayResult:false})
   }
+  getComsumeMoney () {
+    const client = new ApiClient();
+    const _this = this;
+    client.post('/user/consumeMoney',{data:{id:1}}).then(function(data) {
+      _this.setState({consumeMoney:data.data})
+    }, function(value) {
+    });
+  }
   goPayCodeSuccess () {
     const client = new ApiClient();
     const _this = this;
@@ -219,24 +226,30 @@ export default class Pay extends Component {
     const _this = this;
 
     $('#codeImg').hide();
-    //this.props.loading()
     this.loading = true
     client.post('/cart/submit',{data:data}).then(function(data) {
       _this.loading = false
-      //_this.props.unloading()
       _this.props.updateComponent()
       if(data.status==1){
         _this.setState({orderNo:data.data.orderNo});
         if(typeIndex==-1){
           if(data.data.successList.length!=0){
             _this.props.loadData()
+            _this.getComsumeMoney({id:1})
             $('#payBlock').animate({top:570,opacity:0},300)
             $('#btnBottomArea').animate({top: 422,opacity:1},300)
-            _this.props.loadToast('购买成功')
+            $("#ToastMsg").text('购买成功!')
+            $("#Toast").show();
+            setTimeout(()=>{
+              $("#Toast").hide();
+            },2000)
           }else{
-            _this.props.loadToast(data.data.failList[0].msg)
+            $("#ToastMsg").text(data.data.failList[0].msg)
+            $("#Toast").show();
+            setTimeout(()=>{
+              $("#Toast").hide();
+            },2000)
           }
-          
         }
         if(typeIndex==0){
           $('#paySelect').hide();
@@ -299,7 +312,7 @@ export default class Pay extends Component {
   }
   componentDidMount(){
     //this.props.loading()
-    this.props.loadConsumeMoney({id:1})
+    this.getComsumeMoney()
     $('#payBlock').css({opacity:0})
     this.setState({typeIndex:-1,money:0})
   }
@@ -308,8 +321,8 @@ export default class Pay extends Component {
   }
   componentDidUpdate () {
     let money = this.props.money
-    if(this.props.result && money!=this.state.money){
-      let consume = this.props.result.data
+    if(this.state.consumeMoney && money!=this.state.money){
+      let consume = this.state.consumeMoney
       this.setState({money:money})
       if(consume>=money){
         this.setState({consumeMoney:consume,hasInitData:true,typeIndex:-1,useConsumeMoney:money,useConsume:true})

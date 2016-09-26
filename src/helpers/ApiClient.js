@@ -39,7 +39,6 @@ export default class ApiClient {
           }
           $("#Loading").show();
           request.end((err, { body } = {}) => {
-            $("#Toast").hide();
             $("#Loading").hide();
             if(err){
               location.href = "#/notFound"
