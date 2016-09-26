@@ -174,7 +174,7 @@ export default class JoinItem extends Component {
                         获得者：<span className={styles.textBlue}>{result.data.nickname}</span>
                       </div>
                       <div className="f-fr">
-                        幸运号码：{result.data.id}
+                        幸运号码：{result.data.joinCode}
                       </div>
                     </div>
                   }

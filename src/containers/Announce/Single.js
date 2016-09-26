@@ -141,7 +141,7 @@ export default class Single extends Component {
           {item.status==5 &&
             <p className={styles.p}>
               <span className={styles.blue}>{item.nickname}</span> 获得该奖品<br/>
-              幸运号码：{item.id}<br/>
+              幸运号码：{item.code}<br/>
               本期参与：{item.joinNumber}<br/>
               揭晓时间：{this.formatDate(servertime,item.openTime)}<br/>
             </p>
@@ -164,7 +164,7 @@ export default class Single extends Component {
                   {
                     result.data &&　<p className={styles.p}>
                       <span className={styles.blue}>{result.data.nickname}</span> 获得该奖品<br/>
-                      幸运号码：{result.data.id}<br/>
+                      幸运号码：{result.data.joinCode}<br/>
                       本期参与：{result.data.joinNumber}<br/>
                       揭晓时间：{this.formatDate(result.servertime,result.data.openTime)}<br/>
                     </p>
