@@ -10,7 +10,7 @@ import marker from '../../../assets/btn_select.png'
 import aMarker from '../../../assets/btn_select_a.png'
 import ApiClient from '../../../helpers/ApiClient'
 @connect(
-  state => ({}),
+  state => ({link2:state.history.link}),
   {loadMask, unload, loadCodes, loadToast})
 
 export default class JoinDetail extends Component {
@@ -52,7 +52,7 @@ export default class JoinDetail extends Component {
   }
 
   closeHandler() {
-    history.back()
+    location.href='#/'+this.props.link2;
   }
 
   fetchData() {

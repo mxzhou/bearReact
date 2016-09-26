@@ -150,7 +150,7 @@ export default class Lucky extends Component {
                       <p className={styles.joinNumber+' f-ib'}>
                         本期参与: {item.joinNumber}人次
                       </p>
-                      <Link to={'/mine/joinDetail/'+item.id} className={styles.textBlue+' f-ib'} onClick={this.stopPropagation}>查看夺宝号></Link>
+                      <a className={styles.textBlue+' f-ib'} onClick={this.goDetail.bind(this,item.id)}>查看夺宝号></a>
                     </div>
                     <div className={styles.goodsStatus + ' f-cb'}>
                       {orderStatus[item.orderStatus]}
@@ -171,5 +171,9 @@ export default class Lucky extends Component {
   }
   componentDidMount() {
     this.fetchData({pageNumber:1,pageSize:10})
+  }
+  goDetail(id){
+    this.props.loadHistory('mine/lucky')
+    location.href='#/mine/joinDetail/'+id
   }
 }

@@ -148,7 +148,7 @@ export default class JoinItem extends Component {
             <p className={styles.joinNumber+' f-ib'}>
               本期参与: {item.userJoinNumber}人次
             </p>
-            <Link to={'/mine/joinDetail/'+item.id} className={styles.textBlue+' f-ib'} onClick={this.stopPropagation}>查看夺宝号></Link>
+            <a className={styles.textBlue+' f-ib'} onClick={this.goDetail.bind(this,item.id)}>查看夺宝号></a>
           </div>
           <div className={styles.goodsStatus + ' f-cb'}>
             {item.status == 5 &&
@@ -215,5 +215,10 @@ export default class JoinItem extends Component {
   componentWillUnmount(){
     // 解除倒计时
     window.cancelAnimationFrame(this.reqAni);
+  }
+  goDetail(id){
+    const type = this.props.type;
+    this.props.loadHistory('mine/join/'+type)
+    location.href='#/mine/joinDetail/'+id
   }
 }
