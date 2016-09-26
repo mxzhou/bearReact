@@ -9,9 +9,10 @@ import edit from '../../../../assets/img_edit.png'
 import marker from '../../../../assets/btn_marker.png'
 import aMarker from '../../../../assets/btn_marker_a.png'
 import {slyFunc} from '../../../../utils/sly'
+import { load as loadHistory } from '../../../../redux/modules/history';
 @connect(
   state => ({list: state.addressList.data}),
-  {load, loading, unloading})
+  {load, loading, unloading,loadHistory})
 export default class List extends Component {
   static propTypes = {
     list: PropTypes.object
@@ -27,9 +28,13 @@ export default class List extends Component {
 
   editFunc(obj) {
     sessionStorage.setItem('addressObject',JSON.stringify(obj))
+    this.props.loadHistory('mine/address')
     location.href = "#/mine/editAddress";
   }
-
+  addFunc(){
+    this.props.loadHistory('mine/address')
+    location.href = "#/mine/addAddress";
+  }
   render() {
     const {list} = this.props
     const {} = this.state;
@@ -39,7 +44,7 @@ export default class List extends Component {
         <h3 className={styles.title + ' f-cb'}>
           <Close></Close>
           收货地址
-          <Link className={'f-fr ' +styles.goodsBtn} to="/mine/addAddress">添加收货地址</Link>
+          <a className={'f-fr ' +styles.goodsBtn} onClick={this.addFunc.bind(this)}>添加收货地址</a>
         </h3>
         <div className="f-pr">
           <div id="frame" className={styles.frame+' scroll'}>

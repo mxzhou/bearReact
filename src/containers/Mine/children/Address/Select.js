@@ -13,10 +13,11 @@ import marker from '../../../../assets/btn_marker.png'
 import aMarker from '../../../../assets/btn_marker_a.png'
 import ApiClient from '../../../../helpers/ApiClient'
 import {slyFunc} from '../../../../utils/sly'
+import { load as loadHistory } from '../../../../redux/modules/history';
 
 @connect(
   state => ({list: state.addressList.data}),
-  {load, loading, unloading,loadMask,loadToast})
+  {load, loading, unloading,loadMask,loadToast,loadHistory})
 export default class Select extends Component {
   static propTypes = {
     list: PropTypes.object
@@ -41,6 +42,7 @@ export default class Select extends Component {
 
   editFunc(obj) {
     sessionStorage.setItem('addressObject',JSON.stringify(obj))
+    this.props.loadHistory('mine/selectAddress/'+this.props.params.id)
     location.href = "#/mine/editAddress/" + this.props.params.id;
   }
   fetchData(){
@@ -83,10 +85,12 @@ export default class Select extends Component {
       location.href = "#/mine/lucky"
     })
   }
-
+  addFunc(){
+    this.props.loadHistory('mine/selectAddress/'+this.props.params.id)
+    location.href = "#/mine/addAddress/" + this.props.params.id;
+  }
   render() {
     const {list,index} = this.state
-    const id = this.props.params.id;
     const styles = require('../../Mine.scss')
     const back = require('../../../../assets/ic_backpage.png')
 
@@ -95,7 +99,7 @@ export default class Select extends Component {
         <h3 className={styles.title + ' f-cb'}>
           <Link to="/mine/lucky"><img src={back} className={styles.close}/></Link>
           收货地址
-          <Link className={'f-fr ' +styles.goodsBtn} to={"/mine/addAddress/"+id}>添加收货地址</Link>
+          <a className={'f-fr ' +styles.goodsBtn} onClick={this.addFunc.bind(this)}>添加收货地址</a>
         </h3>
         <div className="f-pr">
           <div id="frame" className={styles.addressList+' '+' scroll'}>

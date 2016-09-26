@@ -9,7 +9,7 @@ import aMarker from '../../../../assets/btn_select_a.png'
 import ApiClient from '../../../../helpers/ApiClient'
 
 @connect(
-  state => ({}),
+  state => ({link2:state.history.link}),
   {loadMask,unload,loadToast})
 
 export default class EditAddress extends Component {
@@ -192,7 +192,7 @@ export default class EditAddress extends Component {
     })
   }
   closeHandler(){
-    history.back()
+    location.href='#/'+this.props.link2;
   }
   render() {
     const {numPayList,typePayList} = this.props
