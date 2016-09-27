@@ -167,6 +167,7 @@ export default class Pay extends Component {
       if(data.status==1){
         let payStatus = data.data.payStatus
         if(payStatus==1){
+          $('#money').val(1);
           //支付成功但是剩余购买数不足，钱充到余额
           if(data.data.successList.length!=0){            
             _this.props.loadData()
@@ -243,6 +244,7 @@ export default class Pay extends Component {
             setTimeout(()=>{
               $("#Toast").hide();
             },2000)
+            $('#money').val(1);
           }else{
             $("#ToastMsg").text(data.data.failList[0].msg)
             $("#Toast").show();
@@ -321,7 +323,7 @@ export default class Pay extends Component {
   }
   componentDidUpdate () {
     let money = this.props.money
-    if(this.state.consumeMoney && money!=this.state.money){
+    if((this.state.consumeMoney||this.state.consumeMoney==0) && money!=this.state.money){
       let consume = this.state.consumeMoney
       this.setState({money:money})
       if(consume>=money){
