@@ -154,7 +154,11 @@ export default class Pay extends Component {
     const client = new ApiClient();
     const _this = this;
     client.post('/user/consumeMoney',{data:{id:1}}).then(function(data) {
-      _this.setState({consumeMoney:data.data})
+      if(data.data==0){
+        _this.setState({consumeMoney:data.data,typeIndex:0,useConsumeMoney:0,useConsume:false,otherPayMoney:1})
+      }else{
+       _this.setState({consumeMoney:data.data,typeIndex:-1,useConsumeMoney:1,useConsume:true,otherPayMoney:0})
+      }
     }, function(value) {
     });
   }
@@ -327,7 +331,7 @@ export default class Pay extends Component {
       let consume = this.state.consumeMoney
       this.setState({money:money})
       if(consume>=money){
-        this.setState({consumeMoney:consume,hasInitData:true,typeIndex:-1,useConsumeMoney:money,useConsume:true})
+        this.setState({consumeMoney:consume,hasInitData:true,typeIndex:-1,useConsumeMoney:money,useConsume:true,otherPayMoney:0})
       }else{
         if(consume!=0){
           this.setState({consumeMoney:consume,hasInitData:true,typeIndex:0,useConsumeMoney:consume,useConsume:true,otherPayMoney:(money-consume)})
