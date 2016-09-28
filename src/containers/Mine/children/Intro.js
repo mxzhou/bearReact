@@ -87,13 +87,13 @@ export default class Intro extends Component {
           <div id="frame" className={styles.frame+' scroll'}>
             <ul className={styles.introUl} id="slidee">
               <li className="">
-                <div href="javascript:" className={styles.helpTitle + ' j-title'}>1.怎样参加胖熊1元买？</div>
+                <div href="javascript:" className={styles.helpTitle + ' j-title'}>1.怎样参加夺宝？</div>
                 <div className={styles.helpContent + ' j-content'}>
                   <img src={introduction}/>
                 </div>
               </li>
               <li className="">
-                <div href="javascript:" className={styles.helpTitle + ' j-title'}>2.胖熊1元买是怎么计算幸运号码的？</div>
+                <div href="javascript:" className={styles.helpTitle + ' j-title'}>2.夺宝是怎么计算幸运号码的？</div>
                 <div className={styles.helpContent + ' j-content'}>
                   <p>1、取该商品最后购买时间前网站所有商品100条购买时间记录（限时揭晓商品取截止时间前网站所有商品100条购买时间记录）</p>
                   <p>2、时间按时、分、秒、毫秒依次排列组成一组数值。 例如：15:13:14.334换算成数值为151314334</p>
@@ -124,7 +124,7 @@ export default class Intro extends Component {
                   5.商品是正品吗？怎么保证？
                 </div>
                 <div className={styles.helpContent + ' j-content'}>
-                  <p>胖熊1元买所有商品均由繁星公司或经繁星公司确认的第三方商家提供及发货，100%正品，可享受厂家所提供的全国联保服务。</p>
+                  <p>夺宝所有商品均由繁星公司或经繁星公司确认的第三方商家提供及发货，100%正品，可享受厂家所提供的全国联保服务。</p>
                 </div>
               </li>
               <li className="">
@@ -147,7 +147,7 @@ export default class Intro extends Component {
               </li>
               <li className="">
                 <div href="javascript:" className={styles.helpTitle + ' j-title'}>
-                  8.参与胖熊1元买需要注意什么？
+                  8.参与夺宝需要注意什么？
                 </div>
                 <div className={styles.helpContent + ' j-content'}>
                   <p>为了确保在您获得商品后第一时间收到通知，请务必正确填写真实有效的联系电话和收货地址。</p>
@@ -171,7 +171,7 @@ export default class Intro extends Component {
                   10.什么是夺宝币？
                 </div>
                 <div className={styles.helpContent + ' j-content'}>
-                  <p>夺宝币是胖熊1元买的代币，用户每充值1元，即可获得1个夺宝币；</p>
+                  <p>夺宝币是夺宝的代币，用户每充值1元，即可获得1个夺宝币；</p>
                   <p>1个夺宝币可以直接购买1个夺宝号码。</p>
                 </div>
               </li>
@@ -194,7 +194,7 @@ export default class Intro extends Component {
                   <p>问题二：支付平台（支付宝、微信、网银等）已经扣款，但没有获得夺宝号码？</p>
                   <p>答：这是因为支付完成时当期商品的夺宝号码已经分配完毕，该笔款项将在24小时内以余额形式充值到您的1元买账户，请在“个人中心>账户余额”中查看。</p>
                   <p>问题三：支付平台重复多次付款了该怎么办？</p>
-                  <p>答：由于支付平台没有即时传输数据给胖熊1元买，造成您在支付平台被重复扣款。不过请放心，胖熊1元买将在和支付平台对账确认您的付款后，将重复支付款项原路退回到您的支付平台账户。</p>
+                  <p>答：由于支付平台没有即时传输数据给夺宝，造成您在支付平台被重复扣款。不过请放心，夺宝将在和支付平台对账确认您的付款后，将重复支付款项原路退回到您的支付平台账户。</p>
                 </div>
               </li>
               {/*<li className="">
@@ -202,7 +202,7 @@ export default class Intro extends Component {
                13.所有活动以及商品均与苹果公司无关
                </div>
                <div className={styles.helpContent + ' j-content'}>
-               <p>通过本产品（胖熊一元买）所从事的任何活动以及获得的任何商品均与苹果公司无关。苹果公司既不作为赞助商也不以任何形式参与。</p>
+               <p>通过本产品（夺宝）所从事的任何活动以及获得的任何商品均与苹果公司无关。苹果公司既不作为赞助商也不以任何形式参与。</p>
                </div>
                </li>
                <li className="">
