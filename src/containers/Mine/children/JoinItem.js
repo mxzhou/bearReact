@@ -137,7 +137,7 @@ export default class JoinItem extends Component {
     return (
       <li className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}>
         <div className={styles.luckyLeft}>
-          <img src={item.coverImgUrl} className={styles.coverImg} onClick={this.detailFunc.bind(this,item)}/>
+          <img src={item.coverImgUrl} className={styles.coverImg+" t"} onClick={this.detailFunc.bind(this,item)}/>
         </div>
         <div className={styles.luckyRight}>
           <p className={styles.goodsName}>{item.goodsName}</p>

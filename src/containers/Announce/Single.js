@@ -133,7 +133,7 @@ export default class Single extends Component {
     return (
       <li className={styles.item + (index%2 != 0 ? (' '+styles.even):'')} onClick={this.detailFunc.bind(this,item)}>
         <div className={styles.left}>
-          <img src={item.coverImgUrl} className={styles.coverImg}/>
+          <img src={item.coverImgUrl} className={styles.coverImg+" t"}/>
         </div>
         <div className={styles.right}>
           <p title={item.goodsName} className={styles.name + ' f-pre'}>{item.goodsName}</p>

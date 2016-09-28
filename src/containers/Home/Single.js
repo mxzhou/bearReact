@@ -22,7 +22,7 @@ export default class Single extends Component {
     return (
       <li className={styles.item + (index%2 != 0 ? (' '+styles.even):'')}>
         <div className={styles.left}>
-          <img src={item.coverImgUrl} className={styles.coverImg}  onClick={this.detailFunc.bind(this,item)}/>
+          <img src={item.coverImgUrl} className={styles.coverImg+" t"}  onClick={this.detailFunc.bind(this,item)}/>
         </div>
         <div className={styles.right}>
           <p title={item.goodsName}  onClick={this.detailFunc.bind(this,item)} className={styles.name + ' f-pre'}>{item.goodsName}</p>
@@ -37,7 +37,7 @@ export default class Single extends Component {
           </div>
 
           <div className='f-cb'>
-            <a  className={styles.btn + ' f-fr'} onClick={this.detailFunc.bind(this,item)}>立即夺宝</a>
+            <a  className={styles.btn + ' f-fr t'} onClick={this.detailFunc.bind(this,item)}>立即夺宝</a>
           </div>
         </div>
       </li>

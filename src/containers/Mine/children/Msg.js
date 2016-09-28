@@ -124,7 +124,7 @@ export default class Msg extends Component {
               {return activeIndex == 0 ?
                   <li key={index} className={styles.paragraph +' '+styles.luckyList+ ' f-cb'}>
                     <div className={styles.luckyLeft}>
-                      <img src={item.coverImgUrl} className={styles.coverImg}/>
+                      <img src={item.coverImgUrl} className={styles.coverImg+" t"}/>
                     </div>
                     <div className={styles.luckyRight}>
                       <div className={styles.logic+' f-cb'}>
