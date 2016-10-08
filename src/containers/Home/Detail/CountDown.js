@@ -38,7 +38,7 @@ export default class Pay extends Component {
         _this.props.loadData()
         setTimeout(function(){
           _this.props.loadData()
-        },1000)
+        },3000)
         return;
       }
       this.timetag = Date.now();
